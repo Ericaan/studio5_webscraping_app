@@ -17,9 +17,9 @@ soup1 = BeautifulSoup( page.content , 'lxml')
 soup1a = BeautifulSoup( page.content , 'lxml')
 
 # define a pattern(certain text)
-pattern1 = 'How Learning To Code Can Change Your Life?'
+pattern1 = 'Oracle Netsuite Interview Experience (On-Campus)'
 #define a second pattern of the same set of data you want
-pattern2 = 'Simplify Your Hiring Process with GFG “Get Hired” Job Portal'
+pattern2 = 'Nagarro Interview Experience'
 
 
 #method to find what type of tag user input text is
@@ -60,7 +60,8 @@ def find_tag_element(pattern):
     p_tag = soup.find_all('p', text = pattern)
     if p_tag is not None:
         return "p"
-    
+
+
 #check if both inputs are the same tag
 element_tag1 = find_tag_element(pattern1)
 element_tag2 = find_tag_element(pattern2)
@@ -73,20 +74,20 @@ else:
     print("Selected items not related.")
 
 
+
 #get all the parent elements of both patterns
 #define list for parent of first 
 parents1 = []
 #iterate through the parents, delete the child element(this stops the child from showing up over and over), and add to the list
 for parent in text1.parents:
-    parent.clear()
     parents1.append(parent)
+    parent.clear()
 #same for the second
 parents2 = []
 #iterate through the parents, delete the child element(this stops the child from showing up over and over), and add to the list
 for parent in text2.parents:
-    parent.clear()
     parents2.append(parent)
-
+    parent.clear()
 
 #new list with all the common parent elements
 def intersection(p1, p2):
@@ -96,30 +97,16 @@ common_parents = []
 common_parents = intersection(parents1,parents2)
 
 
+
 #list of all the items with same html element tag
 related_items = soup.find_all(element_tag)
 # where our desired items will be collected
 final_items = []
 
-#method to determine if list contains all the parents in common parents
-def in_common_parents(common,my_list):
-    result = False
-    for x in common:
-        for y in my_list:
-            if x == y:
-                result = True
-        return result
-    return result
-
-#iterate through all the related items, get their parents, 
-# if all the parents from common parents are in the related items parents add them to final list
 for item in related_items:
-    temp = []
-    for parent in item.parents:
-        parent.clear()
-        temp.append(parent)
-    if in_common_parents(common_parents,temp):
-        final_items.append(item)
-    soup = BeautifulSoup( page.content , 'lxml')
+    if item.attrs.keys() == text1.attrs.keys():
+        if item.parent.attrs.keys() == parents1[0].attrs.keys():
+            final_items.append(item)
+            print(item)
+            print()
 
-print(*final_items, sep="\n")
