@@ -14,13 +14,9 @@ page = requests.get( URL )
 # parse html content
 soup = BeautifulSoup( page.content , 'lxml')
 soup1 = BeautifulSoup( page.content , 'lxml')
-soup1a = BeautifulSoup( page.content , 'lxml')
 
 # define a pattern(certain text)
-pattern1 = 'Oracle Netsuite Interview Experience (On-Campus)'
-#define a second pattern of the same set of data you want
-pattern2 = 'Nagarro Interview Experience'
-
+pattern = 'Oracle Netsuite Interview Experience (On-Campus)'
 
 #method to find what type of tag user input text is
 def find_tag_element(pattern):
@@ -61,48 +57,26 @@ def find_tag_element(pattern):
     if p_tag is not None:
         return "p"
 
+#input our text into the methos
+element_tag = find_tag_element(pattern)
 
-#check if both inputs are the same tag
-element_tag1 = find_tag_element(pattern1)
-element_tag2 = find_tag_element(pattern2)
-if element_tag1 == element_tag2:
-    #find the html element and attributes of the pattern
-    element_tag = element_tag1
-    text1 = soup1.find(element_tag, text = pattern1)
-    text2 = soup1a.find(element_tag, text = pattern2)
-else:
-    print("Selected items not related.")
+#use beautiful soup to find the element on the page
+text1 = soup1.find(element_tag, text = pattern)
 
-
-
-#get all the parent elements of both patterns
-#define list for parent of first 
+#get all the parent elements 
+#define list for parents 
 parents1 = []
 #iterate through the parents, delete the child element(this stops the child from showing up over and over), and add to the list
 for parent in text1.parents:
     parents1.append(parent)
     parent.clear()
-#same for the second
-parents2 = []
-#iterate through the parents, delete the child element(this stops the child from showing up over and over), and add to the list
-for parent in text2.parents:
-    parents2.append(parent)
-    parent.clear()
-
-#new list with all the common parent elements
-def intersection(p1, p2):
-    results = [x for x in p1 if x in p2]
-    return results
-common_parents = []
-common_parents = intersection(parents1,parents2)
-
-
 
 #list of all the items with same html element tag
 related_items = soup.find_all(element_tag)
 # where our desired items will be collected
 final_items = []
 
+#iterate through the related items and see if they are similar in attributes to out element and its parent's attributes
 for item in related_items:
     if item.attrs.keys() == text1.attrs.keys():
         if item.parent.attrs.keys() == parents1[0].attrs.keys():
