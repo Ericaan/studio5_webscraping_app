@@ -1,86 +1,120 @@
-from tokenize import String
-from tracemalloc import stop
-from unittest import result
+import re
 from bs4 import BeautifulSoup
-import requests
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 
-#1 is for the first element selected and 1a for the second element selected
+#url input
+URL = 'https://www.trademe.co.nz/a/marketplace/electronics-photography?page=7'
 
-URL = 'https://www.geeksforgeeks.org/'
+#make it so that chrome doesnt open up and so that header user agent allows the scraper through
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)"+"AppleWebKit/537.36 (KHTML, like Gecko)"+"Chrome/87.0.4280.141 Safari/537.36")
 
 # Page content from Website URL
-page = requests.get( URL )
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+driver.get(URL)
 
 # parse html content
-soup = BeautifulSoup( page.content , 'lxml')
-soup1 = BeautifulSoup( page.content , 'lxml')
+pageSource = driver.page_source
+bs = BeautifulSoup(pageSource, "lxml")
+bs1 = BeautifulSoup(pageSource, "lxml")
 
-# define a pattern(certain text)
-pattern = 'Oracle Netsuite Interview Experience (On-Campus)'
+# user inputs two texts and then we recompile them according to whats on the webpage in case the user input is incomplete
+#user input can be incomplete but it cannot be mispelled
+user_input1 = ' AOC CU34G3S 34" Curved 3440x1440 1ms HDMI DP USB 165Hz Ergo Monitor '
+user_input2 = ' Record Storage Boxes x 7 '
+pattern1 = re.compile(user_input1)
+pattern2 = re.compile(user_input2)
 
 #method to find what type of tag user input text is
 def find_tag_element(pattern):
     # Anchor tag
-    a_tag = soup.find_all('a', text = pattern)
-    if a_tag is not None:
+    a_tag = bs.find('a', text = pattern)
+    if a_tag:
         return "a"
     # Span tag
-    span_tag = soup.find_all('span', text = pattern) 
-    if span_tag is not None:
+    span_tag = bs.find('span', text = pattern) 
+    if span_tag:
         return "span"
     # Heading tag
-    h2_tag = soup.find_all('h2', text = pattern) 
-    if h2_tag is not None:
+    h2_tag = bs.find('h2', text = pattern) 
+    if h2_tag:
         return "h2"
-    h3_tag = soup.find_all('h3', text = pattern) 
-    if h3_tag is not None:
+    h3_tag = bs.find('h3', text = pattern) 
+    if h3_tag:
         return "h3"
-    h4_tag = soup.find_all('h4', text = pattern) 
-    if h4_tag is not None:
+    h4_tag = bs.find('h4', text = pattern) 
+    if h4_tag:
         return "h1"
     # List tag
-    li_tag = soup.find_all('li', text = pattern) 
-    if li_tag is not None:
+    li_tag = bs.find('li', text = pattern) 
+    if li_tag:
         return "li"
-    ul_tag = soup.find_all('ul', text = pattern) 
-    if ul_tag is not None:
+    ul_tag = bs.find('ul', text = pattern) 
+    if ul_tag:
         return "ul"
-    ol_tag = soup.find_all('ol', text = pattern) 
-    if ol_tag is not None:
+    ol_tag = bs.find('ol', text = pattern) 
+    if ol_tag:
         return "ol"
     # div 
-    div_tag = soup.find_all('div', text = pattern)
-    if div_tag is not None:
+    div_tag = bs.find('div', text = pattern)
+    if div_tag:
         return "div"
     # p
-    p_tag = soup.find_all('p', text = pattern)
-    if p_tag is not None:
+    p_tag = bs.find('p', text = pattern)
+    if p_tag:
         return "p"
+    else:
+        return "Tag not found"
 
 #input our text into the methos
-element_tag = find_tag_element(pattern)
+element_tag = find_tag_element(pattern1)
 
 #use beautiful soup to find the element on the page
-text1 = soup1.find(element_tag, text = pattern)
+text1 = bs.find(element_tag, text = pattern1)
+text2 = bs.find(element_tag, text = pattern2)
 
-#get all the parent elements 
-#define list for parents 
+#get all the parent elements
+# we will only really use the first one, but we need to clear the element itself from it
 parents1 = []
-#iterate through the parents, delete the child element(this stops the child from showing up over and over), and add to the list
 for parent in text1.parents:
     parents1.append(parent)
     parent.clear()
 
-#list of all the items with same html element tag
-related_items = soup.find_all(element_tag)
-# where our desired items will be collected
+#where the results will be stored
 final_items = []
 
-#iterate through the related items and see if they are similar in attributes to out element and its parent's attributes
-for item in related_items:
-    if item.attrs.keys() == text1.attrs.keys():
-        if item.parent.attrs.keys() == parents1[0].attrs.keys():
-            final_items.append(item)
-            print(item)
-            print()
+#find if they have a class name
+if text1.has_attr("class") and text2.has_attr("class"):
+    #if they have a class name is it the same for both
+    if (text1['class'] == text2['class']):
+        #convert the class name to string because some websites its returned as a list if the class name is composed of various elements
+        convert_string = ' '.join([str(item) for item in text1['class']])
+        #find all other elements with same class name
+        find_by_class = bs1.find_all(element_tag, class_=text1['class'])
+        #iterate through all the elements and evaluate their attributes and parent/parent attributes to filter out further
+        for item in find_by_class:
+            if item.attrs.keys() == text1.attrs.keys():
+                if item.parent.name == parents1[0].name:
+                    if item.parent.attrs.keys() == parents1[0].attrs.keys():
+                        final_items.append(item)
+                        print(item)
+                        print()
+#if no class name
+#find related items based on the element tag instead of class name
+else:
+    related_items = bs1.find_all(element_tag)
+    #iterate through all the elements and evaluate their attributes and parent/parent attributes to filter out further
+    for item in related_items:
+        if item.attrs.keys() == text1.attrs.keys():
+            if item.parent.name == parents1[0].name:
+                if item.parent.attrs.keys() == parents1[0].attrs.keys():
+                    final_items.append(item)
+                    print(item)
+                    print()
 
+#finally close the driver
+driver.close()
