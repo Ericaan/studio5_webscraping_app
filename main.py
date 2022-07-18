@@ -1,10 +1,11 @@
 import crud
 import web_scraper
 
-pname = "Seek.com Community Services"
-URL = "https://www.seek.co.nz/jobs-in-community-services-development"
-user_input1 = "Youth Worker"
-user_input2 = "Support Worker"
+pname = ""
+URL = "https://www.geeksforgeeks.org/"
+user_input1 = 'How to Write a Powerful Resume 2022 '
+user_input2 = 'Top Data Structures That Every Programmer Must Know'
+pages = 1
 new_user_input = ""
 
 #crud.create_project(pname,URL,user_input1,user_input2)
@@ -13,5 +14,4 @@ new_user_input = ""
 #crud.delete_project(pid)
 #crud.read_all_projects()
 
-#web_scraper.scrape(URL,user_input1,user_input2)
-
+web_scraper.scrape(URL,user_input1,user_input2, pages)
