@@ -5,10 +5,12 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+import pandas as pd
+import json
 
 
 #main web scraping function
-def scrape(my_url, input1, input2, pages):
+def scrape(my_url, input1, input2, pages, get_data):
     #url input
     URL = my_url
     #make it so that chrome doesnt open up and so that header user agent allows the scraper through
@@ -146,5 +148,23 @@ def scrape(my_url, input1, input2, pages):
         except:
             print("An issue occurred with the scraping")
         scrape_url(URL)
+
+    # getting the data in csv and json formats
+    def get_data_csv_json(user_input):
+        # convert list to csv and json if user answered yes
+        if user_input == True:
+            dict = {'Job Title': final_items}
+            # csv
+            df = pd.DataFrame(dict)
+            df.to_csv('jobtitle.csv')
+            # json
+            json_str = json.dumps(dict, indent=1)
+            with open('jobtitle2.json', 'w') as outfile:
+                outfile.write(json_str)
+                print("JSON file is created")
+        else:
+            breakpoint()
+
+    # get_data_csv_json(get_data)
 
     driver.close()
