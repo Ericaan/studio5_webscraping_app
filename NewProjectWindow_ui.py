@@ -10,18 +10,17 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-#go to project task window
 from ex1url_ui import Ui_MainWindow
 
 
 class Ui_CreateNewProjectWindow(object):
     def open_ex1(self):
-        #open project task window
+        # open project task window
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.window)
         self.window.show()
-        #get the project name and url
+        # get the project name and url
         projectname = self.name_editText.text()
         url = self.url_editText.text()
         self.ui.project_name.setText(projectname)
@@ -32,101 +31,115 @@ class Ui_CreateNewProjectWindow(object):
         CreateNewProjectWindow.resize(1091, 663)
         self.centralwidget = QtWidgets.QWidget(CreateNewProjectWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.main_label = QtWidgets.QLabel(self.centralwidget)
-        self.main_label.setGeometry(QtCore.QRect(370, 50, 351, 61))
+        self.verticalLayoutWidget_3 = QtWidgets.QWidget(self.centralwidget)
+        self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(70, 30, 961, 601))
+        self.verticalLayoutWidget_3.setObjectName("verticalLayoutWidget_3")
+
+        self.main_layout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_3)
+        self.main_layout.setContentsMargins(100, 100, 100, 100)
+        self.main_layout.setObjectName("main_layout")
+
+        self.main_label_layout = QtWidgets.QVBoxLayout()
+        self.main_label_layout.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.main_label_layout.setObjectName("main_label_layout")
+
+        self.main_label = QtWidgets.QLabel(self.verticalLayoutWidget_3)
+        self.main_label.setEnabled(True)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.main_label.sizePolicy().hasHeightForWidth())
+        self.main_label.setSizePolicy(sizePolicy)
+        self.main_label.setMinimumSize(QtCore.QSize(500, 70))
+        self.main_label.setMaximumSize(QtCore.QSize(0, 60))
         font = QtGui.QFont()
         font.setPointSize(24)
         self.main_label.setFont(font)
+        self.main_label.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.main_label.setObjectName("main_label")
+        self.main_label_layout.addWidget(self.main_label)
 
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(130, 170, 591, 91))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.main_layout.addLayout(self.main_label_layout)
+
+        self.project_name_layout = QtWidgets.QVBoxLayout()
+        self.project_name_layout.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.project_name_layout.setObjectName("project_name_layout")
 
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
 
-        self.name_label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.project_name_label = QtWidgets.QLabel(self.verticalLayoutWidget_3)
         font = QtGui.QFont()
         font.setPointSize(14)
-        self.name_label.setFont(font)
-        self.name_label.setObjectName("name_label")
-        self.horizontalLayout.addWidget(self.name_label)
+        self.project_name_label.setFont(font)
+        self.project_name_label.setObjectName("project_name_label")
+        self.horizontalLayout.addWidget(self.project_name_label)
 
-        self.name_editText = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.project_name_editText = QtWidgets.QLineEdit(self.verticalLayoutWidget_3)
         font = QtGui.QFont()
         font.setPointSize(14)
-        self.name_editText.setFont(font)
-        self.name_editText.setObjectName("name_editText")
-        self.horizontalLayout.addWidget(self.name_editText)
+        self.project_name_editText.setFont(font)
+        self.project_name_editText.setObjectName("project_name_editText")
+        self.horizontalLayout.addWidget(self.project_name_editText)
+        self.project_name_layout.addLayout(self.horizontalLayout)
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout)
-        self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(130, 270, 591, 91))
-        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
-        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.main_layout.addLayout(self.project_name_layout)
+
+        self.url_layout = QtWidgets.QVBoxLayout()
+        self.url_layout.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self.url_layout.setObjectName("url_layout")
+
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-
-        self.url_label = QtWidgets.QLabel(self.verticalLayoutWidget_2)
+        self.url_label = QtWidgets.QLabel(self.verticalLayoutWidget_3)
         font = QtGui.QFont()
         font.setPointSize(14)
         self.url_label.setFont(font)
         self.url_label.setObjectName("url_label")
         self.horizontalLayout_3.addWidget(self.url_label)
 
-        self.url_editText = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
+        self.url_editText = QtWidgets.QLineEdit(self.verticalLayoutWidget_3)
         font = QtGui.QFont()
         font.setPointSize(14)
         self.url_editText.setFont(font)
         self.url_editText.setObjectName("url_editText")
         self.horizontalLayout_3.addWidget(self.url_editText)
 
-        self.verticalLayout_4.addLayout(self.horizontalLayout_3)
-        self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(330, 450, 419, 78))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.horizontalLayoutWidget_2.setFont(font)
-        self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.url_layout.addLayout(self.horizontalLayout_3)
+        self.main_layout.addLayout(self.url_layout)
 
-        self.create_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
+        self.buttons_layout = QtWidgets.QHBoxLayout()
+        self.buttons_layout.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.buttons_layout.setObjectName("buttons_layout")
+
+        self.create_button = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.create_button.setFont(font)
         self.create_button.setObjectName("create_button")
-        self.horizontalLayout_4.addWidget(self.create_button)
-        self.create_button.clicked.connect(lambda :self.open_ex1())
+        self.buttons_layout.addWidget(self.create_button)
+        self.create_button.clicked.connect(lambda: self.open_ex1())
 
-
-        self.cancel_button = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
+        self.cancel_button = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.cancel_button.setFont(font)
         self.cancel_button.setObjectName("cancel_button")
-        self.horizontalLayout_4.addWidget(self.cancel_button)
+        self.buttons_layout.addWidget(self.cancel_button)
 
+        self.main_layout.addLayout(self.buttons_layout)
+
+        self.centralwidget.setLayout(self.main_layout)
         CreateNewProjectWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(CreateNewProjectWindow)
-        self.name_editText.textChanged['QString'].connect(self.name_editText.setText)
-        self.url_editText.textChanged['QString'].connect(self.url_editText.setText)
         QtCore.QMetaObject.connectSlotsByName(CreateNewProjectWindow)
-        CreateNewProjectWindow.setTabOrder(self.create_button, self.cancel_button)
 
     def retranslateUi(self, CreateNewProjectWindow):
         _translate = QtCore.QCoreApplication.translate
         CreateNewProjectWindow.setWindowTitle(_translate("CreateNewProjectWindow", "MainWindow"))
         self.main_label.setText(_translate("CreateNewProjectWindow", "Create New Project"))
-        self.name_label.setText(_translate("CreateNewProjectWindow", "Project Name:"))
+        self.project_name_label.setText(_translate("CreateNewProjectWindow", "Project Name:"))
         self.url_label.setText(_translate("CreateNewProjectWindow", "URL:"))
         self.create_button.setText(_translate("CreateNewProjectWindow", "Create"))
         self.cancel_button.setText(_translate("CreateNewProjectWindow", "Cancel"))
@@ -134,6 +147,7 @@ class Ui_CreateNewProjectWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     CreateNewProjectWindow = QtWidgets.QMainWindow()
     ui = Ui_CreateNewProjectWindow()

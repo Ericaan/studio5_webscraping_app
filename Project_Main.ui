@@ -14,193 +14,255 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="Projects" native="true">
+   <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>229</x>
-      <y>-1</y>
-      <width>861</width>
-      <height>581</height>
+      <x>32</x>
+      <y>10</y>
+      <width>1041</width>
+      <height>561</height>
      </rect>
     </property>
-    <widget class="QPushButton" name="newproject_button">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>40</y>
-       <width>131</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>New Project</string>
-     </property>
-    </widget>
-    <widget class="QTableWidget" name="projects_table">
-     <property name="geometry">
-      <rect>
-       <x>55</x>
-       <y>141</y>
-       <width>751</width>
-       <height>371</height>
-      </rect>
-     </property>
-     <property name="gridStyle">
-      <enum>Qt::SolidLine</enum>
-     </property>
-     <attribute name="horizontalHeaderCascadingSectionResizes">
-      <bool>false</bool>
-     </attribute>
-     <row>
-      <property name="text">
-       <string>1</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>2</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>3</string>
-      </property>
-     </row>
-     <column>
-      <property name="text">
-       <string>Project Name</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Last Edit</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Data Extracted</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>URL</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Input1</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Input2</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Get Data</string>
-      </property>
-     </column>
-    </widget>
-   </widget>
-   <widget class="Line" name="line">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>0</y>
-      <width>20</width>
-      <height>581</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>50</y>
-      <width>232</width>
-      <height>240</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <layout class="QVBoxLayout" name="Menu">
+    <layout class="QHBoxLayout" name="main_layout">
      <item>
-      <widget class="QPushButton" name="manual_button">
+      <layout class="QVBoxLayout" name="menu_layout">
+       <property name="spacing">
+        <number>1</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <item>
+        <widget class="QPushButton" name="manual_button">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Projects</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="dv_button">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Data Visualisation</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="account_button">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Instruction Manual</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="project_button">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>My Account</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="logout_button">
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Log out</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line">
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
         </font>
        </property>
-       <property name="text">
-        <string>Projects</string>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="dv_button">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
+      <layout class="QVBoxLayout" name="project_layout">
+       <property name="leftMargin">
+        <number>20</number>
        </property>
-       <property name="text">
-        <string>Data Visualisation</string>
+       <property name="topMargin">
+        <number>20</number>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="account_button">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
+       <property name="rightMargin">
+        <number>20</number>
        </property>
-       <property name="text">
-        <string>Instruction Manual</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="project_button">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>My Account</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="logout_button">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Log out</string>
-       </property>
-      </widget>
+       <item>
+        <widget class="QPushButton" name="newproject_button">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>300</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>New Project</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="projects_table">
+         <property name="gridStyle">
+          <enum>Qt::SolidLine</enum>
+         </property>
+         <attribute name="horizontalHeaderCascadingSectionResizes">
+          <bool>false</bool>
+         </attribute>
+         <row>
+          <property name="text">
+           <string>1</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>2</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>3</string>
+          </property>
+         </row>
+         <column>
+          <property name="text">
+           <string>Project Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Last Edit</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Data Extracted</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>URL</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Input1</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Input2</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Get Data</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
@@ -221,54 +283,6 @@
     <hint type="destinationlabel">
      <x>324</x>
      <y>72</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>manual_button</sender>
-   <signal>clicked()</signal>
-   <receiver>Projects</receiver>
-   <slot>show()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>141</x>
-     <y>82</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>249</x>
-     <y>52</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>dv_button</sender>
-   <signal>clicked()</signal>
-   <receiver>Projects</receiver>
-   <slot>hide()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>173</x>
-     <y>119</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>256</x>
-     <y>127</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>dv_button</sender>
-   <signal>clicked()</signal>
-   <receiver>Projects</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>93</x>
-     <y>126</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>262</x>
-     <y>182</y>
     </hint>
    </hints>
   </connection>
