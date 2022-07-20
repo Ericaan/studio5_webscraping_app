@@ -1,5 +1,3 @@
-import re
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -165,6 +163,6 @@ def scrape(my_url, input1, input2, pages, get_data):
         else:
             breakpoint()
 
-    # get_data_csv_json(get_data)
+    #get_data_csv_json(get_data)
 
     driver.close()
