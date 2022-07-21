@@ -9,22 +9,23 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QUrl
 
-from ex1url_ui import Ui_MainWindow
-
+from project_ui import Ui_MainWindow
 
 class Ui_CreateNewProjectWindow(object):
-    def open_ex1(self):
+    def openProjectTask(self):
         # open project task window
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.window)
         self.window.show()
         # get the project name and url
-        projectname = self.name_editText.text()
+        projectname = self.project_name_editText.text()
         url = self.url_editText.text()
-        self.ui.project_name.setText(projectname)
-        self.ui.url.setText(url)
+        self.ui.lbl_pname.setText(projectname)
+        # set the browser with the URL user has inputted
+        self.ui.browser.setUrl(QUrl(url))
 
     def setupUi(self, CreateNewProjectWindow):
         CreateNewProjectWindow.setObjectName("CreateNewProjectWindow")
@@ -118,7 +119,9 @@ class Ui_CreateNewProjectWindow(object):
         self.create_button.setFont(font)
         self.create_button.setObjectName("create_button")
         self.buttons_layout.addWidget(self.create_button)
-        self.create_button.clicked.connect(lambda: self.open_ex1())
+        #called the function and close the old window
+        self.create_button.clicked.connect(lambda: self.openProjectTask())
+        self.create_button.clicked.connect(lambda: CreateNewProjectWindow.close())
 
         self.cancel_button = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
         font = QtGui.QFont()

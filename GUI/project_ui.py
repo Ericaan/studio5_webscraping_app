@@ -170,7 +170,8 @@ class Ui_MainWindow(object):
         self.browser.setMinimumSize(QSize(0, 0))
         self.browser.setObjectName("browser")
         self.verticalLayout_4.addWidget(self.browser)
-        self.browser.setUrl(QUrl("https://www.google.com"))
+
+        # self.browser.setUrl(QUrl("https://www.google.com"))
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName("tab_2")
