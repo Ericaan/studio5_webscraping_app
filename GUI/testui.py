@@ -25,9 +25,10 @@ class Ui_MainWindow(object):
         self.groupBox_2.setMaximumSize(QSize(300, 16777215))
         self.groupBox_2.setTitle("")
         self.groupBox_2.setObjectName("groupBox_2")
-        self.groupBox_2.setFlat(True)
-        self.groupBox_2.setStyleSheet("QGroupBox#groupBox_2 {border:0;}")
+        
         self.verticalLayout_2 = QVBoxLayout(self.groupBox_2)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setSpacing(7)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.groupBox_4 = QGroupBox(self.groupBox_2)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
@@ -37,10 +38,11 @@ class Ui_MainWindow(object):
         self.groupBox_4.setSizePolicy(sizePolicy)
         self.groupBox_4.setMinimumSize(QSize(0, 100))
         self.groupBox_4.setTitle("")
-        self.groupBox_4.setObjectName("groupBox_4")
-        self.groupBox_4.setFlat(True)
-        self.groupBox_4.setStyleSheet("QGroupBox#groupBox_4 {border:0;}")
+        self.groupBox_4.setObjectName("groupBox_4")        
+        
         self.horizontalLayout_4 = QHBoxLayout(self.groupBox_4)
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_4.setSpacing(7)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.tb_home = QToolButton(self.groupBox_4)
         self.tb_home.setMinimumSize(QSize(50, 50))
@@ -93,9 +95,10 @@ class Ui_MainWindow(object):
         self.groupBox = QGroupBox(self.centralwidget)
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
-        self.groupBox.setFlat(True)
-        self.groupBox.setStyleSheet("QGroupBox#groupBox {border:0;}")
+        
         self.verticalLayout_3 = QVBoxLayout(self.groupBox)
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_3.setSpacing(7)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.groupBox_3 = QGroupBox(self.groupBox)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
@@ -107,17 +110,27 @@ class Ui_MainWindow(object):
         self.groupBox_3.setMaximumSize(QSize(16777215, 100))
         self.groupBox_3.setTitle("")
         self.groupBox_3.setObjectName("groupBox_3")
-        self.groupBox_3.setFlat(True)
-        self.groupBox_3.setStyleSheet("QGroupBox#groupBox_3 {border:0;}")
+        
         self.horizontalLayout_5 = QHBoxLayout(self.groupBox_3)
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_5.setSpacing(7)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.btn_psave = QPushButton(self.groupBox_3)
+        font = QFont()
+        font.setPointSize(12)
+        self.btn_psave.setFont(font)
         self.btn_psave.setObjectName("btn_psave")
         self.horizontalLayout_5.addWidget(self.btn_psave)
         self.btn_ = QPushButton(self.groupBox_3)
+        font = QFont()
+        font.setPointSize(12)
+        self.btn_.setFont(font)
         self.btn_.setObjectName("btn_")
         self.horizontalLayout_5.addWidget(self.btn_)
         self.pushButton_2 = QPushButton(self.groupBox_3)
+        font = QFont()
+        font.setPointSize(12)
+        self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_5.addWidget(self.pushButton_2)
         self.verticalLayout_3.addWidget(self.groupBox_3)
@@ -128,11 +141,12 @@ class Ui_MainWindow(object):
         self.verticalLayout_4 = QVBoxLayout(self.tab)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.groupBox_5 = QGroupBox(self.tab)
-        self.groupBox_5.setMaximumSize(QSize(16777215, 75))
+        self.groupBox_5.setMaximumSize(QSize(16777215, 50))
+        self.groupBox_5.setTitle("")
         self.groupBox_5.setObjectName("groupBox_5")
-        self.groupBox_5.setFlat(True)
-        self.groupBox_5.setStyleSheet("QGroupBox#groupBox_5 {border:0;}")
+        
         self.horizontalLayout_6 = QHBoxLayout(self.groupBox_5)
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.url_bar = QLineEdit(self.groupBox_5)
         self.url_bar.setObjectName("url_bar")
@@ -151,7 +165,8 @@ class Ui_MainWindow(object):
         self.browser.setMinimumSize(QSize(0, 0))
         self.browser.setObjectName("browser")
         self.verticalLayout_4.addWidget(self.browser)
-        self.browser.setUrl(QUrl("https://www.google.com"))
+
+        # self.browser.setUrl(QUrl("https://www.google.com"))
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName("tab_2")
@@ -169,9 +184,35 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        self.groupBox_2.setFlat(True)
+        self.groupBox_2.setStyleSheet("QGroupBox#groupBox_2 {border:0;}")
+        self.groupBox_4.setFlat(True)
+        self.groupBox_4.setStyleSheet("QGroupBox#groupBox_4 {border:0;}")
+        self.groupBox_5.setFlat(True)
+        self.groupBox_5.setStyleSheet("QGroupBox#groupBox_5 {border:0;}")
+        self.groupBox_3.setFlat(True)
+        self.groupBox_3.setStyleSheet("QGroupBox#groupBox_3 {border:0;}")
+        self.groupBox.setFlat(True)
+        self.groupBox.setStyleSheet("QGroupBox#groupBox {border:0;}")
+        self.go_btn.clicked.connect(lambda: self.navigate(self.url_bar.toPlainText()))
+        self.back_btn.clicked.connect(self.browser.back)
+        self.for_btn.clicked.connect(self.browser.forward)
+
+        
+
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
         QMetaObject.connectSlotsByName(MainWindow)
+
+    
+    #navigate method for go button
+    def navigate(self, url):
+        # in case it doesnt have http
+        if not url.startswith("http"):
+            url = "http://" + url
+            self.url_bar.setText(url)
+        self.browser.setUrl(QtCore.QUrl(url))
+
 
     def retranslateUi(self, MainWindow):
         _translate = QCoreApplication.translate
