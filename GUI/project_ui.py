@@ -53,13 +53,21 @@ class Ui_MainWindow(object):
         self.tb_home.setMinimumSize(QtCore.QSize(50, 50))
         self.tb_home.setObjectName("tb_home")
         self.horizontalLayout_4.addWidget(self.tb_home)
+
         self.lbl_pname = QtWidgets.QLabel(self.groupBox_4)
         font = QtGui.QFont()
         font.setPointSize(20)
         self.lbl_pname.setFont(font)
         self.lbl_pname.setObjectName("lbl_pname")
         self.horizontalLayout_4.addWidget(self.lbl_pname)
+
+        # projectId -- hidden (id to getting data from firebase)
+        self.project_id_hidden = QtWidgets.QLabel(self.groupBox_4)
+        self.horizontalLayout_4.addWidget(self.project_id_hidden)
+        self.project_id_hidden.setHidden(True)
+
         self.verticalLayout_2.addWidget(self.groupBox_4)
+
         self.lbl_input1 = QtWidgets.QLabel(self.groupBox_2)
         self.lbl_input1.setObjectName("lbl_input1")
         self.verticalLayout_2.addWidget(self.lbl_input1)

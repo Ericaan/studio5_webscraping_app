@@ -11,14 +11,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QUrl
 
-import all_projects_ui
-import project_ui
+from project_ui import Ui_MainWindow
 
 class Ui_CreateNewProjectWindow(object):
     def openProjectTask(self):
         # open project task window
         self.window = QtWidgets.QMainWindow()
-        self.ui = project_ui.Ui_MainWindow()
+        self.ui = Ui_MainWindow()
         self.ui.setupUi(self.window)
         self.window.show()
         # get the project name and url
@@ -27,14 +26,6 @@ class Ui_CreateNewProjectWindow(object):
         self.ui.lbl_pname.setText(projectname)
         # set the browser with the URL user has inputted
         self.ui.browser.setUrl(QUrl(url))
-        self.ui.url_bar.setText(url)
-
-    def closeProjectTask(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = all_projects_ui.Ui_Project_Main()
-        self.ui.setupUi(self.window)
-        self.window.show()
-        
 
     def setupUi(self, CreateNewProjectWindow):
         CreateNewProjectWindow.setObjectName("CreateNewProjectWindow")
@@ -138,9 +129,6 @@ class Ui_CreateNewProjectWindow(object):
         self.cancel_button.setFont(font)
         self.cancel_button.setObjectName("cancel_button")
         self.buttons_layout.addWidget(self.cancel_button)
-
-        self.cancel_button.clicked.connect(lambda: self.closeProjectTask())
-        self.cancel_button.clicked.connect(lambda: CreateNewProjectWindow.close())
 
         self.main_layout.addLayout(self.buttons_layout)
 
