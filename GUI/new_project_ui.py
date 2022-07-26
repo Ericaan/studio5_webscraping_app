@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QUrl
 
-import Project_Main_ui
+import all_projects_ui
 import project_ui
 
 class Ui_CreateNewProjectWindow(object):
@@ -31,7 +31,7 @@ class Ui_CreateNewProjectWindow(object):
 
     def closeProjectTask(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = Project_Main_ui.Ui_Project_Main()
+        self.ui = all_projects_ui.Ui_Project_Main()
         self.ui.setupUi(self.window)
         self.window.show()
         

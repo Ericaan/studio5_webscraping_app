@@ -11,7 +11,7 @@ db = firestore.client()
 fb = firebase.FirebaseApplication('https://pythonfirebase-c03ae-default-rtdb.firebaseio.com/',None)
 
 # create a new project
-def create_project(pname,my_url,input1,input2):
+def create_project(pname,my_url):
 	today = datetime.datetime.now()
 	db.collection('Project').document().set(
 		{
@@ -19,7 +19,7 @@ def create_project(pname,my_url,input1,input2):
             'URL': my_url,
 			'lastDate': today,
             'dataDownload':'false',
-			'userInput': [input1,input2]
+			'userInput': None
 		}
 	)
 
@@ -37,7 +37,7 @@ def read_all_projects():
         print( doc.to_dict())
 
 # UPDATE the project
-def update_project(id,pname,my_url,input1,input2):
+def update_project(id,pname,my_url,userInput):
     today = datetime.datetime.now()
     db.collection('Project').document(id).update(
 		{
@@ -45,7 +45,7 @@ def update_project(id,pname,my_url,input1,input2):
             'URL': my_url,
 			'lastDate': today,
             'dataDownload':'false',
-			'userInput': [input1,input2]
+			'userInput': userInput
 		}
 	)
 

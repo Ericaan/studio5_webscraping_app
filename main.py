@@ -15,4 +15,4 @@ new_user_input = ""
 #crud.delete_project(pid)
 #crud.read_all_projects()
 
-web_scraper.scrape(URL,user_input1,user_input2, pages, get_data)
+#web_scraper.scrape(URL,user_input1,user_input2, pages, get_data)

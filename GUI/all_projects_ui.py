@@ -10,13 +10,13 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from NewProjectWindow_ui import Ui_CreateNewProjectWindow
+import new_project_ui 
 
 class Ui_Project_Main(object):
     # show new window
     def openNewProjectWindow(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_CreateNewProjectWindow()
+        self.ui = new_project_ui.Ui_CreateNewProjectWindow()
         self.ui.setupUi(self.window)
         self.window.show()
 
