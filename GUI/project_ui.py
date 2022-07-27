@@ -11,6 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtWebEngineWidgets
 import all_projects_ui
 import crud
+import time
 
 
 class Ui_MainWindow(object):
@@ -60,12 +61,6 @@ class Ui_MainWindow(object):
         self.lbl_pname.setFont(font)
         self.lbl_pname.setObjectName("lbl_pname")
         self.horizontalLayout_4.addWidget(self.lbl_pname)
-
-        # projectId -- hidden (id to getting data from firebase)
-        self.project_id_hidden = QtWidgets.QLabel(self.groupBox_4)
-        self.horizontalLayout_4.addWidget(self.project_id_hidden)
-        self.project_id_hidden.setHidden(True)
-
         self.verticalLayout_2.addWidget(self.groupBox_4)
 
         self.lbl_input1 = QtWidgets.QLabel(self.groupBox_2)

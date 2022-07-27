@@ -42,6 +42,24 @@ def read_all_projects():
 		dict.append(doc.to_dict())
 	return dict
 
+def read_project_url(id):
+	docs = db.collection('Project').where('projectId', '==', id).stream()
+	for doc in docs:
+		url = doc.to_dict().get('URL')
+	return url
+
+def read_project_inputs(id):
+	docs = db.collection('Project').where('projectId', '==', id).stream()
+	for doc in docs:
+		inputs = doc.to_dict().get('userInput')
+	return inputs
+
+def read_project_name(id):
+	docs = db.collection('Project').where('projectId', '==', id).stream()
+	for doc in docs:
+		pname = doc.to_dict().get('projectName')
+	return pname
+
 # UPDATE the project
 def update_project(id,pname,my_url,userInput):
     today = datetime.datetime.now()

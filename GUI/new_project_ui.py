@@ -26,6 +26,7 @@ class Ui_CreateNewProjectWindow(object):
         self.ui.lbl_pname.setText(projectname)
         # set the browser with the URL user has inputted
         self.ui.browser.setUrl(QUrl(url))
+        self.ui.url_bar.setText(url)
 
     def setupUi(self, CreateNewProjectWindow):
         CreateNewProjectWindow.setObjectName("CreateNewProjectWindow")
