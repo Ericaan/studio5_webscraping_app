@@ -1,6 +1,7 @@
-from anytree import NodeMixin, RenderTree
-
-class Tree_ds(NodeMixin):
+from anytree import NodeMixin
+class MyBaseClass(object):  # Just an example of a base class
+     foo = ''
+class Tree_ds(MyBaseClass,NodeMixin):
     def __init__(self, name, input1, input2, parent=None, children=None):
         super(Tree_ds, self).__init__()
         self.name = name

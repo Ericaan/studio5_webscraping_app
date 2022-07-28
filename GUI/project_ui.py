@@ -13,6 +13,7 @@ import all_projects_ui
 import crud
 import time
 
+temp_dict = {}
 
 class Ui_MainWindow(object):
     #method to go to back to projects
@@ -84,14 +85,16 @@ class Ui_MainWindow(object):
         self.tree_template.setMinimumSize(QtCore.QSize(0, 0))
         self.tree_template.setObjectName("tree_template")
         self.tree_template.headerItem().setText(0, "Template")
-        '''
-        item_0 = QtWidgets.QTreeWidgetItem(self.tree_template)
-        item_1 = QtWidgets.QTreeWidgetItem(item_0)
-        item_1 = QtWidgets.QTreeWidgetItem(item_0)
-        item_1 = QtWidgets.QTreeWidgetItem(item_0)
-        item_0 = QtWidgets.QTreeWidgetItem(self.tree_template)
-        item_0 = QtWidgets.QTreeWidgetItem(self.tree_template)
-        '''
+        self.tree_template.headerItem().setText(1, "input1")
+        self.tree_template.headerItem().setText(2, "input2")
+
+        # item_0 = QtWidgets.QTreeWidgetItem(self.tree_template)
+        # item_1 = QtWidgets.QTreeWidgetItem(item_0)
+        # item_1 = QtWidgets.QTreeWidgetItem(item_0)
+        # item_1 = QtWidgets.QTreeWidgetItem(item_0)
+        # item_0 = QtWidgets.QTreeWidgetItem(self.tree_template)
+        # item_0 = QtWidgets.QTreeWidgetItem(self.tree_template)
+
         self.verticalLayout_2.addWidget(self.tree_template)
         self.groupBox_6 = QtWidgets.QGroupBox(self.groupBox_2)
         self.groupBox_6.setObjectName("groupBox_6")
@@ -148,12 +151,12 @@ class Ui_MainWindow(object):
         self.btn_psave.setFont(font)
         self.btn_psave.setObjectName("btn_psave")
         self.horizontalLayout_5.addWidget(self.btn_psave)
-        self.btn_ = QtWidgets.QPushButton(self.groupBox_3)
+        self.btn_get_data = QtWidgets.QPushButton(self.groupBox_3)
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.btn_.setFont(font)
-        self.btn_.setObjectName("btn_")
-        self.horizontalLayout_5.addWidget(self.btn_)
+        self.btn_get_data.setFont(font)
+        self.btn_get_data.setObjectName("btn_get_data")
+        self.horizontalLayout_5.addWidget(self.btn_get_data)
         self.btn_pdel = QtWidgets.QPushButton(self.groupBox_3)
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -224,30 +227,52 @@ class Ui_MainWindow(object):
         self.groupBox_6.setStyleSheet("QGroupBox#groupBox_3 {border:0;}")
         #make browser buttons work
         self.go_btn.clicked.connect(lambda: self.navigate(self.url_bar.toPlainText()))
-        self.back_btn.clicked.connect(self.browser.back)
-        self.for_btn.clicked.connect(self.browser.forward)
+        self.back_btn.clicked.connect(lambda: self.browser.back)
+        self.for_btn.clicked.connect(lambda: self.browser.forward)
         #template handling
         self.tree_template.setColumnCount(1)
-        self.tree_template.itemClicked.connect(self.temp_clicked)
-        self.btn_add2template.clicked.connect(self.new_branch)
+        self.tree_template.itemClicked.connect(lambda: self.temp_clicked)
+        self.btn_add2template.clicked.connect(lambda: self.new_branch)
         #back button functionality
         self.tb_home.clicked.connect(lambda: self.openNewProjectWindow())
         self.tb_home.clicked.connect(lambda: Project_UI.close())
         #save button functionality
-        '''pid = crud.read_project(self.lbl_pname.text)
-        pname = self.lbl_pname.text
-        purl = self.url_bar.text
-        self.btn_psave.clicked.connect(crud.update_project(pid,pname,purl,self.ptemplate))'''
+        pid = crud.read_project(self.lbl_pname.text())
+        pname = self.lbl_pname.text()
+        purl = self.url_bar.toPlainText()
+        #pinput = self.get_template()
+        self.btn_psave.clicked.connect(lambda: self.make_dict())
+        self.btn_psave.clicked.connect(crud.update_project(pid, pname, purl, lambda: self.get_template()))
+        # get data button functionality
+        self.btn_get_data.clicked.connect(lambda: self.make_dict())
+
         #delete button
-        self.btn_pdel.clicked.connect(lambda: self.delProject())
+        self.btn_pdel.clicked.connect(lambda: self.del_project())
         self.btn_pdel.clicked.connect(lambda: self.openNewProjectWindow())
         self.btn_pdel.clicked.connect(lambda: Project_UI.close())
-
 
         self.retranslateUi(Project_UI)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Project_UI)
 
+    def get_template(self):
+        print(temp_dict)
+        return temp_dict
+
+    def make_dict(self):
+        print("iterate")
+        iterator = QtWidgets.QTreeWidgetItemIterator(self.tree_template)
+        while iterator.value():
+            item = iterator.value()
+            if item.parent() is None:
+                key = item.text(0)
+                values = [item.text(1), item.text(2)]
+                temp_dict[key] = values
+            else:
+                key = item.parent().text(0)
+                values = {item.text(0): [item.text(1), item.text(2)]}
+                temp_dict[key].append(values)
+            iterator += 1
 
     #buttons and other interaction methods
     #navigate method for go button
@@ -262,75 +287,85 @@ class Ui_MainWindow(object):
     def temp_clicked(self):
         item = self.tree_template.currentItem()
         root = self.tree_template.invisibleRootItem()
-        if(self.rb_delete.isChecked()):
+        if self.rb_delete.isChecked():
             print("deleted "+item.text(0))
             (item.parent() or root).removeChild(item)
         else:
             print(item.text(0))
 
     #adding a new item to the template
-    def new_branch(self, Project_UI):
+    def new_branch(self):
         _translate = QtCore.QCoreApplication.translate
-        if (self.rb_select.isChecked()):
+        if self.rb_select.isChecked():
             print("Select")
+            # declare a new tree widget item
             item_0 = QtWidgets.QTreeWidgetItem(self.tree_template)
-            count=self.tree_template.topLevelItemCount()
+            count = self.tree_template.topLevelItemCount()
+            # set new tree widget item
             self.tree_template.topLevelItem(count-1).setText(0, _translate("Project_UI", "newItem"))
-            self.tree_template.topLevelItem(count-1).setFlags(self.tree_template.topLevelItem(count-1).flags() | QtCore.Qt.ItemIsEditable) 
-            
-        elif(self.rb_rel_select.isChecked()):
-            print("relative select")
-            item = self.tree_template.selectedItems()
+            self.tree_template.topLevelItem(count-1).setText(1, _translate("Project_UI", self.txt_input1.toPlainText()))
+            self.tree_template.topLevelItem(count-1).setText(2, _translate("Project_UI", self.txt_input2.toPlainText()))
+            self.tree_template.topLevelItem(count-1).setFlags(self.tree_template.topLevelItem(count-1).flags() | QtCore.Qt.ItemIsEditable)
 
+        elif self.rb_rel_select.isChecked():
+            print("relative select")
+            # find the item its relatively selected to
+            item = self.tree_template.selectedItems()
+            # set the new tree widget item
             the_child = QtWidgets.QTreeWidgetItem()
             the_child.setText(0, _translate("Project_UI", "newSubItem"))
+            the_child.setText(1, _translate("Project_UI", self.txt_input1.toPlainText()))
+            the_child.setText(2, _translate("Project_UI", self.txt_input2.toPlainText()))
             the_child.setFlags(the_child.flags() | QtCore.Qt.ItemIsEditable)
             item[0].addChild(the_child)
+            # add to template dictionary
+            # key = item[0].text(0)
+            # values = {the_child.text(0): [the_child.text(1), the_child.text(2)]}
+            # temp_dict[key].append(values)
 
     #delete the project from the database
-    def delProject(self):
+    def del_project(self):
         pid = crud.read_project(self.lbl_pname.text())
         crud.delete_project(pid)
-
 
     def retranslateUi(self, Project_UI):
         _translate = QtCore.QCoreApplication.translate
         Project_UI.setWindowTitle(_translate("Project_UI", "YouScrape"))
         self.tb_home.setText(_translate("Project_UI", "..."))
-        self.lbl_pname.setText(_translate("Project_UI", "Project Name"))
+        self.lbl_pname.setText(_translate("Project_UI", "Trademe-cars"))
         self.lbl_input1.setText(_translate("Project_UI", "Input 1"))
         self.lbl_input2.setText(_translate("Project_UI", "Input 2"))
         self.btn_add2template.setText(_translate("Project_UI", "Add to Template"))
         __sortingEnabled = self.tree_template.isSortingEnabled()
         self.tree_template.setSortingEnabled(False)
-        '''
-        self.tree_template.topLevelItem(0).setText(0, _translate("Project_UI", "title"))
-        self.tree_template.topLevelItem(0).child(0).setText(0, _translate("Project_UI", "text"))
-        self.tree_template.topLevelItem(0).child(1).setText(0, _translate("Project_UI", "price"))
-        self.tree_template.topLevelItem(0).child(2).setText(0, _translate("Project_UI", "url"))
-        self.tree_template.topLevelItem(1).setText(0, _translate("Project_UI", "Company"))
-        self.tree_template.topLevelItem(2).setText(0, _translate("Project_UI", "Reviews"))
-        '''
+
+        # self.tree_template.topLevelItem(0).setText(0, _translate("Project_UI", "title"))
+        # self.tree_template.topLevelItem(0).child(0).setText(0, _translate("Project_UI", "text"))
+        # self.tree_template.topLevelItem(0).child(1).setText(0, _translate("Project_UI", "price"))
+        # self.tree_template.topLevelItem(0).child(2).setText(0, _translate("Project_UI", "url"))
+        # self.tree_template.topLevelItem(1).setText(0, _translate("Project_UI", "Company"))
+        # self.tree_template.topLevelItem(2).setText(0, _translate("Project_UI", "Reviews"))
+
         self.tree_template.setSortingEnabled(__sortingEnabled)
-        #non autogenerated code
+        # non autogenerated code
         self.tree_template.setDragDropMode(QtWidgets.QAbstractItemView.InternalMove)
         self.tree_template.setDragEnabled(True)
         self.tree_template.setAcceptDrops(True)
-        '''
-        self.tree_template.topLevelItem(0).setFlags(self.tree_template.topLevelItem(0).flags() | QtCore.Qt.ItemIsEditable)
-        self.tree_template.topLevelItem(1).setFlags(self.tree_template.topLevelItem(1).flags() | QtCore.Qt.ItemIsEditable)
-        self.tree_template.topLevelItem(2).setFlags(self.tree_template.topLevelItem(2).flags() | QtCore.Qt.ItemIsEditable)
-        self.tree_template.topLevelItem(0).child(0).setFlags(self.tree_template.topLevelItem(0).child(0).flags() | QtCore.Qt.ItemIsEditable)
-        self.tree_template.topLevelItem(0).child(1).setFlags(self.tree_template.topLevelItem(0).child(1).flags() | QtCore.Qt.ItemIsEditable)
-        self.tree_template.topLevelItem(0).child(2).setFlags(self.tree_template.topLevelItem(0).child(2).flags() | QtCore.Qt.ItemIsEditable)
-        '''
+
+        # self.tree_template.topLevelItem(0).setFlags(self.tree_template.topLevelItem(0).flags() | QtCore.Qt.ItemIsEditable)
+        # self.tree_template.topLevelItem(1).setFlags(self.tree_template.topLevelItem(1).flags() | QtCore.Qt.ItemIsEditable)
+        # self.tree_template.topLevelItem(2).setFlags(self.tree_template.topLevelItem(2).flags() | QtCore.Qt.ItemIsEditable)
+        # self.tree_template.topLevelItem(0).child(0).setFlags(self.tree_template.topLevelItem(0).child(0).flags() | QtCore.Qt.ItemIsEditable)
+        # self.tree_template.topLevelItem(0).child(1).setFlags(self.tree_template.topLevelItem(0).child(1).flags() | QtCore.Qt.ItemIsEditable)
+        # self.tree_template.topLevelItem(0).child(2).setFlags(self.tree_template.topLevelItem(0).child(2).flags() | QtCore.Qt.ItemIsEditable)
+
         #
         self.groupBox_6.setTitle(_translate("Project_UI", "Commands"))
         self.rb_delete.setText(_translate("Project_UI", "Delete"))
         self.rb_select.setText(_translate("Project_UI", "Select"))
         self.rb_rel_select.setText(_translate("Project_UI", "Relative Select"))
         self.btn_psave.setText(_translate("Project_UI", "Save"))
-        self.btn_.setText(_translate("Project_UI", "Get Data"))
+        self.btn_get_data.setText(_translate("Project_UI", "Get Data"))
         self.btn_pdel.setText(_translate("Project_UI", "Delete"))
         self.go_btn.setText(_translate("Project_UI", "Go"))
         self.back_btn.setText(_translate("Project_UI", "<"))
