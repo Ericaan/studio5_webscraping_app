@@ -133,6 +133,7 @@ def scrape(my_url, input1, input2, pages, get_data):
                     parent = driver.execute_script("return arguments[0].parentNode;",item)
                     if p1_tagname == parent.tag_name:
                         p_attrs = {}
+                        # butts
                         p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
                         if p_attrs.keys() == p_attrs1.keys():
                             final_items.append(item.get_attribute("innerHTML"))

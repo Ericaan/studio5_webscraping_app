@@ -15,6 +15,7 @@ import time
 
 temp_dict = {}
 
+
 class Ui_MainWindow(object):
     #method to go to back to projects
     def openNewProjectWindow(self):
@@ -70,6 +71,7 @@ class Ui_MainWindow(object):
         self.txt_input1 = QtWidgets.QTextEdit(self.groupBox_2)
         self.txt_input1.setMaximumSize(QtCore.QSize(16777215, 50))
         self.txt_input1.setObjectName("txt_input1")
+
         self.verticalLayout_2.addWidget(self.txt_input1)
         self.lbl_input2 = QtWidgets.QLabel(self.groupBox_2)
         self.lbl_input2.setObjectName("lbl_input2")
@@ -77,6 +79,7 @@ class Ui_MainWindow(object):
         self.txt_input2 = QtWidgets.QTextEdit(self.groupBox_2)
         self.txt_input2.setMaximumSize(QtCore.QSize(16777215, 50))
         self.txt_input2.setObjectName("txt_input2")
+
         self.verticalLayout_2.addWidget(self.txt_input2)
         self.btn_add2template = QtWidgets.QPushButton(self.groupBox_2)
         self.btn_add2template.setObjectName("btn_add2template")
@@ -203,7 +206,12 @@ class Ui_MainWindow(object):
         self.tableWidget.setMaximumSize(QtCore.QSize(16777215, 150))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
-        self.tableWidget.setRowCount(0)
+        self.tableWidget.setRowCount(2)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(1, item)
+
         self.verticalLayout_3.addWidget(self.tableWidget)
         self.horizontalLayout_2.addWidget(self.groupBox)
         Project_UI.setCentralWidget(self.centralwidget)
@@ -225,28 +233,24 @@ class Ui_MainWindow(object):
         self.groupBox.setStyleSheet("QGroupBox#groupBox {border:0;}")
         self.groupBox_6.setFlat(True)
         self.groupBox_6.setStyleSheet("QGroupBox#groupBox_3 {border:0;}")
-        #make browser buttons work
+
+        # make browser buttons work
         self.go_btn.clicked.connect(lambda: self.navigate(self.url_bar.toPlainText()))
         self.back_btn.clicked.connect(lambda: self.browser.back)
         self.for_btn.clicked.connect(lambda: self.browser.forward)
-        #template handling
+        # template handling
         self.tree_template.setColumnCount(1)
-        self.tree_template.itemClicked.connect(lambda: self.temp_clicked)
-        self.btn_add2template.clicked.connect(lambda: self.new_branch)
-        #back button functionality
+        self.tree_template.itemClicked.connect(self.temp_clicked)
+        self.btn_add2template.clicked.connect(self.new_branch)
+        # back button functionality
         self.tb_home.clicked.connect(lambda: self.openNewProjectWindow())
         self.tb_home.clicked.connect(lambda: Project_UI.close())
-        #save button functionality
-        pid = crud.read_project(self.lbl_pname.text())
-        pname = self.lbl_pname.text()
-        purl = self.url_bar.toPlainText()
-        #pinput = self.get_template()
+        # save button functionality
         self.btn_psave.clicked.connect(lambda: self.make_dict())
-        self.btn_psave.clicked.connect(crud.update_project(pid, pname, purl, lambda: self.get_template()))
+        self.btn_psave.clicked.connect(lambda: self.save_click())
         # get data button functionality
         self.btn_get_data.clicked.connect(lambda: self.make_dict())
-
-        #delete button
+        # delete button
         self.btn_pdel.clicked.connect(lambda: self.del_project())
         self.btn_pdel.clicked.connect(lambda: self.openNewProjectWindow())
         self.btn_pdel.clicked.connect(lambda: Project_UI.close())
@@ -255,9 +259,14 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Project_UI)
 
-    def get_template(self):
-        print(temp_dict)
-        return temp_dict
+    # buttons and other interaction methods
+    def save_click(self):
+        pid = crud.read_project(self.lbl_pname.text())
+        pname = self.lbl_pname.text()
+        purl = self.url_bar.toPlainText()
+        pinput = temp_dict
+        crud.update_project(pid, pname, purl, pinput)
+        temp_dict.clear()
 
     def make_dict(self):
         print("iterate")
@@ -273,8 +282,8 @@ class Ui_MainWindow(object):
                 values = {item.text(0): [item.text(1), item.text(2)]}
                 temp_dict[key].append(values)
             iterator += 1
+        print(str(temp_dict))
 
-    #buttons and other interaction methods
     #navigate method for go button
     def navigate(self, url):
         # in case it doesnt have http
@@ -306,6 +315,21 @@ class Ui_MainWindow(object):
             self.tree_template.topLevelItem(count-1).setText(1, _translate("Project_UI", self.txt_input1.toPlainText()))
             self.tree_template.topLevelItem(count-1).setText(2, _translate("Project_UI", self.txt_input2.toPlainText()))
             self.tree_template.topLevelItem(count-1).setFlags(self.tree_template.topLevelItem(count-1).flags() | QtCore.Qt.ItemIsEditable)
+            # table update
+            # column
+            item_1 = QtWidgets.QTableWidgetItem()
+            cols = self.tableWidget.columnCount()
+            self.tableWidget.setColumnCount(cols+1)
+            self.tableWidget.setHorizontalHeaderItem(cols, item_1)
+            self.tableWidget.horizontalHeaderItem(cols).setText(_translate("MainWindow", "new column"))
+            # row 1 item
+            item_2 = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setItem(0, cols, item_2)
+            self.tableWidget.item(0, cols).setText(_translate("MainWindow", self.txt_input1.toPlainText()))
+            # row 2 item
+            item_3 = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setItem(1, cols, item_3)
+            self.tableWidget.item(1, cols).setText(_translate("MainWindow", self.txt_input2.toPlainText()))
 
         elif self.rb_rel_select.isChecked():
             print("relative select")
@@ -318,10 +342,6 @@ class Ui_MainWindow(object):
             the_child.setText(2, _translate("Project_UI", self.txt_input2.toPlainText()))
             the_child.setFlags(the_child.flags() | QtCore.Qt.ItemIsEditable)
             item[0].addChild(the_child)
-            # add to template dictionary
-            # key = item[0].text(0)
-            # values = {the_child.text(0): [the_child.text(1), the_child.text(2)]}
-            # temp_dict[key].append(values)
 
     #delete the project from the database
     def del_project(self):
@@ -372,6 +392,14 @@ class Ui_MainWindow(object):
         self.for_btn.setText(_translate("Project_UI", ">"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Project_UI", "Tab 1"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Project_UI", "Tab 2"))
+
+        __sortingEnabled = self.tableWidget.isSortingEnabled()
+        self.tableWidget.setSortingEnabled(False)
+        item = self.tableWidget.verticalHeaderItem(0)
+        item.setText(_translate("MainWindow", "1"))
+        item = self.tableWidget.verticalHeaderItem(1)
+        item.setText(_translate("MainWindow", "2"))
+        self.tableWidget.setSortingEnabled(__sortingEnabled)
 
 
 if __name__ == "__main__":

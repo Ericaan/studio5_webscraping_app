@@ -2,10 +2,10 @@ import crud
 import web_scraper
 
 pname = ""
-URL = "https://www.geeksforgeeks.org/"
-user_input1 = 'How to Apply For a Software Engineering Job in 4 Ways?'
-user_input2 = 'How to prepare for ICFP or International Conference on Functional Programming?'
-pages = 1
+URL = "https://www.seek.co.nz/jobs-in-community-services-development"
+user_input1 = 'Youth Worker'
+user_input2 = 'Case Manager'
+pages = 2
 get_data = False
 new_user_input = ""
 

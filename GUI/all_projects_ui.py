@@ -44,8 +44,8 @@ class Ui_Project_Main(object):
             self.ui.lbl_pname.setText(project_name)
             self.ui.browser.setUrl(QUrl(URL))
             self.ui.url_bar.setText(URL)
-            self.ui.txt_input1.setText(user_inputs[0])
-            self.ui.txt_input2.setText(user_inputs[1])
+            # self.ui.txt_input1.setText(user_inputs[0])
+            # self.ui.txt_input2.setText(user_inputs[1])
 
     # get the project ID from selected row
     def clicked_row(self):
@@ -207,7 +207,7 @@ class Ui_Project_Main(object):
             json_to_csv.to_csv('project_details.csv', index=False)
 
         # call the function
-        data_from_firestore()
+        # data_from_firestore()
 
         # read csv file
         read_csv = pd.read_csv('project_details.csv')
