@@ -1,4 +1,4 @@
-projectName,URL,userInput,projectId,lastDate,dataDownload
-Seek.com Community Services,https://www.seek.co.nz/jobs-in-community-services-development,"['Youth Worker', 'Support Worker']",eso1xJpJ7tO9YWaAPPmf,"07/07/2022, 16:02:18",false
-geeksforgeeks scrape,https://www.geeksforgeeks.org/,"['How to Learn Data Science in 10 weeks?', 'Interview Experience League 2022']",17q6uPMcm5grSgKxgopK,"07/07/2022, 15:59:53",false
-Trademe-cars,https://www.trademe.co.nz/a/motors/cars,"['2014 Subaru XV', '2018 Isuzu D-Max']",uePZxOk7YPo5RchhNDCs,"07/26/2022, 14:33:32",false
+Project ID,Project Name,URL,Data Download,Last Date
+eso1xJpJ7tO9YWaAPPmf,Seek.com Community Services,https://www.seek.co.nz/jobs-in-community-services-development,false,"08/02/2022, 01:26:36"
+17q6uPMcm5grSgKxgopK,geeksforgeeks scrape,https://www.geeksforgeeks.org/,false,"08/01/2022, 13:36:10"
+uePZxOk7YPo5RchhNDCs,Trademe-cars,https://www.trademe.co.nz/a/motors/cars,false,"07/26/2022, 14:33:32"

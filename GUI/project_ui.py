@@ -18,7 +18,7 @@ temp_dict = {}
 
 class Ui_MainWindow(object):
     #method to go to back to projects
-    def openNewProjectWindow(self):
+    def openAllProjectWindow(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = all_projects_ui.Ui_Project_Main()
         self.ui.setupUi(self.window)
@@ -243,7 +243,7 @@ class Ui_MainWindow(object):
         self.tree_template.itemClicked.connect(self.temp_clicked)
         self.btn_add2template.clicked.connect(self.new_branch)
         # back button functionality
-        self.tb_home.clicked.connect(lambda: self.openNewProjectWindow())
+        self.tb_home.clicked.connect(lambda: self.openAllProjectWindow())
         self.tb_home.clicked.connect(lambda: Project_UI.close())
         # save button functionality
         self.btn_psave.clicked.connect(lambda: self.make_dict())
@@ -252,7 +252,7 @@ class Ui_MainWindow(object):
         self.btn_get_data.clicked.connect(lambda: self.make_dict())
         # delete button
         self.btn_pdel.clicked.connect(lambda: self.del_project())
-        self.btn_pdel.clicked.connect(lambda: self.openNewProjectWindow())
+        self.btn_pdel.clicked.connect(lambda: self.openAllProjectWindow())
         self.btn_pdel.clicked.connect(lambda: Project_UI.close())
 
         self.retranslateUi(Project_UI)

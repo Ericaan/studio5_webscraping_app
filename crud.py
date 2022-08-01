@@ -1,3 +1,4 @@
+import csv
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -65,6 +66,37 @@ def read_project_name(id):
         pname = doc.to_dict().get('projectName')
     return pname
 
+def read_specific_fields():
+	docs = db.collection('Project').stream()
+	data = []
+	for doc in docs:
+		projectId = doc.get('projectId')
+		projectName = doc.get('projectName')
+		url = doc.get('URL')
+		dataDownload = doc.get('dataDownload')
+		lastDate = doc.get('lastDate')
+		data.append(projectId)
+		data.append(projectName)
+		data.append(url)
+		data.append(dataDownload)
+		data.append(lastDate)
+	#assign keys
+	keys = ["Project ID", "Project Name", "URL", "Data Download", "Last Date"]
+	# new_list = np.array_split(data, 3)
+	# print((new_list))
+	def list_split(list, n):
+		for x in range(0, len(list), n):
+			split = list[x: n + x]
+			# yield = used to convert function into generator
+			# return = used to return the result to the caller statement
+			yield split
+	# 5 values
+	new_list =list(list_split(data, 5))
+
+	with open('project_details.csv', 'w') as f:
+		write = csv.writer(f)
+		write.writerow(keys)
+		write.writerows(new_list)
 
 # UPDATE the project
 def update_project(id, pname, my_url, user_input):
