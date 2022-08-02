@@ -12,8 +12,7 @@ fb = firebase.FirebaseApplication('https://pythonfirebase-c03ae-default-rtdb.fir
 
 
 # create a new project
-# will add userId as new field
-def create_project(pname, my_url):
+def create_project(userId, pname, my_url):
     today = datetime.datetime.now()
     # convert today as string instead of timestamp
     date_time = today.strftime("%m/%d/%Y, %H:%M:%S")
@@ -21,6 +20,7 @@ def create_project(pname, my_url):
     doc.set(
         {
             'projectId': doc.id,
+            'userId': userId,
             'projectName': pname,
             'URL': my_url,
             'lastDate': date_time,
@@ -67,8 +67,8 @@ def read_project_name(id):
         pname = doc.to_dict().get('projectName')
     return pname
 
-def read_specific_fields():
-	docs = db.collection('Project').stream()
+def read_specific_fields(userId):
+	docs = db.collection('Project').where('userId', '==', userId).stream()
 	data = []
 	for doc in docs:
 		projectId = doc.get('projectId')

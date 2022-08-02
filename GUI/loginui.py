@@ -13,6 +13,7 @@ import crud
 import all_projects_ui
 import signupui
 
+
 class Ui_LOGIN(object):
     def go_to_signup_window(self):
         self.window = QtWidgets.QMainWindow()
@@ -22,6 +23,7 @@ class Ui_LOGIN(object):
         LOGIN.close()
 
     def go_to_main_window(self):
+        _translate = QtCore.QCoreApplication.translate
         self.window = QtWidgets.QMainWindow()
         self.ui = all_projects_ui.Ui_Project_Main()
         self.ui.setupUi(self.window)
@@ -45,6 +47,7 @@ class Ui_LOGIN(object):
                 # direct user to main_menu
                 if user_pass_firestore == self.pass_text.text():
                     self.userId.setText(crud.pass_userrId(self.email_text.text()))
+                    # userId.append(crud.pass_userrId(self.email_text.text()))
                     message.setText("Successfully login")
                     message.exec_()
                     self.go_to_main_window()
