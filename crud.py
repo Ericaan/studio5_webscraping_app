@@ -12,6 +12,7 @@ fb = firebase.FirebaseApplication('https://pythonfirebase-c03ae-default-rtdb.fir
 
 
 # create a new project
+# will add userId as new field
 def create_project(pname, my_url):
     today = datetime.datetime.now()
     # convert today as string instead of timestamp
@@ -115,3 +116,45 @@ def update_project(id, pname, my_url, user_input):
 # DELETE the project
 def delete_project(id):
     db.collection('Project').document(id).delete()
+
+
+
+def create_user(email, password):
+    doc = db.collection('User').document()
+    doc.set(
+        {
+            'userId': doc.id,
+            'email': email,
+            'password': password
+        }
+    )
+
+def checking_user_email(email):
+    docs = db.collection('User').where('email', '==', email).get()
+    # print(docs)
+    if docs == []:
+        return "Available"
+    else:
+        return "Exists"
+
+def checking_user_pass(email):
+    docs = db.collection('User').where('email', '==', email).get()
+    for doc in docs:
+        user_pass = doc.to_dict().get('password')
+        return (user_pass)
+
+def pass_userrId(email):
+    docs = db.collection('User').where('email', '==', email).get()
+    for doc in docs:
+        userId = doc.to_dict().get('userId')
+        return (userId)
+
+def update_user(id, password):
+    db.collection('User').document(id).update(
+        {
+            'password': password
+        }
+    )
+
+def delete_user(id):
+    db.collection('User').document(id).delete()

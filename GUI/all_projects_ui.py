@@ -67,8 +67,8 @@ class Ui_Project_Main(object):
         # return selected_project_id
 
     def setupUi(self, Project_Main):
-        MainWindow.setObjectName("Project_Main")
-        MainWindow.resize(1106, 600)
+        Project_Main.setObjectName("Project_Main")
+        Project_Main.resize(1106, 600)
         self.centralwidget = QtWidgets.QWidget(Project_Main)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -122,6 +122,12 @@ class Ui_Project_Main(object):
         self.label_hidden = QtWidgets.QLabel(self.frame_4)
         self.verticalLayout_3.addWidget(self.label_hidden)
         self.label_hidden.setHidden(True)
+
+        self.userId_label = QtWidgets.QLabel(self.frame_4)
+        self.verticalLayout_3.addWidget(self.userId_label)
+        self.userId_label.setHidden(True)
+
+        print("UserID: ", self.userId_label.text())
 
         self.logout_button = QtWidgets.QPushButton(self.frame_4)
         self.logout_button.setObjectName("logout_button")
@@ -281,27 +287,27 @@ class Ui_Project_Main(object):
         self.horizontalLayout_5.addWidget(self.stackedWidget)
         self.horizontalLayout.addWidget(self.main_body)
         self.verticalLayout.addWidget(self.frame_2)
-        MainWindow.setCentralWidget(self.centralwidget)
+        Project_Main.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
+        self.retranslateUi(Project_Main)
         self.stackedWidget.setCurrentIndex(0)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(Project_Main)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.project_button.setText(_translate("MainWindow", "Projects"))
-        self.dv_button.setText(_translate("MainWindow", "Data Visualisation"))
-        self.manual_button.setText(_translate("MainWindow", "Instruction Manual"))
-        self.account_button.setText(_translate("MainWindow", "My Account"))
-        self.logout_button.setText(_translate("MainWindow", "Log out"))
-        self.label.setText(_translate("MainWindow", "Main Page"))
-        self.newproject_button.setText(_translate("MainWindow", "New Project"))
-        self.open_project_button.setText(_translate("MainWindow", "Open"))
-        self.label_2.setText(_translate("MainWindow", "Data Visualisation "))
-        self.label_5.setText(_translate("MainWindow", "Instruction Manual"))
-        self.label_3.setText(_translate("MainWindow", "My Account"))
-        self.label_4.setText(_translate("MainWindow", "Log Out"))
+        MainWindow.setWindowTitle(_translate("Project_Main", "MainWindow"))
+        self.project_button.setText(_translate("Project_Main", "Projects"))
+        self.dv_button.setText(_translate("Project_Main", "Data Visualisation"))
+        self.manual_button.setText(_translate("Project_Main", "Instruction Manual"))
+        self.account_button.setText(_translate("Project_Main", "My Account"))
+        self.logout_button.setText(_translate("Project_Main", "Log out"))
+        self.label.setText(_translate("Project_Main", "Main Page"))
+        self.newproject_button.setText(_translate("Project_Main", "New Project"))
+        self.open_project_button.setText(_translate("Project_Main", "Open"))
+        self.label_2.setText(_translate("Project_Main", "Data Visualisation "))
+        self.label_5.setText(_translate("Project_Main", "Instruction Manual"))
+        self.label_3.setText(_translate("Project_Main", "My Account"))
+        self.label_4.setText(_translate("Project_Main", "Log Out"))
 
 
 if __name__ == "__main__":
