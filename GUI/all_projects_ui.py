@@ -74,12 +74,13 @@ class Ui_Project_Main(object):
             self.window.show()
             # showing existing project name, url, and inputs
             project_name = crud.read_project_name(self.label_hidden.text())
+            print(project_name)
             URL = crud.read_project_url(self.label_hidden.text())
-            user_inputs = crud.read_project_inputs(self.label_hidden.text())
+            # user_inputs = crud.read_project_inputs(self.label_hidden.text())
             self.ui.lbl_pname.setText(project_name)
             self.ui.browser.setUrl(QtCore.QUrl(URL))
             self.ui.url_bar.setText(URL)
-            self.ui.userId_label.setText(self.userId_label.text())
+            # self.ui.userId_label.setText(self.userId_label.text())
             # self.ui.txt_input1.setText(user_inputs[0])
             # self.ui.txt_input2.setText(user_inputs[1])
 
@@ -92,7 +93,7 @@ class Ui_Project_Main(object):
                 selected_project_id = self.projects_table.item(currentRow, j).text()
                 # print(selected_project_id)
         self.label_hidden.setText(selected_project_id)
-        # print("label: ",self.label_hidden.text())
+        print("label: ",self.label_hidden.text())
         # return selected_project_id
 
     def setupUi(self, Project_Main):

@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import crud
 import re
 import loginui
+import bcrypt
 
 class Ui_SIGNUP(object):
     def email_validation(self, email_input):
@@ -26,7 +27,6 @@ class Ui_SIGNUP(object):
         self.ui = loginui.Ui_LOGIN()
         self.ui.setupUi(self.window)
         self.window.show()
-        SIGNUP.close()
 
     def empty_fields(self):
         self.email_text.setText("")
@@ -54,7 +54,10 @@ class Ui_SIGNUP(object):
             else:
                 if self.email_validation(self.email_text.text()):
                     # if email's valid = register user
-                    crud.create_user(self.email_text.text(), self.pass_text.text())
+                    user_password = self.pass_text.text()
+                    # user_password = user_password.encode('utf-8')
+                    # hashed_pass = bcrypt.hashpw(user_password, bcrypt.gensalt(10))
+                    crud.create_user(self.email_text.text(), user_password)
                     message.setText("Registered")
                     message.exec_()
                     self.go_to_login_window()
@@ -161,6 +164,7 @@ class Ui_SIGNUP(object):
         self.signup_button.setObjectName("signup_button")
         self.verticalLayout_6.addWidget(self.signup_button)
         self.signup_button.clicked.connect(lambda :self.signup())
+        self.signup_button.clicked.connect(lambda :SIGNUP.close())
 
         self.verticalLayout_4.addWidget(self.widget_4, 0, QtCore.Qt.AlignHCenter)
         self.widget_3 = QtWidgets.QWidget(self.frame_3)
@@ -174,6 +178,7 @@ class Ui_SIGNUP(object):
         self.login_button.setObjectName("login_button")
         self.verticalLayout_5.addWidget(self.login_button)
         self.login_button.clicked.connect(lambda :self.go_to_login_window())
+        self.login_button.clicked.connect(lambda :SIGNUP.close())
         self.verticalLayout_4.addWidget(self.widget_3, 0, QtCore.Qt.AlignHCenter)
         self.verticalLayout_2.addWidget(self.frame_3)
         self.verticalLayout.addWidget(self.frame)

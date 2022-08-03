@@ -24,8 +24,8 @@ def create_project(userId, pname, my_url):
             'projectName': pname,
             'URL': my_url,
             'lastDate': date_time,
-            'dataDownload': 'false',
-            'userInput': None
+            'dataDownload': 'false'
+            # 'userInput': None
         }
     )
 
@@ -36,6 +36,12 @@ def read_project(pname):
     docs = db.collection('Project').where('projectName', "==", pname).stream()
     for doc in docs:
         return doc.id
+
+def return_userid_by_pname(pname):
+    docs = db.collection('Project').where('projectName', "==", pname).stream()
+    for doc in docs:
+        user_id = doc.to_dict().get('userId')
+    return user_id
 
 
 # return all the projects
@@ -68,36 +74,42 @@ def read_project_name(id):
     return pname
 
 def read_specific_fields(userId):
-	docs = db.collection('Project').where('userId', '==', userId).stream()
-	data = []
-	for doc in docs:
-		projectId = doc.get('projectId')
-		projectName = doc.get('projectName')
-		url = doc.get('URL')
-		dataDownload = doc.get('dataDownload')
-		lastDate = doc.get('lastDate')
-		data.append(projectId)
-		data.append(projectName)
-		data.append(url)
-		data.append(dataDownload)
-		data.append(lastDate)
-	#assign keys
-	keys = ["Project ID", "Project Name", "URL", "Data Download", "Last Date"]
-	# new_list = np.array_split(data, 3)
-	# print((new_list))
-	def list_split(list, n):
-		for x in range(0, len(list), n):
-			split = list[x: n + x]
-			# yield = used to convert function into generator
-			# return = used to return the result to the caller statement
-			yield split
-	# 5 values
-	new_list =list(list_split(data, 5))
+        docs = db.collection('Project').where('userId', '==', userId).stream()
+        data = []
+        # assign keys
+        keys = ["Project ID", "Project Name", "URL", "Data Download", "Last Date"]
+        if docs == []:
+            with open('project_details.csv', 'w') as f:
+                write = csv.writer(f)
+                write.writerow(keys)
+        else:
+            for doc in docs:
+                projectId = doc.get('projectId')
+                projectName = doc.get('projectName')
+                url = doc.get('URL')
+                dataDownload = doc.get('dataDownload')
+                lastDate = doc.get('lastDate')
+                data.append(projectId)
+                data.append(projectName)
+                data.append(url)
+                data.append(dataDownload)
+                data.append(lastDate)
 
-	with open('project_details.csv', 'w') as f:
-		write = csv.writer(f)
-		write.writerow(keys)
-		write.writerows(new_list)
+            # new_list = np.array_split(data, 3)
+            # print((new_list))
+            def list_split(list, n):
+                for x in range(0, len(list), n):
+                    split = list[x: n + x]
+                    # yield = used to convert function into generator
+                    # return = used to return the result to the caller statement
+                    yield split
+            # 5 values
+            new_list =list(list_split(data, 5))
+
+            with open('project_details.csv', 'w') as f:
+                write = csv.writer(f)
+                write.writerow(keys)
+                write.writerows(new_list)
 
 # UPDATE the project
 def update_project(id, pname, my_url, user_input):

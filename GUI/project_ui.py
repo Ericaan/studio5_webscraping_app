@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtWebEngineWidgets
 import all_projects_ui
 import crud
-import time
+import pandas as pd
 
 temp_dict = {}
 
@@ -23,6 +23,33 @@ class Ui_MainWindow(object):
         self.ui = all_projects_ui.Ui_Project_Main()
         self.ui.setupUi(self.window)
         self.window.show()
+        self.ui.stackedWidget.setCurrentIndex(1)
+        uid = crud.return_userid_by_pname(self.lbl_pname.text())
+        self.ui.userId_label.setText(uid)
+        crud.read_specific_fields(uid)
+
+        # read csv file
+        read_csv = pd.read_csv('project_details.csv')
+        rows = len(read_csv)
+        columns = len(read_csv.columns)
+        header_labels = read_csv.columns
+
+        # set the table widget
+        self.ui.projects_table.setRowCount(rows)
+        self.ui.projects_table.setColumnCount(columns)
+        self.ui.projects_table.setHorizontalHeaderLabels(header_labels)
+
+        # put the data in table widget item
+        for i in range(rows):
+            for j in range(columns):
+                self.ui.projects_table.setItem(i, j, QtWidgets.QTableWidgetItem(str(read_csv.iat[i, j])))
+
+        # resize the contents of the table
+        self.ui.projects_table.resizeColumnsToContents()
+        self.ui.projects_table.resizeRowsToContents()
+
+        # for now -- user cannot edit the table
+        self.ui.projects_table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
     def setupUi(self, Project_UI):
         Project_UI.setObjectName("Project_UI")

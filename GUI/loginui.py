@@ -13,14 +13,12 @@ import crud
 import all_projects_ui
 import signupui
 
-
 class Ui_LOGIN(object):
     def go_to_signup_window(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = signupui.Ui_SIGNUP()
         self.ui.setupUi(self.window)
         self.window.show()
-        LOGIN.close()
 
     def go_to_main_window(self):
         _translate = QtCore.QCoreApplication.translate
@@ -29,7 +27,6 @@ class Ui_LOGIN(object):
         self.ui.setupUi(self.window)
         self.window.show()
         self.ui.userId_label.setText(self.userId.text())
-        LOGIN.close()
 
     def empty_fields(self):
         self.email_text.setText("")
@@ -164,6 +161,7 @@ class Ui_LOGIN(object):
         self.login_button.setObjectName("login_button")
         self.verticalLayout_6.addWidget(self.login_button)
         self.login_button.clicked.connect(lambda :self.login())
+        self.login_button.clicked.connect(lambda :LOGIN.close())
         self.verticalLayout_4.addWidget(self.widget_4, 0, QtCore.Qt.AlignHCenter)
         self.widget_3 = QtWidgets.QWidget(self.frame_3)
         self.widget_3.setObjectName("widget_3")
@@ -177,6 +175,7 @@ class Ui_LOGIN(object):
         self.signup_button.setObjectName("signup_button")
         self.verticalLayout_5.addWidget(self.signup_button)
         self.signup_button.clicked.connect(lambda :self.go_to_signup_window())
+        self.signup_button.clicked.connect(lambda: LOGIN.close())
         self.verticalLayout_4.addWidget(self.widget_3, 0, QtCore.Qt.AlignHCenter)
         self.verticalLayout_2.addWidget(self.frame_3)
         self.verticalLayout.addWidget(self.frame)

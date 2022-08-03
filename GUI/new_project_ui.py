@@ -24,15 +24,13 @@ class Ui_CreateNewProjectWindow(object):
         # get the project name and url
         projectname = self.project_name_editText.text()
         url = self.url_editText.text()
-        #save to firestore
-        # crud.create_project(self.label_hidden.text(), projectname, url)
+        crud.create_project(self.label_hidden.text(), projectname, url)
         self.ui.lbl_pname.setText(projectname)
         # set the browser with the URL user has inputted
         self.ui.browser.setUrl(QUrl(url))
         self.ui.url_bar.setText(url)
 
         print("userId-newproject ",self.label_hidden.text())
-        # CreateNewProjectWindow.close()
 
     def main_menu(self):
         self.window = QtWidgets.QMainWindow()
@@ -138,7 +136,7 @@ class Ui_CreateNewProjectWindow(object):
         self.buttons_layout.addWidget(self.create_button)
         #called the function and close the old window
         self.create_button.clicked.connect(lambda: self.openProjectTask())
-        # self.create_button.clicked.connect(lambda: CreateNewProjectWindow.close())
+        self.create_button.clicked.connect(lambda: CreateNewProjectWindow.close())
 
         self.cancel_button = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
         font = QtGui.QFont()
