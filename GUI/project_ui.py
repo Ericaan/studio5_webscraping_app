@@ -11,7 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtWebEngineWidgets
 import all_projects_ui
 import crud
+<<<<<<< Updated upstream
 import pandas as pd
+=======
+import web_scraper
+>>>>>>> Stashed changes
 
 temp_dict = {}
 
@@ -234,6 +238,8 @@ class Ui_MainWindow(object):
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(2)
+        self.tableWidget.verticalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
@@ -269,6 +275,8 @@ class Ui_MainWindow(object):
         self.tree_template.setColumnCount(1)
         self.tree_template.itemClicked.connect(self.temp_clicked)
         self.btn_add2template.clicked.connect(self.new_branch)
+        # preview table handling
+        self.tableWidget.clicked.connect(self.table_refresh)
         # back button functionality
         self.tb_home.clicked.connect(lambda: self.openAllProjectWindow())
         self.tb_home.clicked.connect(lambda: Project_UI.close())
@@ -277,6 +285,7 @@ class Ui_MainWindow(object):
         self.btn_psave.clicked.connect(lambda: self.save_click())
         # get data button functionality
         self.btn_get_data.clicked.connect(lambda: self.make_dict())
+        self.btn_get_data.clicked.connect(lambda: self.web_scrape)
         # delete button
         self.btn_pdel.clicked.connect(lambda: self.del_project())
         self.btn_pdel.clicked.connect(lambda: self.openAllProjectWindow())
@@ -287,6 +296,26 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(Project_UI)
 
     # buttons and other interaction methods
+    def web_scrape(self):
+        iterator = QtWidgets.QTreeWidgetItemIterator(self.tree_template)
+        my_url = self.url_bar.toPlainText()
+        while iterator.value():
+            item = iterator.value()
+            web_scraper.scrape(my_url, item.text(1), item.text(2), 1, False)
+            iterator += 1
+
+    def table_refresh(self):
+        iterator = QtWidgets.QTreeWidgetItemIterator(self.tree_template)
+        current_col = 0
+        while iterator.value():
+            item = iterator.value()
+            if item.parent() is None:
+                self.tableWidget.horizontalHeaderItem(current_col).setText(item.text(0))
+            else:
+                self.tableWidget.horizontalHeaderItem(current_col).setText(item.parent().text(0)+"_"+item.text(0))
+            iterator += 1
+            current_col += 1
+
     def save_click(self):
         pid = crud.read_project(self.lbl_pname.text())
         pname = self.lbl_pname.text()
@@ -325,6 +354,10 @@ class Ui_MainWindow(object):
         root = self.tree_template.invisibleRootItem()
         if self.rb_delete.isChecked():
             print("deleted "+item.text(0))
+            # delete from preview
+            for x in range(self.tableWidget.columnCount()):
+                if self.tableWidget.horizontalHeaderItem(x).text() == item.text(0):
+                    self.tableWidget.removeColumn(x)
             (item.parent() or root).removeChild(item)
         else:
             print(item.text(0))
@@ -348,7 +381,7 @@ class Ui_MainWindow(object):
             cols = self.tableWidget.columnCount()
             self.tableWidget.setColumnCount(cols+1)
             self.tableWidget.setHorizontalHeaderItem(cols, item_1)
-            self.tableWidget.horizontalHeaderItem(cols).setText(_translate("MainWindow", "new column"))
+            self.tableWidget.horizontalHeaderItem(cols).setText(_translate("MainWindow", "newItem"))
             # row 1 item
             item_2 = QtWidgets.QTableWidgetItem()
             self.tableWidget.setItem(0, cols, item_2)
@@ -369,6 +402,21 @@ class Ui_MainWindow(object):
             the_child.setText(2, _translate("Project_UI", self.txt_input2.toPlainText()))
             the_child.setFlags(the_child.flags() | QtCore.Qt.ItemIsEditable)
             item[0].addChild(the_child)
+            # table update
+            # column
+            item_1 = QtWidgets.QTableWidgetItem()
+            cols = self.tableWidget.columnCount()
+            self.tableWidget.setColumnCount(cols + 1)
+            self.tableWidget.setHorizontalHeaderItem(cols, item_1)
+            self.tableWidget.horizontalHeaderItem(cols).setText(_translate("MainWindow", item[0].text(0)+"newSubItem"))
+            # row 1 item
+            item_2 = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setItem(0, cols, item_2)
+            self.tableWidget.item(0, cols).setText(_translate("MainWindow", self.txt_input1.toPlainText()))
+            # row 2 item
+            item_3 = QtWidgets.QTableWidgetItem()
+            self.tableWidget.setItem(1, cols, item_3)
+            self.tableWidget.item(1, cols).setText(_translate("MainWindow", self.txt_input2.toPlainText()))
 
     #delete the project from the database
     def del_project(self):
@@ -427,6 +475,7 @@ class Ui_MainWindow(object):
         item = self.tableWidget.verticalHeaderItem(1)
         item.setText(_translate("MainWindow", "2"))
         self.tableWidget.setSortingEnabled(__sortingEnabled)
+        self.tableWidget.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
 
 if __name__ == "__main__":
