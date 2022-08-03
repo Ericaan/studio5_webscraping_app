@@ -43,7 +43,7 @@ class Ui_LOGIN(object):
             if user_email_firestore == "Exists":
                 # check whether email is in database has the same password
                 # direct user to main_menu
-                if bcrypt.checkpw(user_pass_firestore == self.pass_text.text()):
+                if user_pass_firestore == self.pass_text.text():
                     self.userId.setText(crud.pass_userrId(self.email_text.text()))
                     # userId.append(crud.pass_userrId(self.email_text.text()))
                     message.setText("Successfully login")

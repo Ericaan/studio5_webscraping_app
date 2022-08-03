@@ -42,7 +42,7 @@ class Ui_SIGNUP(object):
             if user_email_firestore == "Exists":
                 # check whether email in database has the same password
                 # direct user to go to login window
-                if bcrypt.checkpw(user_pass_firestore == self.pass_text.text()):
+                if user_pass_firestore == self.pass_text.text():
                     message.setText("User has already existed. Please go to LOGIN window")
                     message.exec_()
                     self.empty_fields()
@@ -55,9 +55,9 @@ class Ui_SIGNUP(object):
                 if self.email_validation(self.email_text.text()):
                     # if email's valid = register user
                     user_password = self.pass_text.text()
-                    user_password = user_password.encode('utf-8')
-                    hashed_pass = bcrypt.hashpw(user_password, bcrypt.gensalt(10))
-                    crud.create_user(self.email_text.text(), hashed_pass)
+                    # user_password = user_password.encode('utf-8')
+                    # hashed_pass = bcrypt.hashpw(user_password, bcrypt.gensalt(10))
+                    crud.create_user(self.email_text.text(), user_password)
                     message.setText("Registered")
                     message.exec_()
                     self.go_to_login_window()
