@@ -1,4 +1,6 @@
 import csv
+
+import bcrypt
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -161,6 +163,18 @@ def pass_userrId(email):
         userId = doc.to_dict().get('userId')
         return (userId)
 
+def return_user_email(id):
+    docs = db.collection('User').where('userId', '==', id).get()
+    for doc in docs:
+        email = doc.to_dict().get('email')
+    return email
+
+def return_user_pass(id):
+    docs = db.collection('User').where('userId', '==', id).get()
+    for doc in docs:
+        password = doc.to_dict().get('password')
+    return password
+
 def update_user(id, password):
     db.collection('User').document(id).update(
         {
@@ -170,3 +184,10 @@ def update_user(id, password):
 
 def delete_user(id):
     db.collection('User').document(id).delete()
+
+def delete_project_with_userId(id):
+    # delete every project, user's created
+    docs = db.collection('Project').where('userId', '==', id).stream()
+    for doc in docs:
+        db.collection('Project').document(doc.id).delete()
+

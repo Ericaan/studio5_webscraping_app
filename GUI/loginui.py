@@ -39,16 +39,18 @@ class Ui_LOGIN(object):
         if self.email_text.text() != "" and self.pass_text.text() != "":
             user_email_firestore = crud.checking_user_email(self.email_text.text())
             user_pass_firestore = crud.checking_user_pass(self.email_text.text())
+            user_input_password = self.pass_text.text().encode('utf-8')
             # checking whether email that user inputted exists in database
             if user_email_firestore == "Exists":
                 # check whether email is in database has the same password
                 # direct user to main_menu
-                if user_pass_firestore == self.pass_text.text():
+                if bcrypt.checkpw(user_input_password, user_pass_firestore):
                     self.userId.setText(crud.pass_userrId(self.email_text.text()))
                     # userId.append(crud.pass_userrId(self.email_text.text()))
                     message.setText("Successfully login")
                     message.exec_()
                     self.go_to_main_window()
+                    # LOGIN.hide()
                 else:
                     message.setText("Please enter the correct password")
                     message.exec_()
@@ -162,7 +164,8 @@ class Ui_LOGIN(object):
         self.login_button.setObjectName("login_button")
         self.verticalLayout_6.addWidget(self.login_button)
         self.login_button.clicked.connect(lambda :self.login())
-        self.login_button.clicked.connect(lambda :LOGIN.close())
+        # self.login_button.clicked.connect(LOGIN.close())
+        # self.login_button.clicked.connect(lambda :LOGIN.close())
         self.verticalLayout_4.addWidget(self.widget_4, 0, QtCore.Qt.AlignHCenter)
         self.widget_3 = QtWidgets.QWidget(self.frame_3)
         self.widget_3.setObjectName("widget_3")

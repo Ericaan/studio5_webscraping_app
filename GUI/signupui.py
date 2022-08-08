@@ -38,11 +38,13 @@ class Ui_SIGNUP(object):
         if self.email_text.text() != "" and self.pass_text.text() != "":
             user_email_firestore = crud.checking_user_email(self.email_text.text())
             user_pass_firestore = crud.checking_user_pass(self.email_text.text())
+            user_input_password = self.pass_text.text().encode('utf-8')
             # checking whether email that user inputted exists in database
             if user_email_firestore == "Exists":
+                print("exists")
                 # check whether email in database has the same password
                 # direct user to go to login window
-                if user_pass_firestore == self.pass_text.text():
+                if bcrypt.checkpw(user_input_password, user_pass_firestore):
                     message.setText("User has already existed. Please go to LOGIN window")
                     message.exec_()
                     self.empty_fields()
@@ -52,16 +54,20 @@ class Ui_SIGNUP(object):
                     self.empty_fields()
             # if it does not exist, check whether email is valid (pattern)
             else:
+                print("does not exist")
                 if self.email_validation(self.email_text.text()):
+                    print("Valid email")
                     # if email's valid = register user
                     user_password = self.pass_text.text()
-                    # user_password = user_password.encode('utf-8')
-                    # hashed_pass = bcrypt.hashpw(user_password, bcrypt.gensalt(10))
-                    crud.create_user(self.email_text.text(), user_password)
+                    user_password = user_password.encode('utf-8')
+                    hashed_pass = bcrypt.hashpw(user_password, bcrypt.gensalt(10))
+                    crud.create_user(self.email_text.text(), hashed_pass)
                     message.setText("Registered")
                     message.exec_()
                     self.go_to_login_window()
+                    SIGNUP.close()
                 else:
+                    print("Invalid email")
                     message.setText("Email is not valid")
                     message.exec_()
                     self.empty_fields()
@@ -164,7 +170,7 @@ class Ui_SIGNUP(object):
         self.signup_button.setObjectName("signup_button")
         self.verticalLayout_6.addWidget(self.signup_button)
         self.signup_button.clicked.connect(lambda :self.signup())
-        self.signup_button.clicked.connect(lambda :SIGNUP.close())
+        # self.signup_button.clicked.connect(lambda :SIGNUP.close())
 
         self.verticalLayout_4.addWidget(self.widget_4, 0, QtCore.Qt.AlignHCenter)
         self.widget_3 = QtWidgets.QWidget(self.frame_3)

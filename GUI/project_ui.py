@@ -11,11 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtWebEngineWidgets
 import all_projects_ui
 import crud
-<<<<<<< Updated upstream
+# <<<<<<< Updated upstream
 import pandas as pd
-=======
+# =======
 import web_scraper
->>>>>>> Stashed changes
+# >>>>>>> Stashed changes
 
 temp_dict = {}
 
