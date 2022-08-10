@@ -18,11 +18,14 @@ import crud
 import selectReportui
 import loginui
 import pandas as pd
+<<<<<<< Updated upstream
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
 import random
 
+=======
+>>>>>>> Stashed changes
 
 class Ui_Project_Main(object):
     def openProjectsTab(self):
@@ -85,6 +88,7 @@ class Ui_Project_Main(object):
 
     def openProjectTask(self):
         projectId = self.label_hidden.text()
+        u_temp_dict = crud.read_user_input(projectId)
         if projectId == "":
             print("User has not select any projects")
         else:
@@ -100,9 +104,57 @@ class Ui_Project_Main(object):
             self.ui.lbl_pname.setText(project_name)
             self.ui.browser.setUrl(QtCore.QUrl(URL))
             self.ui.url_bar.setText(URL)
-            # self.ui.userId_label.setText(self.userId_label.text())
-            # self.ui.txt_input1.setText(user_inputs[0])
-            # self.ui.txt_input2.setText(user_inputs[1])
+            # set up the template for opened project
+            self.ui.tableWidget.setColumnCount(0)
+            for key in u_temp_dict:
+                item_0 = QtWidgets.QTreeWidgetItem(self.ui.tree_template)
+                count = self.ui.tree_template.topLevelItemCount()
+                self.ui.tree_template.topLevelItem(count-1).setText(0, key)
+                self.ui.tree_template.topLevelItem(count-1).setText(1, u_temp_dict[key][0])
+                self.ui.tree_template.topLevelItem(count-1).setText(2, u_temp_dict[key][1])
+                self.ui.tree_template.topLevelItem(count-1).setFlags(self.ui.tree_template.topLevelItem(count-1).flags() | QtCore.Qt.ItemIsEditable)
+                # table update
+                # column
+                item_1 = QtWidgets.QTableWidgetItem()
+                cols = self.ui.tableWidget.columnCount()
+                self.ui.tableWidget.setColumnCount(cols + 1)
+                self.ui.tableWidget.setHorizontalHeaderItem(cols, item_1)
+                self.ui.tableWidget.horizontalHeaderItem(cols).setText(key)
+                # row 1 item
+                item_2 = QtWidgets.QTableWidgetItem()
+                self.ui.tableWidget.setItem(0, (cols), item_2)
+                self.ui.tableWidget.item(0, (cols)).setText(u_temp_dict[key][0])
+                # row 2 item
+                item_3 = QtWidgets.QTableWidgetItem()
+                self.ui.tableWidget.setItem(1, (cols), item_3)
+                self.ui.tableWidget.item(1, (cols)).setText(u_temp_dict[key][1])
+                for item in u_temp_dict[key]:
+                    if type(item) is dict:
+                        for key_b in item:
+                            prnt = self.ui.tree_template.topLevelItem(count - 1)
+                            the_child = QtWidgets.QTreeWidgetItem()
+                            the_child.setText(0, key_b)
+                            the_child.setText(1, item[key_b][0])
+                            the_child.setText(2, item[key_b][1])
+                            the_child.setFlags(the_child.flags() | QtCore.Qt.ItemIsEditable)
+                            prnt.addChild(the_child)
+                            # table update
+                            # column
+                            itm_1 = QtWidgets.QTableWidgetItem()
+                            col = self.ui.tableWidget.columnCount()
+                            self.ui.tableWidget.setColumnCount(col + 1)
+                            self.ui.tableWidget.setHorizontalHeaderItem(col, itm_1)
+                            self.ui.tableWidget.horizontalHeaderItem(col).setText(key + "_" + key_b)
+                            # row 1 item
+                            itm_2 = QtWidgets.QTableWidgetItem()
+                            self.ui.tableWidget.setItem(0, (col), itm_2)
+                            self.ui.tableWidget.item(0, (col)).setText(item[key_b][0])
+                            # row 2 item
+                            itm_3 = QtWidgets.QTableWidgetItem()
+                            self.ui.tableWidget.setItem(1, (col), itm_3)
+                            self.ui.tableWidget.item(1, (col)).setText(item[key_b][1])
+            print(u_temp_dict)
+
 
     # get the project ID from selected row
     def clicked_row(self):

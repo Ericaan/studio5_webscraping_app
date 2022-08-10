@@ -11,16 +11,24 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtWebEngineWidgets
 import all_projects_ui
 import crud
+<<<<<<< Updated upstream
 # <<<<<<< Updated upstream
 import pandas as pd
 # =======
 import web_scraper
 # >>>>>>> Stashed changes
+=======
+import pandas as pd
+import web_scraper
+import download_data
+>>>>>>> Stashed changes
 
 temp_dict = {}
-
+results = {}
 
 class Ui_MainWindow(object):
+    temp_dict.clear()
+    results.clear()
     #method to go to back to projects
     def openAllProjectWindow(self):
         self.window = QtWidgets.QMainWindow()
@@ -31,29 +39,32 @@ class Ui_MainWindow(object):
         uid = crud.return_userid_by_pname(self.lbl_pname.text())
         self.ui.userId_label.setText(uid)
         crud.read_specific_fields(uid)
-
         # read csv file
         read_csv = pd.read_csv('project_details.csv')
         rows = len(read_csv)
         columns = len(read_csv.columns)
         header_labels = read_csv.columns
-
         # set the table widget
         self.ui.projects_table.setRowCount(rows)
         self.ui.projects_table.setColumnCount(columns)
         self.ui.projects_table.setHorizontalHeaderLabels(header_labels)
-
         # put the data in table widget item
         for i in range(rows):
             for j in range(columns):
                 self.ui.projects_table.setItem(i, j, QtWidgets.QTableWidgetItem(str(read_csv.iat[i, j])))
-
         # resize the contents of the table
         self.ui.projects_table.resizeColumnsToContents()
         self.ui.projects_table.resizeRowsToContents()
-
         # for now -- user cannot edit the table
         self.ui.projects_table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+
+    # open the window to download data
+    def open_dialog(self):
+        self.dialog = QtWidgets.QDialog()
+        self.dialog.ui = download_data.Ui_Dialog()
+        self.dialog.ui.setupUi(self.dialog)
+        self.dialog.ui.my_url = self.url_bar.toPlainText()
+        self.dialog.show()
 
     def setupUi(self, Project_UI):
         Project_UI.setObjectName("Project_UI")
@@ -269,11 +280,11 @@ class Ui_MainWindow(object):
 
         # make browser buttons work
         self.go_btn.clicked.connect(lambda: self.navigate(self.url_bar.toPlainText()))
-        self.back_btn.clicked.connect(lambda: self.browser.back)
-        self.for_btn.clicked.connect(lambda: self.browser.forward)
+        self.back_btn.clicked.connect(self.browser.back)
+        self.for_btn.clicked.connect(self.browser.forward)
         # template handling
         self.tree_template.setColumnCount(1)
-        self.tree_template.itemClicked.connect(self.temp_clicked)
+        self.tree_template.itemClicked.connect(self.del_temp_item)
         self.btn_add2template.clicked.connect(self.new_branch)
         # preview table handling
         self.tableWidget.clicked.connect(self.table_refresh)
@@ -285,7 +296,9 @@ class Ui_MainWindow(object):
         self.btn_psave.clicked.connect(lambda: self.save_click())
         # get data button functionality
         self.btn_get_data.clicked.connect(lambda: self.make_dict())
-        self.btn_get_data.clicked.connect(lambda: self.web_scrape)
+        # self.btn_get_data.clicked.connect(lambda: self.web_scrape(temp_dict))
+        self.btn_get_data.clicked.connect(lambda: self.open_dialog())
+        # self.btn_get_data.clicked.connect(lambda: self.web_scrape(temp_dict))
         # delete button
         self.btn_pdel.clicked.connect(lambda: self.del_project())
         self.btn_pdel.clicked.connect(lambda: self.openAllProjectWindow())
@@ -296,26 +309,58 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(Project_UI)
 
     # buttons and other interaction methods
-    def web_scrape(self):
-        iterator = QtWidgets.QTreeWidgetItemIterator(self.tree_template)
+    # this iterates the template dictionary and scrapes the website
+    def web_scrape(self, diction):
+        # print(diction)
         my_url = self.url_bar.toPlainText()
-        while iterator.value():
-            item = iterator.value()
-            web_scraper.scrape(my_url, item.text(1), item.text(2), 1, False)
-            iterator += 1
+        for key in diction:
+            values = web_scraper.scrape(my_url, diction[key][0], diction[key][1], 1)
+            results[key] = values
+            for item in diction[key]:
+                if type(item) is dict:
+                    self.web_scrape(item)
+        return results
 
+    # refresh the table so the column titles match the template
     def table_refresh(self):
+        while self.tableWidget.columnCount() > 0:
+            self.tableWidget.removeColumn(0)
         iterator = QtWidgets.QTreeWidgetItemIterator(self.tree_template)
-        current_col = 0
         while iterator.value():
             item = iterator.value()
             if item.parent() is None:
-                self.tableWidget.horizontalHeaderItem(current_col).setText(item.text(0))
+                # column
+                item_1 = QtWidgets.QTableWidgetItem()
+                cols = self.tableWidget.columnCount()
+                self.tableWidget.setColumnCount(cols + 1)
+                self.tableWidget.setHorizontalHeaderItem(cols, item_1)
+                self.tableWidget.horizontalHeaderItem(cols).setText(item.text(0))
+                # row 1 item
+                item_2 = QtWidgets.QTableWidgetItem()
+                self.tableWidget.setItem(0, cols, item_2)
+                self.tableWidget.item(0, cols).setText(item.text(1))
+                # row 2 item
+                item_3 = QtWidgets.QTableWidgetItem()
+                self.tableWidget.setItem(1, cols, item_3)
+                self.tableWidget.item(1, cols).setText(item.text(2))
             else:
-                self.tableWidget.horizontalHeaderItem(current_col).setText(item.parent().text(0)+"_"+item.text(0))
+                # column
+                item_1 = QtWidgets.QTableWidgetItem()
+                cols = self.tableWidget.columnCount()
+                self.tableWidget.setColumnCount(cols + 1)
+                self.tableWidget.setHorizontalHeaderItem(cols, item_1)
+                self.tableWidget.horizontalHeaderItem(cols).setText(item.parent().text(0)+"_"+item.text(0))
+                # row 1 item
+                item_2 = QtWidgets.QTableWidgetItem()
+                self.tableWidget.setItem(0, cols, item_2)
+                self.tableWidget.item(0, cols).setText(item.text(1))
+                # row 2 item
+                item_3 = QtWidgets.QTableWidgetItem()
+                self.tableWidget.setItem(1, cols, item_3)
+                self.tableWidget.item(1, cols).setText(item.text(2))
             iterator += 1
-            current_col += 1
 
+    # saves/updates the project to the database
     def save_click(self):
         pid = crud.read_project(self.lbl_pname.text())
         pname = self.lbl_pname.text()
@@ -323,10 +368,12 @@ class Ui_MainWindow(object):
         pinput = temp_dict
         crud.update_project(pid, pname, purl, pinput)
         temp_dict.clear()
+        results.clear()
 
+    # makes the template into a dictionary that can be saved more easily onto the database
     def make_dict(self):
-        print("iterate")
         iterator = QtWidgets.QTreeWidgetItemIterator(self.tree_template)
+        count = 1
         while iterator.value():
             item = iterator.value()
             if item.parent() is None:
@@ -338,9 +385,8 @@ class Ui_MainWindow(object):
                 values = {item.text(0): [item.text(1), item.text(2)]}
                 temp_dict[key].append(values)
             iterator += 1
-        print(str(temp_dict))
 
-    #navigate method for go button
+    # navigate method for go button
     def navigate(self, url):
         # in case it doesnt have http
         if not url.startswith("http"):
@@ -348,25 +394,17 @@ class Ui_MainWindow(object):
             self.url_bar.setText(url)
         self.browser.setUrl(QtCore.QUrl(url))
 
-    #method for template item handling
-    def temp_clicked(self):
+    # delete item from template and preview table
+    def del_temp_item(self):
         item = self.tree_template.currentItem()
         root = self.tree_template.invisibleRootItem()
         if self.rb_delete.isChecked():
-            print("deleted "+item.text(0))
-            # delete from preview
-            for x in range(self.tableWidget.columnCount()):
-                if self.tableWidget.horizontalHeaderItem(x).text() == item.text(0):
-                    self.tableWidget.removeColumn(x)
             (item.parent() or root).removeChild(item)
-        else:
-            print(item.text(0))
 
-    #adding a new item to the template
+    # adding a new item to the template
     def new_branch(self):
         _translate = QtCore.QCoreApplication.translate
         if self.rb_select.isChecked():
-            print("Select")
             # declare a new tree widget item
             item_0 = QtWidgets.QTreeWidgetItem(self.tree_template)
             count = self.tree_template.topLevelItemCount()
@@ -390,9 +428,7 @@ class Ui_MainWindow(object):
             item_3 = QtWidgets.QTableWidgetItem()
             self.tableWidget.setItem(1, cols, item_3)
             self.tableWidget.item(1, cols).setText(_translate("MainWindow", self.txt_input2.toPlainText()))
-
         elif self.rb_rel_select.isChecked():
-            print("relative select")
             # find the item its relatively selected to
             item = self.tree_template.selectedItems()
             # set the new tree widget item
@@ -423,6 +459,7 @@ class Ui_MainWindow(object):
         pid = crud.read_project(self.lbl_pname.text())
         crud.delete_project(pid)
 
+    # autogenerated method for defining final characteristics of GUI elements
     def retranslateUi(self, Project_UI):
         _translate = QtCore.QCoreApplication.translate
         Project_UI.setWindowTitle(_translate("Project_UI", "YouScrape"))
@@ -433,28 +470,23 @@ class Ui_MainWindow(object):
         self.btn_add2template.setText(_translate("Project_UI", "Add to Template"))
         __sortingEnabled = self.tree_template.isSortingEnabled()
         self.tree_template.setSortingEnabled(False)
-
         # self.tree_template.topLevelItem(0).setText(0, _translate("Project_UI", "title"))
         # self.tree_template.topLevelItem(0).child(0).setText(0, _translate("Project_UI", "text"))
         # self.tree_template.topLevelItem(0).child(1).setText(0, _translate("Project_UI", "price"))
         # self.tree_template.topLevelItem(0).child(2).setText(0, _translate("Project_UI", "url"))
         # self.tree_template.topLevelItem(1).setText(0, _translate("Project_UI", "Company"))
         # self.tree_template.topLevelItem(2).setText(0, _translate("Project_UI", "Reviews"))
-
         self.tree_template.setSortingEnabled(__sortingEnabled)
         # non autogenerated code
         self.tree_template.setDragDropMode(QtWidgets.QAbstractItemView.InternalMove)
         self.tree_template.setDragEnabled(True)
         self.tree_template.setAcceptDrops(True)
-
         # self.tree_template.topLevelItem(0).setFlags(self.tree_template.topLevelItem(0).flags() | QtCore.Qt.ItemIsEditable)
         # self.tree_template.topLevelItem(1).setFlags(self.tree_template.topLevelItem(1).flags() | QtCore.Qt.ItemIsEditable)
         # self.tree_template.topLevelItem(2).setFlags(self.tree_template.topLevelItem(2).flags() | QtCore.Qt.ItemIsEditable)
         # self.tree_template.topLevelItem(0).child(0).setFlags(self.tree_template.topLevelItem(0).child(0).flags() | QtCore.Qt.ItemIsEditable)
         # self.tree_template.topLevelItem(0).child(1).setFlags(self.tree_template.topLevelItem(0).child(1).flags() | QtCore.Qt.ItemIsEditable)
         # self.tree_template.topLevelItem(0).child(2).setFlags(self.tree_template.topLevelItem(0).child(2).flags() | QtCore.Qt.ItemIsEditable)
-
-        #
         self.groupBox_6.setTitle(_translate("Project_UI", "Commands"))
         self.rb_delete.setText(_translate("Project_UI", "Delete"))
         self.rb_select.setText(_translate("Project_UI", "Select"))
@@ -467,7 +499,7 @@ class Ui_MainWindow(object):
         self.for_btn.setText(_translate("Project_UI", ">"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Project_UI", "Tab 1"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Project_UI", "Tab 2"))
-
+        # more non autogenerated
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
         item = self.tableWidget.verticalHeaderItem(0)
