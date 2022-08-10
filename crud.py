@@ -39,6 +39,7 @@ def read_project(pname):
     for doc in docs:
         return doc.id
 
+
 def return_userid_by_pname(pname):
     docs = db.collection('Project').where('projectName', "==", pname).stream()
     for doc in docs:
@@ -46,34 +47,28 @@ def return_userid_by_pname(pname):
     return user_id
 
 
-# return all the projects
-def read_all_projects():
-    docs = db.collection('Project').stream()
-    dict = []
-    for doc in docs:
-        dict.append(doc("URL").to_dict())
-    return dict
-
-
-def read_project_url(id):
-    docs = db.collection('Project').where('projectId', '==', id).stream()
+def read_project_url(pid):
+    docs = db.collection('Project').where('projectId', '==', pid).stream()
     for doc in docs:
         url = doc.to_dict().get('URL')
     return url
 
 
-def read_project_inputs(id):
-    docs = db.collection('Project').where('projectId', '==', id).stream()
-    for doc in docs:
-        inputs = doc.to_dict().get('userInput')
-    return inputs
-
-
-def read_project_name(id):
-    docs = db.collection('Project').where('projectId', '==', id).stream()
+def read_project_name(pid):
+    docs = db.collection('Project').where('projectId', '==', pid).stream()
     for doc in docs:
         pname = doc.to_dict().get('projectName')
     return pname
+
+
+def read_user_input(pid):
+    docs = db.collection('Project').where('projectId', '==', pid).stream()
+    data = {}
+    for doc in docs:
+        data = doc.to_dict().get('userInput')
+    return data
+
+
 
 def read_specific_fields(userId):
         docs = db.collection('Project').where('userId', '==', userId).stream()

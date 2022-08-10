@@ -5,10 +5,11 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import pandas as pd
 import json
+import csv
 
 
 #main web scraping function
-def scrape(my_url, input1, input2, pages, get_data):
+def scrape(my_url, input1, input2, pages):
     #url input
     URL = my_url
     #make it so that chrome doesnt open up and so that header user agent allows the scraper through
@@ -57,87 +58,82 @@ def scrape(my_url, input1, input2, pages, get_data):
                 find_by_class = driver.find_elements(By.XPATH, f"// *[contains(@class,'{t1_class}')]")
                 #iterate through all the elements and evaluate their attributes and parent/parent attributes to filter out further
                 for item in find_by_class:
-                    #do they have the same attributes
-                    attrs = {}
-                    attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', item)
-                    if attrs.keys() == attrs1.keys():
-                        #do their parents have the same tag
-                        parent = driver.execute_script("return arguments[0].parentNode;",item)
-                        if  p1_tagname == parent.tag_name:
-                            #do their parents have the same attributes
-                            p_attrs = {}
-                            p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
-                            if p_attrs.keys() == p_attrs1.keys():
-                                #add to the list
-                                final_items.append(item.get_attribute("innerHTML"))
-                                print(item.get_attribute("innerHTML"))
-                                print()
-                    # in case the item should be added but for some reason differs on one or two attributes
-                    elif attrs1.keys() != attrs2.keys():
-                        parent = driver.execute_script("return arguments[0].parentNode;",item)
-                        if p2_tagname == parent.tag_name:
-                            p_attrs = {}
-                            p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
-                            if p_attrs.keys() == p_attrs2.keys():
-                                final_items.append(item.get_attribute("innerHTML"))
-                                print(item.get_attribute("innerHTML"))
-                                print()
+                    if item.tag_name == t1_tagname:
+                        #do they have the same attributes
+                        attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', item)
+                        if attrs.keys() == attrs1.keys():
+                            #do their parents have the same tag
+                            parent = driver.execute_script("return arguments[0].parentNode;",item)
+                            if  p1_tagname == parent.tag_name:
+                                #do their parents have the same attributes
+                                p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
+                                if p_attrs.keys() == p_attrs1.keys():
+                                    #add to the list
+                                    final_items.append(item.get_attribute("innerHTML"))
+                                    # print(item.get_attribute("innerHTML"))
+                                    # print()
+                        # in case the item should be added but for some reason differs on one or two attributes
+                        elif attrs1.keys() != attrs2.keys():
+                            parent = driver.execute_script("return arguments[0].parentNode;",item)
+                            if p2_tagname == parent.tag_name:
+                                p_attrs = {}
+                                p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
+                                if p_attrs.keys() == p_attrs2.keys():
+                                    final_items.append(item.get_attribute("innerHTML"))
+                                    # print(item.get_attribute("innerHTML"))
+                                    # print()
             else:
                 #if they dont have a class
                 related_items = driver.find_elements(By.TAG_NAME,t1_tagname)
                 #iterate through all the elements and evaluate their attributes and parent/parent attributes to filter out further
                 for item in related_items:
-                    attrs = {}
-                    attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', item)
-                    if attrs.keys() == attrs1.keys():
-                        parent = driver.execute_script("return arguments[0].parentNode;",item)
-                        if p1_tagname == parent.tag_name:
-                            p_attrs = {}
-                            p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
-                            if p_attrs.keys() == p_attrs1.keys():
-                                final_items.append(item.get_attribute("innerHTML"))
-                                print(item.get_attribute("innerHTML"))
-                                print()
-                    # in case the item should be added but for some reason differs on one or two attributes
-                    # make note in instructions if the user isnt getting some desired result add it to one of the inputs
-                    elif attrs1.keys() != attrs2.keys():
-                        parent = driver.execute_script("return arguments[0].parentNode;",item)
-                        if p2_tagname == parent.tag_name:
-                            p_attrs = {}
-                            p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
-                            if p_attrs.keys() == p_attrs1.keys():
-                                final_items.append(item.get_attribute("innerHTML"))
-                                print(item.get_attribute("innerHTML"))
-                                print()
+                    if item.tag_name == t1_tagname:
+                        attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', item)
+                        if attrs.keys() == attrs1.keys():
+                            parent = driver.execute_script("return arguments[0].parentNode;",item)
+                            if p1_tagname == parent.tag_name:
+                                p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
+                                if p_attrs.keys() == p_attrs1.keys():
+                                    final_items.append(item.get_attribute("innerHTML"))
+                                    # print(item.get_attribute("innerHTML"))
+                                    # print()
+                        # in case the item should be added but for some reason differs on one or two attributes
+                        # make note in instructions if the user isnt getting some desired result add it to one of the inputs
+                        elif attrs1.keys() != attrs2.keys():
+                            parent = driver.execute_script("return arguments[0].parentNode;",item)
+                            if p2_tagname == parent.tag_name:
+                                p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
+                                if p_attrs.keys() == p_attrs1.keys():
+                                    final_items.append(item.get_attribute("innerHTML"))
+                                    # print(item.get_attribute("innerHTML"))
+                                    # print()
         #if no class name
         #find related items based on the element tag instead of class name
         else:
             related_items = driver.find_elements(By.TAG_NAME,t1_tagname)
             #iterate through all the elements and evaluate their attributes and parent/parent attributes to filter out further
             for item in related_items:
-                attrs = {}
-                attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', item)
-                if attrs.keys() == attrs1.keys():
-                    parent = driver.execute_script("return arguments[0].parentNode;",item)
-                    if p1_tagname == parent.tag_name:
-                        p_attrs = {}
-                        # butts
-                        p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
-                        if p_attrs.keys() == p_attrs1.keys():
-                            final_items.append(item.get_attribute("innerHTML"))
-                            print(item.get_attribute("innerHTML"))
-                            print()
-                # in case the item should be added but for some reason differs on one or two attributes
-                # make note in instructions if the user isnt getting some desired result add it to one of the inputs
-                elif attrs1.keys() != attrs2.keys():
-                    parent = driver.execute_script("return arguments[0].parentNode;",item)
-                    if p2_tagname == parent.tag_name:
-                        p_attrs = {}
-                        p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
-                        if p_attrs.keys() == p_attrs1.keys():
-                            final_items.append(item.get_attribute("innerHTML"))
-                            print(item.get_attribute("innerHTML"))
-                            print()
+                if item.tag_name == t1_tagname:
+                    attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', item)
+                    if attrs.keys() == attrs1.keys():
+                        parent = driver.execute_script("return arguments[0].parentNode;",item)
+                        if p1_tagname == parent.tag_name:
+                            # butts
+                            p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
+                            if p_attrs.keys() == p_attrs1.keys():
+                                final_items.append(item.get_attribute("innerHTML"))
+                                # print(item.get_attribute("innerHTML"))
+                                # print()
+                    # in case the item should be added but for some reason differs on one or two attributes
+                    # make note in instructions if the user isnt getting some desired result add it to one of the inputs
+                    elif attrs1.keys() != attrs2.keys():
+                        parent = driver.execute_script("return arguments[0].parentNode;",item)
+                        if p2_tagname == parent.tag_name:
+                            p_attrs = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent)
+                            if p_attrs.keys() == p_attrs1.keys():
+                                final_items.append(item.get_attribute("innerHTML"))
+                                # print(item.get_attribute("innerHTML"))
+                                # print()
 
     #loop through the amount of result pages user wants
     for i in range(1, pages+1, 1):
@@ -153,22 +149,23 @@ def scrape(my_url, input1, input2, pages, get_data):
         #scrape
         scrape_url(URL)
 
-    # getting the data in csv and json formats
-    def get_data_csv_json(user_input):
-        # convert list to csv and json if user answered yes
-        if user_input == True:
-            dict = {'Job Title': final_items}
-            # csv
-            df = pd.DataFrame(dict)
-            df.to_csv('jobtitle.csv')
-            # json
-            json_str = json.dumps(dict, indent=1)
-            with open('jobtitle2.json', 'w') as outfile:
-                outfile.write(json_str)
-                print("JSON file is created")
-        else:
-            breakpoint()
-
-    #get_data_csv_json(get_data)
-
     driver.close()
+    print(final_items)
+    return final_items
+
+
+def get_data_csv_json(file_type, diction, file_name):
+    if file_type == "csv":
+        df = pd.DataFrame(dict([(k, pd.Series(v)) for k, v in diction.items()]))
+        # df = pd.DataFrame.from_dict(diction, orient='index')
+        df.to_csv(f"{file_name}.csv")
+        print("CSV file is created")
+    elif file_type == "json":
+        # json
+        json_str = json.dumps(diction, indent=1)
+        with open(f'{file_name}.json', 'w') as outfile:
+            outfile.write(json_str)
+            print("JSON file is created")
+    else:
+        breakpoint()
+
