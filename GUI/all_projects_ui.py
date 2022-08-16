@@ -18,14 +18,10 @@ import crud
 import selectReportui
 import loginui
 import pandas as pd
-<<<<<<< Updated upstream
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
 import random
-
-=======
->>>>>>> Stashed changes
 
 class Ui_Project_Main(object):
     def openProjectsTab(self):
@@ -100,10 +96,13 @@ class Ui_Project_Main(object):
             project_name = crud.read_project_name(self.label_hidden.text())
             print(project_name)
             URL = crud.read_project_url(self.label_hidden.text())
+            URL2 = crud.read_project_url2(self.label_hidden.text())
             # user_inputs = crud.read_project_inputs(self.label_hidden.text())
             self.ui.lbl_pname.setText(project_name)
             self.ui.browser.setUrl(QtCore.QUrl(URL))
             self.ui.url_bar.setText(URL)
+            #browser 2
+            self.ui.browser2.setUrl(QtCore.QUrl(URL2))
             # set up the template for opened project
             self.ui.tableWidget.setColumnCount(0)
             for key in u_temp_dict:

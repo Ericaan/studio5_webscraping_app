@@ -11,17 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtWebEngineWidgets
 import all_projects_ui
 import crud
-<<<<<<< Updated upstream
-# <<<<<<< Updated upstream
 import pandas as pd
-# =======
 import web_scraper
-# >>>>>>> Stashed changes
-=======
 import pandas as pd
 import web_scraper
 import download_data
->>>>>>> Stashed changes
 
 temp_dict = {}
 results = {}
@@ -243,6 +237,15 @@ class Ui_MainWindow(object):
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
         self.tabWidget.addTab(self.tab_2, "")
+
+        # added second tab -- can be changed later -- show if browser2's working
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.tab_2)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.browser2 = QtWebEngineWidgets.QWebEngineView(self.tab_2)
+        self.browser2.setMinimumSize(QtCore.QSize(0, 0))
+        self.browser2.setObjectName("browser2")
+        self.verticalLayout_5.addWidget(self.browser2)
+
         self.verticalLayout_3.addWidget(self.tabWidget)
         self.tableWidget = QtWidgets.QTableWidget(self.groupBox)
         self.tableWidget.setMaximumSize(QtCore.QSize(16777215, 150))

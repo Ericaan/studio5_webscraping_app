@@ -14,7 +14,7 @@ fb = firebase.FirebaseApplication('https://pythonfirebase-c03ae-default-rtdb.fir
 
 
 # create a new project
-def create_project(userId, pname, my_url):
+def create_project(userId, pname, my_url, my_url2):
     today = datetime.datetime.now()
     # convert today as string instead of timestamp
     date_time = today.strftime("%m/%d/%Y, %H:%M:%S")
@@ -25,11 +25,13 @@ def create_project(userId, pname, my_url):
             'userId': userId,
             'projectName': pname,
             'URL': my_url,
+            'URL2': my_url2,
             'lastDate': date_time,
             'dataDownload': 'false'
             # 'userInput': None
         }
     )
+
 
 
 # Read the project based on the name
@@ -52,6 +54,12 @@ def read_project_url(pid):
     for doc in docs:
         url = doc.to_dict().get('URL')
     return url
+
+def read_project_url2(pid):
+    docs = db.collection('Project').where('projectId', '==', pid).stream()
+    for doc in docs:
+        url2 = doc.to_dict().get('URL2')
+    return url2
 
 
 def read_project_name(pid):
