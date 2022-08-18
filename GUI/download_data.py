@@ -17,6 +17,7 @@ results = {}
 
 class Ui_Dialog(object):
     my_url = ""
+    my_url_2 = ""
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(612, 430)
@@ -27,7 +28,7 @@ class Ui_Dialog(object):
         self.lbl_download_data.setFont(font)
         self.lbl_download_data.setObjectName("lbl_download_data")
         self.rb_json = QtWidgets.QRadioButton(Dialog)
-        self.rb_json.setGeometry(QtCore.QRect(100, 150, 151, 20))
+        self.rb_json.setGeometry(QtCore.QRect(100, 130, 151, 20))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rb_json.setFont(font)
@@ -36,7 +37,7 @@ class Ui_Dialog(object):
         self.buttonGroup.setObjectName("buttonGroup")
         self.buttonGroup.addButton(self.rb_json)
         self.rb_csv = QtWidgets.QRadioButton(Dialog)
-        self.rb_csv.setGeometry(QtCore.QRect(100, 200, 151, 20))
+        self.rb_csv.setGeometry(QtCore.QRect(100, 170, 151, 20))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.rb_csv.setFont(font)
@@ -63,6 +64,16 @@ class Ui_Dialog(object):
         font.setPointSize(9)
         self.label.setFont(font)
         self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(Dialog)
+        self.label_2.setGeometry(QtCore.QRect(90, 210, 141, 21))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.spinBox = QtWidgets.QSpinBox(Dialog)
+        self.spinBox.setGeometry(QtCore.QRect(240, 210, 42, 22))
+        self.spinBox.setMinimum(1)
+        self.spinBox.setObjectName("spinBox")
 
         # close dialog button
         self.btn_cancel.clicked.connect(lambda: Dialog.close())
@@ -104,3 +115,4 @@ class Ui_Dialog(object):
         self.btn_generate.setText(_translate("Dialog", "Generate"))
         self.btn_cancel.setText(_translate("Dialog", "Cancel"))
         self.label.setText(_translate("Dialog", "File Name :"))
+        self.label_2.setText(_translate("Dialog", "No. of result pages :"))

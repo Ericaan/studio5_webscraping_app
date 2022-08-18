@@ -2,9 +2,9 @@ import crud
 import web_scraper
 
 pname = ""
-URL = "https://www.geeksforgeeks.org/"
-user_input1 = 'When was the last time you earned a few bucks while learning? Can you remember it? If not, then the time is right now. Yes'
-user_input2 = 'What comes next when you finish your graduation? The ultimate goal is to get a handsome job to add more charm to it, right. So'
+URL = "https://www.seek.co.nz/jobs-in-information-communication-technology"
+user_input1 = 'Service Desk Analyst'
+user_input2 = 'Systems Engineer Queenstown'
 pages = 1
 new_user_input = ""
 test = {'Age': [52, 24, 31, 47, 51, 61],
@@ -17,6 +17,6 @@ test = {'Age': [52, 24, 31, 47, 51, 61],
 #crud.delete_project(pid)
 #crud.read_all_projects()
 
-# web_scraper.scrape(URL,user_input1,user_input2, pages)
-web_scraper.get_data_csv_json("csv",test,"test")
+web_scraper.scrape(URL,user_input1,user_input2, pages)
+# web_scraper.get_data_csv_json("csv",test,"test")
 # crud.read_user_input(pid)

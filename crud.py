@@ -27,11 +27,10 @@ def create_project(userId, pname, my_url, my_url2):
             'URL': my_url,
             'URL2': my_url2,
             'lastDate': date_time,
-            'dataDownload': 'false'
+            'dataDownload': 'false',
             # 'userInput': None
         }
     )
-
 
 
 # Read the project based on the name
@@ -117,12 +116,13 @@ def read_specific_fields(userId):
                 write.writerows(new_list)
 
 # UPDATE the project
-def update_project(id, pname, my_url, user_input):
+def update_project(id, pname, my_url, my_url2, user_input):
     today = datetime.datetime.now()
     db.collection('Project').document(id).update(
         {
             'projectName': pname,
             'URL': my_url,
+            'URL2': my_url2,
             'lastDate': today.strftime("%m/%d/%Y, %H:%M:%S"),
             'dataDownload': 'false',
             'userInput': user_input

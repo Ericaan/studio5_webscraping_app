@@ -34,7 +34,8 @@ class Ui_CreateNewProjectWindow(object):
             self.ui.browser.setUrl(QUrl(url))
             self.ui.url_bar.setText(url)
 
-            self.ui.browser2.setUrl(QUrl(url2))
+            self.ui.browser_2.setUrl(QUrl(url2))
+            self.ui.url_bar_2.setText(url)
 
             print("userId-newproject ", self.label_hidden.text())
 

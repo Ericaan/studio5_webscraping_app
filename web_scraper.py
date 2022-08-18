@@ -5,48 +5,63 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import pandas as pd
 import json
-import csv
 
 
-#main web scraping function
-def scrape(my_url, input1, input2, pages):
-    #url input
+# function to find if user inputs are present
+def check_inputs(my_url, input1, input2):
     URL = my_url
-    #make it so that chrome doesnt open up and so that header user agent allows the scraper through
     chrome_options = Options()
     chrome_options.add_argument('--headless')
-    chrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)'+'AppleWebKit/537.36 (KHTML, like Gecko)'+'Chrome/87.0.4280.141 Safari/537.36')
-
+    chrome_options.add_argument(
+        'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)' + 'AppleWebKit/537.36 (KHTML, like Gecko)' + 'Chrome/87.0.4280.141 Safari/537.36')
     # Page content from Website URL
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get(URL)
+    # user inputs two texts
+    user_input1 = f'"{input1}"'
+    user_input2 = f'"{input2}"'
+    # search the page to find the elements that contain the inputs
+    try:
+        text1 = driver.find_element(By.XPATH, f"// *[contains(text(),{user_input1})]")
+        text2 = driver.find_element(By.XPATH, f"// *[contains(text(),{user_input2})]")
+        return True
+    except:
+        return False
 
+
+# main web scraping function
+def scrape(my_url, input1, input2, pages):
+    # url input
+    URL = my_url
+    # make it so that chrome doesnt open up and so that header user agent allows the scraper through
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)'+'AppleWebKit/537.36 (KHTML, like Gecko)'+'Chrome/87.0.4280.141 Safari/537.36')
+    # Page content from Website URL
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    driver.get(URL)
     # user inputs two texts 
     user_input1 = f'"{input1}"'
     user_input2 = f'"{input2}"'
-    #search the page to find the elements that contain the inputs
+    # search the page to find the elements that contain the inputs
     text1 = driver.find_element(By.XPATH,f"// *[contains(text(),{user_input1})]")
     text2 = driver.find_element(By.XPATH,f"// *[contains(text(),{user_input2})]")
-
-    #now find all the attributes and such of the elements
+    # now find all the attributes and such of the elements
     attrs1 = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', text1)
     attrs2 = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', text2)
     t1_class = text1.get_attribute('class')
     t2_class = text2.get_attribute('class')
     t1_tagname = text1.tag_name
-
-    #find the parents and their attributes
+    # find the parents and their attributes
     parent1 = driver.execute_script("return arguments[0].parentNode;",text1)
     parent2 = driver.execute_script("return arguments[0].parentNode;",text2)
     p_attrs1 = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent1)
     p_attrs2 = driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', parent2)
     p1_tagname = parent1.tag_name
     p2_tagname = parent2.tag_name
-
-    #declare a list that will hold the results
+    # declare a list that will hold the results
     final_items = []
-
-    #function to find and filter all the related elements
+    # function to find and filter all the related elements
     def scrape_url(a_url):
         #start a new webdriver for when there is multiple page results
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
@@ -134,7 +149,6 @@ def scrape(my_url, input1, input2, pages):
                                 final_items.append(item.get_attribute("innerHTML"))
                                 # print(item.get_attribute("innerHTML"))
                                 # print()
-
     #loop through the amount of result pages user wants
     for i in range(1, pages+1, 1):
         page_no = str(i)
@@ -148,9 +162,10 @@ def scrape(my_url, input1, input2, pages):
             print("An issue occurred with the scraping")
         #scrape
         scrape_url(URL)
-
     driver.close()
-    print(final_items)
+    for item in final_items:
+        print(item)
+        print()
     return final_items
 
 
