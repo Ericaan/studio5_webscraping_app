@@ -111,7 +111,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="url_label2">
+          <widget class="QLineEdit" name="url_editText2">
            <property name="font">
             <font>
              <pointsize>14</pointsize>

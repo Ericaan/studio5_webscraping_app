@@ -15,7 +15,8 @@ from PyQt5.QtWidgets import QMessageBox
 import new_project_ui
 import project_ui
 import crud
-import selectReportui
+# import selectReportui
+import selectReport
 import loginui
 import pandas as pd
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -215,7 +216,7 @@ class Ui_Project_Main(object):
 
     def go_to_select_report(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = selectReportui.Ui_SelectReport()
+        self.ui = selectReport.Ui_SelectReport()
         self.ui.setupUi(self.window)
         self.window.show()
 

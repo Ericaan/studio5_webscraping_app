@@ -32,7 +32,7 @@
        <item alignment="Qt::AlignHCenter">
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Select Report </string>
+          <string>Select New Report </string>
          </property>
         </widget>
        </item>
@@ -82,7 +82,7 @@
           <item>
            <widget class="QLabel" name="file_name_lbl">
             <property name="text">
-             <string>-filename-</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -107,9 +107,9 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QPushButton" name="generate_btn">
+        <widget class="QPushButton" name="select_btn">
          <property name="text">
-          <string>Generate</string>
+          <string>Select</string>
          </property>
         </widget>
        </item>

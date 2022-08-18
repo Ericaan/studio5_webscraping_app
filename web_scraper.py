@@ -169,3 +169,5 @@ def get_data_csv_json(file_type, diction, file_name):
     else:
         breakpoint()
 
+# scrape("https://www.amazon.com/s?k=gaming+keyboard&pd_rd_r=2544aca9-f9c0-4836-b628-2da04966ca1d&pd_rd_w=egPVc&pd_rd_wg=yOWMH&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=997H8KFN42B5CMRXZXFG&ref=pd_gw_unk",
+#        "RGB", "RGB", 1)

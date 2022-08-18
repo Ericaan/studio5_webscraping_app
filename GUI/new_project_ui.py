@@ -42,6 +42,8 @@ class Ui_CreateNewProjectWindow(object):
         self.window = QtWidgets.QMainWindow()
         self.ui = all_projects_ui.Ui_Project_Main()
         self.ui.setupUi(self.window)
+        # passed the user id back to main menu
+        self.ui.userId_label.setText(self.label_hidden.text())
         self.window.show()
 
     def setupUi(self, CreateNewProjectWindow):
