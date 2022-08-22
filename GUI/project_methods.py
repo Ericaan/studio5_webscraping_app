@@ -2,7 +2,7 @@
 from PyQt5 import QtCore, QtWidgets
 import crud
 
-
+# this is for all the methods used in project_ui page
 # buttons and other interaction methods
 # refresh the table so the column titles match the template
 def table_refresh(tableWidget, tree_template):
@@ -28,6 +28,14 @@ def table_refresh(tableWidget, tree_template):
             item_3 = QtWidgets.QTableWidgetItem()
             tableWidget.setItem(1, cols, item_3)
             tableWidget.item(1, cols).setText(item.text(2))
+            # row 3 item
+            item_2 = QtWidgets.QTableWidgetItem()
+            tableWidget.setItem(2, cols, item_2)
+            tableWidget.item(2, cols).setText(item.text(3))
+            # row 4 item
+            item_3 = QtWidgets.QTableWidgetItem()
+            tableWidget.setItem(3, cols, item_3)
+            tableWidget.item(3, cols).setText(item.text(4))
         else:
             # column
             item_1 = QtWidgets.QTableWidgetItem()
@@ -91,7 +99,7 @@ def del_temp_item(tree_template, rb_delete):
 
 
 # adding a new item to the template
-def new_branch(rb_select, rb_rel_select, tree_template, txt_input1, txt_input2, tableWidget):
+def new_branch(rb_select, rb_rel_select, rb_second_tab, tree_template, txt_input1, txt_input2, tableWidget):
     if rb_select.isChecked():
         # declare a new tree widget item
         QtWidgets.QTreeWidgetItem(tree_template)
@@ -117,6 +125,21 @@ def new_branch(rb_select, rb_rel_select, tree_template, txt_input1, txt_input2, 
         item_3 = QtWidgets.QTableWidgetItem()
         tableWidget.setItem(1, cols, item_3)
         tableWidget.item(1, cols).setText(txt_input2.toPlainText())
+    elif rb_second_tab.isChecked():
+        item = tree_template.selectedItems()
+        # add to tree
+        item[0].setText(3, txt_input1.toPlainText())
+        item[0].setText(4, txt_input2.toPlainText())
+        # add to table
+        for col in range(tableWidget.columnCount()):
+            table_item = tableWidget.horizontalHeaderItem(col)
+            if table_item.text() == item[0].text(0):
+                item_0 = QtWidgets.QTableWidgetItem()
+                tableWidget.setItem(2, col, item_0)
+                tableWidget.item(2, col).setText(txt_input1.toPlainText())
+                item_1 = QtWidgets.QTableWidgetItem()
+                tableWidget.setItem(3, col, item_1)
+                tableWidget.item(3, col).setText(txt_input2.toPlainText())
     elif rb_rel_select.isChecked():
         # find the item its relatively selected to
         item = tree_template.selectedItems()

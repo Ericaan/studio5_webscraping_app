@@ -24,8 +24,11 @@ class Ui_CreateNewProjectWindow(object):
         if projectname != "" and url != "":
             # open project task window
             self.window = QtWidgets.QMainWindow()
+            print("hello")
             self.ui = project_ui.Ui_MainWindow()
+            print("hello")
             self.ui.setupUi(self.window)
+            print("hello")
             self.window.show()
 
             crud.create_project(self.label_hidden.text(), projectname, url, url2)
@@ -35,7 +38,7 @@ class Ui_CreateNewProjectWindow(object):
             self.ui.url_bar.setText(url)
 
             self.ui.browser_2.setUrl(QUrl(url2))
-            self.ui.url_bar_2.setText(url)
+            self.ui.url_bar_2.setText(url2)
 
             print("userId-newproject ", self.label_hidden.text())
 

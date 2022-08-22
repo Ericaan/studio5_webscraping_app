@@ -16,7 +16,7 @@ import new_project_ui
 import project_ui
 import crud
 # import selectReportui
-import selectReport
+import selectReportui
 import loginui
 import pandas as pd
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
