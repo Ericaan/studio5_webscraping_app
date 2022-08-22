@@ -81,7 +81,7 @@ def read_specific_fields(userId):
         docs = db.collection('Project').where('userId', '==', userId).stream()
         data = []
         # assign keys
-        keys = ["Project ID", "Project Name", "URL", "Data Download", "Last Date"]
+        keys = ["Project ID", "Project Name", "URL", "URL2", "Data Download", "Last Date"]
         if docs == []:
             with open('project_details.csv', 'w') as f:
                 write = csv.writer(f)
@@ -91,11 +91,13 @@ def read_specific_fields(userId):
                 projectId = doc.get('projectId')
                 projectName = doc.get('projectName')
                 url = doc.get('URL')
+                url2 = doc.get('URL2')
                 dataDownload = doc.get('dataDownload')
                 lastDate = doc.get('lastDate')
                 data.append(projectId)
                 data.append(projectName)
                 data.append(url)
+                data.append(url2)
                 data.append(dataDownload)
                 data.append(lastDate)
 
@@ -108,7 +110,7 @@ def read_specific_fields(userId):
                     # return = used to return the result to the caller statement
                     yield split
             # 5 values
-            new_list =list(list_split(data, 5))
+            new_list =list(list_split(data, 6))
 
             with open('project_details.csv', 'w') as f:
                 write = csv.writer(f)

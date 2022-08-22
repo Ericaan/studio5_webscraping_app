@@ -9,9 +9,99 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import all_projects_ui
+import pandas as pd
+import numpy as np
 
 class Ui_ConstructReport(object):
+    # set the graph's position
+    position = 421
+    def generate_report(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = all_projects_ui.Ui_Project_Main()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        self.ui.stackedWidget.setCurrentIndex(3)
+        report_name = self.report_name_label.text()
+        self.ui.dv_report_name_lbl.setText(report_name)
+        self.drawing_graph()
+
+    def scatter_plot(self, df, a, b):
+        ax = self.ui.figure.add_subplot(self.position)
+        x = np.array(df[a])
+        y = np.array(df[b])
+        ax.scatter(x, y)
+        ax.set_xlabel(a)
+        ax.set_ylabel(b)
+        self.position += 1
+
+    def line_chart(self, df, a, b):
+        ax = self.ui.figure.add_subplot(self.position)
+        x = np.array(df[a])
+        y = np.array(df[b])
+        ax.plot(x, y)
+        self.position += 1
+
+    def bar_chart(self, df, a, b):
+        ax = self.ui.figure.add_subplot(self.position)
+        x = np.array(df[a])
+        y = np.array(df[b])
+        ax.bar(x, y)
+        ax.set_xlabel(a)
+        ax.set_ylabel(b)
+        self.position += 1
+
+    def histogram(self, df, value):
+        ax = self.ui.figure.add_subplot(self.position)
+        # plot data
+        ax.hist(df[value])
+        ax.set_xlabel(value)
+        ax.set_ylabel('Frequency')
+        self.position += 1
+
+    def drawing_graph(self):
+        file_name = self.lblHidden.text()
+        #read the csv file
+        df = pd.read_csv(file_name)
+        #clear previous figure
+        self.ui.figure.clear()
+
+        scatterx1 = self.scatter_x_1.text()
+        scattery1 = self.scatter_y_1.text()
+        scatterx2 = self.scatter_x_2.text()
+        scattery2 = self.scatter_y_2.text()
+        linex1 = self.line_x_1.text()
+        liney1 = self.line_y_1.text()
+        linex2 = self.line_x_2.text()
+        liney2 = self.line_y_2.text()
+        barx1 = self.bar_x_1.text()
+        bary1 = self.bar_y_1.text()
+        barx2 = self.bar_x_2.text()
+        bary2 = self.bar_y_2.text()
+        histogram1 = self.histo_value1.text()
+        histogram2 = self.histo_value2.text()
+
+        # multiple if statements to check the values of each graph
+        if scatterx1 != "" and scattery1 != "":
+            self.scatter_plot(df, scatterx1, scattery1)
+        if scatterx2 != "" and scattery2 != "":
+            self.scatter_plot(df, scatterx2, scattery2)
+        if linex1 != "" and liney1 != "":
+            self.line_chart(df, linex1, liney1)
+        if linex2 != "" and liney2 != "":
+            self.line_chart(df, linex2, liney2)
+        if barx1 != "" and bary1 != "":
+            self.bar_chart(df, barx1, bary1)
+        if barx2 != "" and bary2 != "":
+            self.bar_chart(df, barx2, bary2)
+        if histogram1 != "":
+            self.histogram(df, histogram1)
+        if histogram2 != "":
+            self.histogram(df, histogram2)
+
+        self.ui.figure.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.4, hspace=0.4)
+        self.ui.canvas.draw()
+
     def setupUi(self, ConstructReport):
         ConstructReport.setObjectName("ConstructReport")
         ConstructReport.resize(1357, 837)
@@ -162,8 +252,6 @@ class Ui_ConstructReport(object):
         self.scatterQ = QtWidgets.QComboBox(self.scatterQWidget)
         self.scatterQ.setObjectName("scatterQ")
         self.scatterQ.addItem("")
-        self.scatterQ.setItemText(0, "")
-        self.scatterQ.addItem("")
         self.scatterQ.addItem("")
         self.horizontalLayout_15.addWidget(self.scatterQ)
         self.verticalLayout_20.addWidget(self.scatterQWidget)
@@ -176,8 +264,6 @@ class Ui_ConstructReport(object):
         self.horizontalLayout_11.addWidget(self.label_11)
         self.lineChartQ = QtWidgets.QComboBox(self.lineQWidget)
         self.lineChartQ.setObjectName("lineChartQ")
-        self.lineChartQ.addItem("")
-        self.lineChartQ.setItemText(0, "")
         self.lineChartQ.addItem("")
         self.lineChartQ.addItem("")
         self.horizontalLayout_11.addWidget(self.lineChartQ)
@@ -192,8 +278,6 @@ class Ui_ConstructReport(object):
         self.barChartQ = QtWidgets.QComboBox(self.barQWidget)
         self.barChartQ.setObjectName("barChartQ")
         self.barChartQ.addItem("")
-        self.barChartQ.setItemText(0, "")
-        self.barChartQ.addItem("")
         self.barChartQ.addItem("")
         self.horizontalLayout_13.addWidget(self.barChartQ)
         self.verticalLayout_20.addWidget(self.barQWidget)
@@ -206,8 +290,6 @@ class Ui_ConstructReport(object):
         self.horizontalLayout_12.addWidget(self.label_12)
         self.histogramQ = QtWidgets.QComboBox(self.histogramQWidget)
         self.histogramQ.setObjectName("histogramQ")
-        self.histogramQ.addItem("")
-        self.histogramQ.setItemText(0, "")
         self.histogramQ.addItem("")
         self.histogramQ.addItem("")
         self.horizontalLayout_12.addWidget(self.histogramQ)
@@ -466,6 +548,12 @@ class Ui_ConstructReport(object):
         self.verticalLayout.addWidget(self.widget_3, 0, QtCore.Qt.AlignRight)
         ConstructReport.setCentralWidget(self.centralwidget)
 
+        # label for file name
+        self.lblHidden = QtWidgets.QLabel(self.widget)
+        self.verticalLayout_2.addWidget(self.lblHidden)
+        self.lblHidden.setHidden(True)
+
+        # hid all the widgets for graphs
         self.scatterQWidget.setHidden(True)
         self.lineQWidget.setHidden(True)
         self.barQWidget.setHidden(True)
@@ -481,6 +569,8 @@ class Ui_ConstructReport(object):
         self.histogramWidget1.setHidden(True)
         self.histogramWidget2.setHidden(True)
 
+        # check checkboxes if they are clicked, if they are clicked, show the widgets
+        # if they are not checked or unchecked, hid widget and empty text fields
         def scatter_checked():
             if self.scatterCB.isChecked():
                 self.label_7.setHidden(False)
@@ -489,6 +579,10 @@ class Ui_ConstructReport(object):
                 self.scatterQWidget.setHidden(True)
                 self.scatterWidget1.setHidden(True)
                 self.scatterWidget2.setHidden(True)
+                self.scatter_x_1.setText("")
+                self.scatter_y_1.setText("")
+                self.scatter_x_2.setText("")
+                self.scatter_y_2.setText("")
 
         def line_checked():
             if self.lineChartCB.isChecked():
@@ -498,6 +592,10 @@ class Ui_ConstructReport(object):
                 self.lineQWidget.setHidden(True)
                 self.lineWidget1.setHidden(True)
                 self.lineWidget2.setHidden(True)
+                self.line_x_1.setText("")
+                self.line_y_1.setText("")
+                self.line_x_2.setText("")
+                self.line_y_2.setText("")
 
         def bar_checked():
             if self.barChartCB.isChecked():
@@ -507,6 +605,10 @@ class Ui_ConstructReport(object):
                 self.barQWidget.setHidden(True)
                 self.barWidget1.setHidden(True)
                 self.barWidget2.setHidden(True)
+                self.bar_x_1.setText("")
+                self.bar_y_1.setText("")
+                self.bar_x_2.setText("")
+                self.bar_y_2.setText("")
 
         def histogram_checked():
             if self.histogramCB.isChecked():
@@ -516,41 +618,44 @@ class Ui_ConstructReport(object):
                 self.histogramQWidget.setHidden(True)
                 self.histogramWidget1.setHidden(True)
                 self.histogramWidget2.setHidden(True)
+                self.histo_value1.setText("")
+                self.histo_value2.setText("")
 
         self.scatterCB.stateChanged.connect(lambda: scatter_checked())
         self.lineChartCB.stateChanged.connect(lambda: line_checked())
         self.barChartCB.stateChanged.connect(lambda: bar_checked())
         self.histogramCB.stateChanged.connect(lambda: histogram_checked())
 
+        # combo box, set widget based on the quantity user picked
         def scatter_quantity():
-            if self.scatterQ.currentIndex() == 1:
+            if self.scatterQ.currentIndex() == 0:
                 self.scatterWidget1.setHidden(False)
                 self.scatterWidget2.setHidden(True)
-            elif self.scatterQ.currentIndex() == 2:
+            elif self.scatterQ.currentIndex() == 1:
                 self.scatterWidget1.setHidden(False)
                 self.scatterWidget2.setHidden(False)
 
         def line_quantity():
-            if self.lineChartQ.currentIndex() == 1:
+            if self.lineChartQ.currentIndex() == 0:
                 self.lineWidget1.setHidden(False)
                 self.lineWidget2.setHidden(True)
-            elif self.lineChartQ.currentIndex() == 2:
+            elif self.lineChartQ.currentIndex() == 1:
                 self.lineWidget1.setHidden(False)
                 self.lineWidget2.setHidden(False)
 
         def bar_quantity():
-            if self.barChartQ.currentIndex() == 1:
+            if self.barChartQ.currentIndex() == 0:
                 self.barWidget1.setHidden(False)
                 self.barWidget2.setHidden(True)
-            elif self.barChartQ.currentIndex() == 2:
+            elif self.barChartQ.currentIndex() == 1:
                 self.barWidget1.setHidden(False)
                 self.barWidget2.setHidden(False)
 
         def histogram_quantity():
-            if self.histogramQ.currentIndex() == 1:
+            if self.histogramQ.currentIndex() == 0:
                 self.histogramWidget1.setHidden(False)
                 self.histogramWidget2.setHidden(True)
-            elif self.histogramQ.currentIndex() == 2:
+            elif self.histogramQ.currentIndex() == 1:
                 self.histogramWidget1.setHidden(False)
                 self.histogramWidget2.setHidden(False)
 
@@ -558,6 +663,9 @@ class Ui_ConstructReport(object):
         self.lineChartQ.currentIndexChanged.connect(lambda: line_quantity())
         self.barChartQ.currentIndexChanged.connect(lambda: bar_quantity())
         self.histogramQ.currentIndexChanged.connect(lambda: histogram_quantity())
+
+        self.generateReport.clicked.connect(lambda :self.generate_report())
+        self.generateReport.clicked.connect(lambda :ConstructReport.close())
 
         self.retranslateUi(ConstructReport)
         QtCore.QMetaObject.connectSlotsByName(ConstructReport)
@@ -573,17 +681,17 @@ class Ui_ConstructReport(object):
         self.histogramCB.setText(_translate("ConstructReport", "Histogram"))
         self.label_7.setText(_translate("ConstructReport", "From the type(s) you have selected, how many of each do you want to make?"))
         self.label_14.setText(_translate("ConstructReport", "Scatter Plot: "))
-        self.scatterQ.setItemText(1, _translate("ConstructReport", "1"))
-        self.scatterQ.setItemText(2, _translate("ConstructReport", "2"))
+        self.scatterQ.setItemText(0, _translate("ConstructReport", "1"))
+        self.scatterQ.setItemText(1, _translate("ConstructReport", "2"))
         self.label_11.setText(_translate("ConstructReport", "Line Chart:"))
-        self.lineChartQ.setItemText(1, _translate("ConstructReport", "1"))
-        self.lineChartQ.setItemText(2, _translate("ConstructReport", "2"))
+        self.lineChartQ.setItemText(0, _translate("ConstructReport", "1"))
+        self.lineChartQ.setItemText(1, _translate("ConstructReport", "2"))
         self.label_13.setText(_translate("ConstructReport", "Bar Chart:"))
-        self.barChartQ.setItemText(1, _translate("ConstructReport", "1"))
-        self.barChartQ.setItemText(2, _translate("ConstructReport", "2"))
+        self.barChartQ.setItemText(0, _translate("ConstructReport", "1"))
+        self.barChartQ.setItemText(1, _translate("ConstructReport", "2"))
         self.label_12.setText(_translate("ConstructReport", "Histogram:"))
-        self.histogramQ.setItemText(1, _translate("ConstructReport", "1"))
-        self.histogramQ.setItemText(2, _translate("ConstructReport", "2"))
+        self.histogramQ.setItemText(0, _translate("ConstructReport", "1"))
+        self.histogramQ.setItemText(1, _translate("ConstructReport", "2"))
         self.label_3.setText(_translate("ConstructReport", "You have chosen the graph(s) you want to use."))
         self.label_4.setText(_translate("ConstructReport", "Please input the key value(s) for each graph"))
         self.label_5.setText(_translate("ConstructReport", "Scatter Plot 1: "))

@@ -15,137 +15,7 @@ import constructReportui
 import pandas as pd
 import numpy as np
 
-fileName = ""
-
-
 class Ui_SelectReport(object):
-    # def generate_report(self):
-    #     self.window = QtWidgets.QMainWindow()
-    #     self.ui = all_projects_ui.Ui_Project_Main()
-    #     self.ui.setupUi(self.window)
-    #     self.window.show()
-    #     self.ui.stackedWidget.setCurrentIndex(3)
-    #     report_name = self.report_name_text.text()
-    #     file_name = self.file_name_lbl.text()
-    #     # diag_title = file_name[file_name.rfind("/"):]
-    #     df = pd.read_csv(file_name)
-    #     # for dtype in df.dtypes.iteritems():
-    #     #     print(dtype)
-    #     objects = df.select_dtypes('O')
-    #     col_object = objects.columns.tolist()
-    #     nums = df.select_dtypes(include=['int64', 'float64'])
-    #     col_num = nums.columns.tolist()
-    #     self.ui.dv_report_name_lbl.setText(report_name)
-    #     self.ui.figure.clear()
-    #     position = 221
-    #
-    #     def object_dv_csv():
-    #         print("object_dv_csv")
-    #         self.ui.dv_table.setHidden(False)
-    #         objs = []
-    #         name = []
-    #         count = []
-    #         for obj in objects.columns:
-    #             # getting the number of how many words for each column have been repeated
-    #             frequency = objects.pivot_table(columns=[obj], aggfunc='size')
-    #             # getting the name
-    #             most_called_name = frequency.idxmax()
-    #             # the maximum number
-    #             count_most_called_name = frequency.max()
-    #             # append the name of columns, the most called name, and the number
-    #             objs.append(obj)
-    #             name.append(most_called_name)
-    #             count.append(count_most_called_name)
-    #         # make a dictionary
-    #         data = {'Section': objs,
-    #                 'Name': name,
-    #                 'Frequency': count}
-    #         # setting row and column for the table
-    #         row = len(objects.columns)
-    #         col = len(data.keys())
-    #         self.ui.dv_table.setRowCount(row)
-    #         self.ui.dv_table.setColumnCount(col)
-    #         headers = []
-    #         for i, key in enumerate(data.keys()):
-    #             headers.append(key)
-    #             for j, item in enumerate(data[key]):
-    #                 newItem = QtWidgets.QTableWidgetItem(str(item))
-    #                 self.ui.dv_table.setItem(j, i, newItem)
-    #         self.ui.dv_table.setHorizontalHeaderLabels(headers)
-    #         # resize the contents of the table
-    #         self.ui.dv_table.resizeColumnsToContents()
-    #         self.ui.dv_table.resizeRowsToContents()
-    #
-    #     def number_dv_csv(position):
-    #         # if file has unnamed (list of numbers)
-    #         for i in nums:
-    #             if i == "Unnamed: 0":
-    #                 nums.drop("Unnamed: 0", inplace=True, axis=1)
-    #                 col_num = nums.columns.tolist()
-    #         # showing histogram -- only need one value(x)
-    #         for i in nums.columns:
-    #             ax = self.ui.figure.add_subplot(position)
-    #             # plot data
-    #             ax.hist(df[i])
-    #             ax.set_xlabel(i)
-    #             ax.set_ylabel('Frequency')
-    #             position += 1
-    #         # showing scatter plot -- need x and y (2 vals)
-    #         ax = self.ui.figure.add_subplot(position)
-    #         x = np.array(df[col_num[0]])
-    #         y = np.array(df[col_num[1]])
-    #         # plot data
-    #         ax.scatter(x, y)
-    #         ax.set_xlabel(col_num[0])
-    #         ax.set_ylabel(col_num[1])
-    #         position += 1
-    #
-    #     #if csv file does not contain any "O", "int64", or "float64"
-    #     if not col_num and not col_object:
-    #         print("Object, Int, and float are null")
-    #     else:
-    #         if col_num != [] and col_object != []:
-    #             print("both are not null")
-    #             object_dv_csv()
-    #             number_dv_csv(position)
-    #
-    #         elif col_num != [] and not col_object:
-    #             print("num is not null")
-    #             # if file has unnamed (list of numbers)
-    #             for i in nums:
-    #                 if i == "Unnamed: 0":
-    #                     nums.drop("Unnamed: 0", inplace=True, axis=1)
-    #                     col_num = nums.columns.tolist()
-    #
-    #             # showing histogram -- only need one value(x)
-    #             for i in nums.columns:
-    #                 ax = self.ui.figure.add_subplot(position)
-    #                 # plot data
-    #                 ax.hist(df[i])
-    #                 ax.set_xlabel(i)
-    #                 ax.set_ylabel('Frequency')
-    #                 position += 1
-    #                 print("histo")
-    #
-    #             # showing scatter plot -- need x and y (2 vals)
-    #             ax = self.ui.figure.add_subplot(position)
-    #             x = np.array(df[col_num[0]])
-    #             y = np.array(df[col_num[1]])
-    #             # plot data
-    #             ax.scatter(x, y)
-    #             ax.set_xlabel(col_num[0])
-    #             ax.set_ylabel(col_num[1])
-    #             position += 1
-    #
-    #         elif col_object != [] and not col_num:
-    #             print("obj is not null")
-    #             object_dv_csv()
-    #
-    #     # create a spacing between subplots
-    #     self.ui.figure.subplots_adjust(left=0.1,bottom=0.1, right=0.9, top=0.9, wspace=0.4, hspace=0.4)
-    #     # refresh canvas
-    #     self.ui.canvas.draw()
-
     def choose_file(self):
         file, check = QFileDialog.getOpenFileName(
             None,
@@ -164,7 +34,7 @@ class Ui_SelectReport(object):
         self.window.show()
         report_name = self.report_name_text.text()
         file_name = self.file_name_lbl.text()
-        fileName = file_name
+        self.ui.lblHidden.setText(file_name)
         df = pd.read_csv(file_name)
         rows = len(df)
         columns = len(df.columns)

@@ -299,11 +299,6 @@
                           <widget class="QComboBox" name="scatterQ">
                            <item>
                             <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
                              <string>1</string>
                             </property>
                            </item>
@@ -329,11 +324,6 @@
                          </item>
                          <item>
                           <widget class="QComboBox" name="lineChartQ">
-                           <item>
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
                            <item>
                             <property name="text">
                              <string>1</string>
@@ -363,11 +353,6 @@
                           <widget class="QComboBox" name="barChartQ">
                            <item>
                             <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
                              <string>1</string>
                             </property>
                            </item>
@@ -393,11 +378,6 @@
                          </item>
                          <item>
                           <widget class="QComboBox" name="histogramQ">
-                           <item>
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
                            <item>
                             <property name="text">
                              <string>1</string>

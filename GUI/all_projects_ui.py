@@ -216,7 +216,7 @@ class Ui_Project_Main(object):
 
     def go_to_select_report(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = selectReport.Ui_SelectReport()
+        self.ui = selectReportui.Ui_SelectReport()
         self.ui.setupUi(self.window)
         self.window.show()
 
@@ -634,7 +634,7 @@ class Ui_Project_Main(object):
         self.select_report_dv_button.clicked.connect(lambda: Project_Main.close())
 
         # canvas for data visualisation
-        self.figure = plt.figure()
+        self.figure = plt.figure(figsize=(11,9), dpi=100)
         self.canvas = FigureCanvas(self.figure)
         # self.toolbar = NavigationToolbar(self.canvas, self.widget_11)
         # self.verticalLayout_20.addWidget(self.toolbar)
