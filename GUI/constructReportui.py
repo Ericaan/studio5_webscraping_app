@@ -25,6 +25,7 @@ class Ui_ConstructReport(object):
         report_name = self.report_name_label.text()
         self.ui.dv_report_name_lbl.setText(report_name)
         self.drawing_graph()
+        self.ui.userId_label.setText(self.lbl_id.text())
 
     def scatter_plot(self, df, a, b):
         ax = self.ui.figure.add_subplot(self.position)
@@ -101,6 +102,14 @@ class Ui_ConstructReport(object):
 
         self.ui.figure.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.4, hspace=0.4)
         self.ui.canvas.draw()
+
+    def back_to_main_menu(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = all_projects_ui.Ui_Project_Main()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        self.ui.stackedWidget.setCurrentIndex(2)
+        self.ui.userId_label.setText(self.lbl_id.text())
 
     def setupUi(self, ConstructReport):
         ConstructReport.setObjectName("ConstructReport")
@@ -553,6 +562,10 @@ class Ui_ConstructReport(object):
         self.verticalLayout_2.addWidget(self.lblHidden)
         self.lblHidden.setHidden(True)
 
+        self.lbl_id = QtWidgets.QLabel(self.widget)
+        self.verticalLayout_2.addWidget(self.lbl_id)
+        self.lbl_id.setHidden(True)
+
         # hid all the widgets for graphs
         self.scatterQWidget.setHidden(True)
         self.lineQWidget.setHidden(True)
@@ -666,6 +679,8 @@ class Ui_ConstructReport(object):
 
         self.generateReport.clicked.connect(lambda :self.generate_report())
         self.generateReport.clicked.connect(lambda :ConstructReport.close())
+        self.cancel.clicked.connect(lambda :self.back_to_main_menu())
+        self.cancel.clicked.connect(lambda :ConstructReport.close())
 
         self.retranslateUi(ConstructReport)
         QtCore.QMetaObject.connectSlotsByName(ConstructReport)

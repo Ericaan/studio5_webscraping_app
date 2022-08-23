@@ -27,7 +27,6 @@ import random
 class Ui_Project_Main(object):
     def openProjectsTab(self):
         self.stackedWidget.setCurrentIndex(1)
-        print("UserID-mainmenu: ", self.userId_label.text())
         crud.read_specific_fields(self.userId_label.text())
 
         # read csv file
@@ -61,7 +60,6 @@ class Ui_Project_Main(object):
 
     def openAccountTab(self):
         self.stackedWidget.setCurrentIndex(5)
-        print("UserID-mainmenu: ", self.userId_label.text())
         email = crud.return_user_email(self.userId_label.text())
         self.email_acc_text.setText(email)
         # cannot be change by user
@@ -165,7 +163,6 @@ class Ui_Project_Main(object):
                 selected_project_id = self.projects_table.item(currentRow, j).text()
                 # print(selected_project_id)
         self.label_hidden.setText(selected_project_id)
-        print("label: ", self.label_hidden.text())
         # return selected_project_id
 
     def alertLogout(self):
@@ -219,6 +216,7 @@ class Ui_Project_Main(object):
         self.ui = selectReportui.Ui_SelectReport()
         self.ui.setupUi(self.window)
         self.window.show()
+        self.ui.id_lbl.setText(self.userId_label.text())
 
     def setupUi(self, Project_Main):
         Project_Main.setObjectName("Project_Main")
@@ -454,9 +452,9 @@ class Ui_Project_Main(object):
         self.widget_12.setObjectName("widget_12")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.widget_12)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        self.back_btn = QtWidgets.QPushButton(self.widget_12)
-        self.back_btn.setObjectName("back_btn")
-        self.horizontalLayout_6.addWidget(self.back_btn)
+        # self.back_btn = QtWidgets.QPushButton(self.widget_12)
+        # self.back_btn.setObjectName("back_btn")
+        # self.horizontalLayout_6.addWidget(self.back_btn)
         self.download_btn = QtWidgets.QPushButton(self.widget_12)
         self.download_btn.setObjectName("download_btn")
         self.horizontalLayout_6.addWidget(self.download_btn)
@@ -671,7 +669,7 @@ class Ui_Project_Main(object):
         self.label_2.setText(_translate("Project_Main", "Data Visualisation"))
         self.select_report_dv_button.setText(_translate("Project_Main", "Select Report"))
         self.dv_report_name_lbl.setText(_translate("Project_Main", "Data Visualisation Name"))
-        self.back_btn.setText(_translate("Project_Main", "Back"))
+        # self.back_btn.setText(_translate("Project_Main", "Back"))
         self.download_btn.setText(_translate("Project_Main", "Download"))
         self.label_5.setText(_translate("Project_Main", "Instruction Manual"))
         self.label_3.setText(_translate("Project_Main", "My Account"))

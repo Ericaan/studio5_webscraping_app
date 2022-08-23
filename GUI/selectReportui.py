@@ -27,6 +27,14 @@ class Ui_SelectReport(object):
             self.file_name_lbl.setText(file)
             print(file)
 
+    def cancel(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = all_projects_ui.Ui_Project_Main()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        self.ui.stackedWidget.setCurrentIndex(2)
+        self.ui.userId_label.setText(self.id_lbl.text())
+
     def select_report(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = constructReportui.Ui_ConstructReport()
@@ -54,6 +62,7 @@ class Ui_SelectReport(object):
         self.ui.table_show_report.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
         self.ui.report_name_label.setText(report_name)
+        self.ui.lbl_id.setText(self.id_lbl.text())
 
     def setupUi(self, SelectReport):
         SelectReport.setObjectName("SelectReport")
@@ -131,9 +140,15 @@ class Ui_SelectReport(object):
         self.verticalLayout.addWidget(self.widget_3, 0, QtCore.Qt.AlignHCenter)
         SelectReport.setCentralWidget(self.centralwidget)
 
+        self.id_lbl = QtWidgets.QLabel(self.widget_3)
+        self.horizontalLayout_3.addWidget(self.id_lbl)
+        self.id_lbl.setHidden(True)
+
         self.choose_file_button.clicked.connect(lambda: self.choose_file())
         self.select_btn.clicked.connect(lambda: self.select_report())
         self.select_btn.clicked.connect(lambda: SelectReport.close())
+        self.cancel_btn.clicked.connect(lambda :self.cancel())
+        self.cancel_btn.clicked.connect(lambda :SelectReport.close())
 
         self.retranslateUi(SelectReport)
         QtCore.QMetaObject.connectSlotsByName(SelectReport)
