@@ -60,7 +60,7 @@ class Ui_MainWindow(object):
         self.dialog = QtWidgets.QDialog()
         self.dialog.ui = download_data.Ui_Dialog()
         self.dialog.ui.setupUi(self.dialog)
-        self.dialog.ui.my_url = self.url_bar.toPlainText()
+        self.dialog.ui.my_url = self.url_bar.text()
         self.dialog.show()
 
     # open the input notice
@@ -142,7 +142,7 @@ class Ui_MainWindow(object):
         self.buttonGroup.addButton(self.rb_second_tab)
         self.gridLayout.addWidget(self.rb_second_tab, 0, 1, 1, 1)
         self.rb_select = QtWidgets.QRadioButton(self.groupBox_6)
-        self.rb_select.setChecked(False)
+        self.rb_select.setChecked(True)
         self.rb_select.setObjectName("rb_select")
         self.buttonGroup.addButton(self.rb_select)
         self.gridLayout.addWidget(self.rb_select, 0, 0, 1, 1)
@@ -263,17 +263,19 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.tabWidget)
         self.tableWidget = QtWidgets.QTableWidget(self.groupBox)
         self.tableWidget.setMaximumSize(QtCore.QSize(16777215, 150))
+
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
-        self.tableWidget.setRowCount(4)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(3, item)
+        self.tableWidget.setRowCount(0)
+        # item = QtWidgets.QTableWidgetItem()
+        # self.tableWidget.setVerticalHeaderItem(0, item)
+        # item = QtWidgets.QTableWidgetItem()
+        # self.tableWidget.setVerticalHeaderItem(1, item)
+        # item = QtWidgets.QTableWidgetItem()
+        # self.tableWidget.setVerticalHeaderItem(2, item)
+        # item = QtWidgets.QTableWidgetItem()
+        # self.tableWidget.setVerticalHeaderItem(3, item)
+
         self.verticalLayout_3.addWidget(self.tableWidget)
         self.label = QtWidgets.QLabel(self.groupBox)
         font = QtGui.QFont()
@@ -307,64 +309,55 @@ class Ui_MainWindow(object):
         # make browser buttons work
         self.go_btn.clicked.connect(
             lambda: project_methods.navigate(self.url_bar.toPlainText(), self.url_bar, self.browser))
-        # self.go_btn.clicked.connect(lambda: self.navigate(self.url_bar.toPlainText(), self.url_bar, self.browser))
         self.back_btn.clicked.connect(self.browser.back)
         self.for_btn.clicked.connect(self.browser.forward)
         self.go_btn_2.clicked.connect(
             lambda: project_methods.navigate(self.url_bar_2.toPlainText(), self.url_bar_2, self.browser_2))
-        # self.go_btn_2.clicked.connect(lambda: self.navigate(self.url_bar_2.toPlainText(), self.url_bar_2, self.browser_2))
         self.back_btn_2.clicked.connect(self.browser_2.back)
         self.for_btn_2.clicked.connect(self.browser_2.forward)
         # template handling
         self.tree_template.setColumnCount(1)
         self.tree_template.itemClicked.connect(
             lambda: project_methods.del_temp_item(self.tree_template, self.rb_delete))
-        # self.tree_template.itemClicked.connect(lambda: self.del_temp_item())
         self.btn_add2template.clicked.connect(lambda: self.check_inputs())
-        self.btn_add2template.clicked.connect(lambda: project_methods.new_branch(
-            self.rb_select, self.rb_rel_select, self.rb_second_tab, self.tree_template, self.txt_input1,
-            self.txt_input2, self.tableWidget))
-        # self.btn_add2template.clicked.connect(lambda: self.new_branch())
         # preview table handling
         self.tableWidget.clicked.connect(lambda: project_methods.table_refresh(self.tableWidget, self.tree_template))
-        # self.tableWidget.clicked.connect(lambda: self.table_refresh())
         # back button functionality
         self.tb_home.clicked.connect(lambda: self.openAllProjectWindow())
         self.tb_home.clicked.connect(lambda: MainWindow.close())
         # save button functionality
         self.btn_psave.clicked.connect(lambda: project_methods.make_dict(self.tree_template, temp_dict))
-        # self.btn_psave.clicked.connect(lambda: self.make_dict())
         self.btn_psave.clicked.connect(
             lambda: project_methods.save_click(self.lbl_pname, self.url_bar, self.url_bar_2, temp_dict))
-        # self.btn_psave.clicked.connect(lambda: self.save_click())
         # get data button functionality
         self.btn_get_data.clicked.connect(lambda: project_methods.make_dict(self.tree_template, temp_dict))
-        # self.btn_get_data.clicked.connect(lambda: self.make_dict())
         self.btn_get_data.clicked.connect(lambda: self.open_getData_dialog())
         # delete button
         self.btn_del.clicked.connect(lambda: project_methods.del_project(self.lbl_pname))
-        # self.btn_pdel.clicked.connect(lambda: self.del_project())
         self.btn_del.clicked.connect(lambda: self.openAllProjectWindow())
         self.btn_del.clicked.connect(lambda: MainWindow.close())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     # check if inputs are legit
     def check_inputs(self):
         valid = False
         if self.rb_select.isChecked():
-            valid = web_scraper.check_inputs(self.url_bar.toPlainText(), self.txt_input1.toPlainText(),
+            valid = web_scraper.check_inputs(self.url_bar.text(), self.txt_input1.toPlainText(),
+                                             self.txt_input2.toPlainText())
+        elif self.rb_rel_select.isChecked():
+            valid = web_scraper.check_inputs(self.url_bar.text(), self.txt_input1.toPlainText(),
                                              self.txt_input2.toPlainText())
         elif self.rb_second_tab.isChecked():
-            valid = web_scraper.check_inputs(self.url_bar_2.toPlainText(), self.txt_input1.toPlainText(),
+            valid = web_scraper.check_inputs(self.url_bar_2.text(), self.txt_input1.toPlainText(),
                                              self.txt_input2.toPlainText())
         # what to do depending on whether the inputs are valid
         if valid:
-            project_methods.new_branch(self.rb_select, self.rb_rel_select, self.tree_template, self.txt_input1,
-                                       self.txt_input2, self.tableWidget)
-            # self.new_branch()
+            print("valid")
+            project_methods.new_branch(self.rb_select, self.rb_rel_select, self.rb_second_tab, self.tree_template,
+                                       self.txt_input1, self.txt_input2, self.tableWidget)
         else:
             self.open_inputNotice_dialog()
 
@@ -399,14 +392,14 @@ class Ui_MainWindow(object):
         self.back_btn_2.setText(_translate("MainWindow", "<"))
         self.for_btn_2.setText(_translate("MainWindow", ">"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Tab 2"))
-        item = self.tableWidget.verticalHeaderItem(0)
-        item.setText(_translate("MainWindow", "1"))
-        item = self.tableWidget.verticalHeaderItem(1)
-        item.setText(_translate("MainWindow", "2"))
-        item = self.tableWidget.verticalHeaderItem(2)
-        item.setText(_translate("MainWindow", "3"))
-        item = self.tableWidget.verticalHeaderItem(3)
-        item.setText(_translate("MainWindow", "4"))
+        # item = self.tableWidget.verticalHeaderItem(0)
+        # item.setText(_translate("MainWindow", "1"))
+        # item = self.tableWidget.verticalHeaderItem(1)
+        # item.setText(_translate("MainWindow", "2"))
+        # item = self.tableWidget.verticalHeaderItem(2)
+        # item.setText(_translate("MainWindow", "3"))
+        # item = self.tableWidget.verticalHeaderItem(3)
+        # item.setText(_translate("MainWindow", "4"))
         self.label.setText(_translate("MainWindow", "*Double click on the table to update"))
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)

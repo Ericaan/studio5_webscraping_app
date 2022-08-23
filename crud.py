@@ -28,7 +28,7 @@ def create_project(userId, pname, my_url, my_url2):
             'URL2': my_url2,
             'lastDate': date_time,
             'dataDownload': 'false',
-            # 'userInput': None
+            'userInput': None
         }
     )
 

@@ -2,6 +2,7 @@
 from PyQt5 import QtCore, QtWidgets
 import crud
 
+
 # this is for all the methods used in project_ui page
 # buttons and other interaction methods
 # refresh the table so the column titles match the template
@@ -58,27 +59,30 @@ def table_refresh(tableWidget, tree_template):
 def save_click(lbl_pname, url_bar, url_bar2, temp_dict):
     pid = crud.read_project(lbl_pname.text())
     pname = lbl_pname.text()
-    purl = url_bar.toPlainText()
-    purl2 = url_bar2.toPlainText()
+    purl = url_bar.text()
+    purl2 = url_bar2.text()
     pinput = temp_dict
     crud.update_project(pid, pname, purl, purl2, pinput)
     temp_dict.clear()
+    print("save works")
 
 
 # makes the template into a dictionary that can be saved more easily onto the database
 def make_dict(tree_template, temp_dict):
-    iterator = QtWidgets.QTreeWidgetItemIterator(tree_template)
-    while iterator.value():
-        item = iterator.value()
-        if item.parent() is None:
-            key = item.text(0)
-            values = [item.text(1), item.text(2)]
-            temp_dict[key] = values
-        else:
-            key = item.parent().text(0)
-            values = {item.text(0): [item.text(1), item.text(2)]}
-            temp_dict[key].append(values)
-        iterator += 1
+    if tree_template is not None:
+        iterator = QtWidgets.QTreeWidgetItemIterator(tree_template)
+        while iterator.value():
+            item = iterator.value()
+            if item.parent() is None:
+                key = item.text(0)
+                values = [item.text(1), item.text(2)]
+                temp_dict[key] = values
+            else:
+                key = item.parent().text(0)
+                values = {item.text(0): [item.text(1), item.text(2)]}
+                temp_dict[key].append(values)
+            iterator += 1
+    print("make dict works")
 
 
 # navigate method for go button

@@ -96,62 +96,79 @@ class Ui_Project_Main(object):
             print(project_name)
             URL = crud.read_project_url(self.label_hidden.text())
             URL2 = crud.read_project_url2(self.label_hidden.text())
-            # user_inputs = crud.read_project_inputs(self.label_hidden.text())
+            # project title
             self.ui.lbl_pname.setText(project_name)
+            # tab 1
             self.ui.browser.setUrl(QtCore.QUrl(URL))
             self.ui.url_bar.setText(URL)
-            #browser 2
-            self.ui.browser2.setUrl(QtCore.QUrl(URL2))
+            self.ui.tableWidget.setRowCount(2)
+            item = QtWidgets.QTableWidgetItem()
+            self.ui.tableWidget.setVerticalHeaderItem(0, item)
+            item.setText("1")
+            item = QtWidgets.QTableWidgetItem()
+            self.ui.tableWidget.setVerticalHeaderItem(1, item)
+            item.setText("2")
+            # tab 2
+            if URL2 != "":
+                self.ui.browser_2.setUrl(QtCore.QUrl(URL2))
+                self.ui.url_bar_2.setText(URL2)
+                self.ui.tableWidget.setRowCount(4)
+                item = QtWidgets.QTableWidgetItem()
+                self.ui.tableWidget.setVerticalHeaderItem(2, item)
+                item = QtWidgets.QTableWidgetItem()
+                self.ui.tableWidget.setVerticalHeaderItem(3, item)
+                item.setText("4")
             # set up the template for opened project
             self.ui.tableWidget.setColumnCount(0)
-            for key in u_temp_dict:
-                item_0 = QtWidgets.QTreeWidgetItem(self.ui.tree_template)
-                count = self.ui.tree_template.topLevelItemCount()
-                self.ui.tree_template.topLevelItem(count-1).setText(0, key)
-                self.ui.tree_template.topLevelItem(count-1).setText(1, u_temp_dict[key][0])
-                self.ui.tree_template.topLevelItem(count-1).setText(2, u_temp_dict[key][1])
-                self.ui.tree_template.topLevelItem(count-1).setFlags(self.ui.tree_template.topLevelItem(count-1).flags() | QtCore.Qt.ItemIsEditable)
-                # table update
-                # column
-                item_1 = QtWidgets.QTableWidgetItem()
-                cols = self.ui.tableWidget.columnCount()
-                self.ui.tableWidget.setColumnCount(cols + 1)
-                self.ui.tableWidget.setHorizontalHeaderItem(cols, item_1)
-                self.ui.tableWidget.horizontalHeaderItem(cols).setText(key)
-                # row 1 item
-                item_2 = QtWidgets.QTableWidgetItem()
-                self.ui.tableWidget.setItem(0, (cols), item_2)
-                self.ui.tableWidget.item(0, (cols)).setText(u_temp_dict[key][0])
-                # row 2 item
-                item_3 = QtWidgets.QTableWidgetItem()
-                self.ui.tableWidget.setItem(1, (cols), item_3)
-                self.ui.tableWidget.item(1, (cols)).setText(u_temp_dict[key][1])
-                for item in u_temp_dict[key]:
-                    if type(item) is dict:
-                        for key_b in item:
-                            prnt = self.ui.tree_template.topLevelItem(count - 1)
-                            the_child = QtWidgets.QTreeWidgetItem()
-                            the_child.setText(0, key_b)
-                            the_child.setText(1, item[key_b][0])
-                            the_child.setText(2, item[key_b][1])
-                            the_child.setFlags(the_child.flags() | QtCore.Qt.ItemIsEditable)
-                            prnt.addChild(the_child)
-                            # table update
-                            # column
-                            itm_1 = QtWidgets.QTableWidgetItem()
-                            col = self.ui.tableWidget.columnCount()
-                            self.ui.tableWidget.setColumnCount(col + 1)
-                            self.ui.tableWidget.setHorizontalHeaderItem(col, itm_1)
-                            self.ui.tableWidget.horizontalHeaderItem(col).setText(key + "_" + key_b)
-                            # row 1 item
-                            itm_2 = QtWidgets.QTableWidgetItem()
-                            self.ui.tableWidget.setItem(0, (col), itm_2)
-                            self.ui.tableWidget.item(0, (col)).setText(item[key_b][0])
-                            # row 2 item
-                            itm_3 = QtWidgets.QTableWidgetItem()
-                            self.ui.tableWidget.setItem(1, (col), itm_3)
-                            self.ui.tableWidget.item(1, (col)).setText(item[key_b][1])
-            print(u_temp_dict)
+            if u_temp_dict is not None:
+                print("dict not empty")
+                for key in u_temp_dict:
+                    item_0 = QtWidgets.QTreeWidgetItem(self.ui.tree_template)
+                    count = self.ui.tree_template.topLevelItemCount()
+                    self.ui.tree_template.topLevelItem(count-1).setText(0, key)
+                    self.ui.tree_template.topLevelItem(count-1).setText(1, u_temp_dict[key][0])
+                    self.ui.tree_template.topLevelItem(count-1).setText(2, u_temp_dict[key][1])
+                    self.ui.tree_template.topLevelItem(count-1).setFlags(self.ui.tree_template.topLevelItem(count-1).flags() | QtCore.Qt.ItemIsEditable)
+                    # table update
+                    # column
+                    item_1 = QtWidgets.QTableWidgetItem()
+                    cols = self.ui.tableWidget.columnCount()
+                    self.ui.tableWidget.setColumnCount(cols + 1)
+                    self.ui.tableWidget.setHorizontalHeaderItem(cols, item_1)
+                    self.ui.tableWidget.horizontalHeaderItem(cols).setText(key)
+                    # row 1 item
+                    item_2 = QtWidgets.QTableWidgetItem()
+                    self.ui.tableWidget.setItem(0, (cols), item_2)
+                    self.ui.tableWidget.item(0, (cols)).setText(u_temp_dict[key][0])
+                    # row 2 item
+                    item_3 = QtWidgets.QTableWidgetItem()
+                    self.ui.tableWidget.setItem(1, (cols), item_3)
+                    self.ui.tableWidget.item(1, (cols)).setText(u_temp_dict[key][1])
+                    for item in u_temp_dict[key]:
+                        if type(item) is dict:
+                            for key_b in item:
+                                prnt = self.ui.tree_template.topLevelItem(count - 1)
+                                the_child = QtWidgets.QTreeWidgetItem()
+                                the_child.setText(0, key_b)
+                                the_child.setText(1, item[key_b][0])
+                                the_child.setText(2, item[key_b][1])
+                                the_child.setFlags(the_child.flags() | QtCore.Qt.ItemIsEditable)
+                                prnt.addChild(the_child)
+                                # table update
+                                # column
+                                itm_1 = QtWidgets.QTableWidgetItem()
+                                col = self.ui.tableWidget.columnCount()
+                                self.ui.tableWidget.setColumnCount(col + 1)
+                                self.ui.tableWidget.setHorizontalHeaderItem(col, itm_1)
+                                self.ui.tableWidget.horizontalHeaderItem(col).setText(key + "_" + key_b)
+                                # row 1 item
+                                itm_2 = QtWidgets.QTableWidgetItem()
+                                self.ui.tableWidget.setItem(0, (col), itm_2)
+                                self.ui.tableWidget.item(0, (col)).setText(item[key_b][0])
+                                # row 2 item
+                                itm_3 = QtWidgets.QTableWidgetItem()
+                                self.ui.tableWidget.setItem(1, (col), itm_3)
+                                self.ui.tableWidget.item(1, (col)).setText(item[key_b][1])
 
 
     # get the project ID from selected row
