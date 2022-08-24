@@ -115,6 +115,7 @@ class Ui_Project_Main(object):
                 self.ui.tableWidget.setRowCount(4)
                 item = QtWidgets.QTableWidgetItem()
                 self.ui.tableWidget.setVerticalHeaderItem(2, item)
+                item.setText("3")
                 item = QtWidgets.QTableWidgetItem()
                 self.ui.tableWidget.setVerticalHeaderItem(3, item)
                 item.setText("4")
@@ -128,6 +129,9 @@ class Ui_Project_Main(object):
                     self.ui.tree_template.topLevelItem(count-1).setText(0, key)
                     self.ui.tree_template.topLevelItem(count-1).setText(1, u_temp_dict[key][0])
                     self.ui.tree_template.topLevelItem(count-1).setText(2, u_temp_dict[key][1])
+                    if URL2 != "":
+                        self.ui.tree_template.topLevelItem(count - 1).setText(2, u_temp_dict[key][2])
+                        self.ui.tree_template.topLevelItem(count - 1).setText(3, u_temp_dict[key][3])
                     self.ui.tree_template.topLevelItem(count-1).setFlags(self.ui.tree_template.topLevelItem(count-1).flags() | QtCore.Qt.ItemIsEditable)
                     # table update
                     # column
@@ -138,12 +142,21 @@ class Ui_Project_Main(object):
                     self.ui.tableWidget.horizontalHeaderItem(cols).setText(key)
                     # row 1 item
                     item_2 = QtWidgets.QTableWidgetItem()
-                    self.ui.tableWidget.setItem(0, (cols), item_2)
-                    self.ui.tableWidget.item(0, (cols)).setText(u_temp_dict[key][0])
+                    self.ui.tableWidget.setItem(0, cols, item_2)
+                    self.ui.tableWidget.item(0, cols).setText(u_temp_dict[key][0])
                     # row 2 item
                     item_3 = QtWidgets.QTableWidgetItem()
-                    self.ui.tableWidget.setItem(1, (cols), item_3)
-                    self.ui.tableWidget.item(1, (cols)).setText(u_temp_dict[key][1])
+                    self.ui.tableWidget.setItem(1, cols, item_3)
+                    self.ui.tableWidget.item(1, cols).setText(u_temp_dict[key][1])
+                    if URL2 != "":
+                        # row 3 item
+                        item_2 = QtWidgets.QTableWidgetItem()
+                        self.ui.tableWidget.setItem(2, cols, item_2)
+                        self.ui.tableWidget.item(2, cols).setText(u_temp_dict[key][2])
+                        # row 4 item
+                        item_3 = QtWidgets.QTableWidgetItem()
+                        self.ui.tableWidget.setItem(3, cols, item_3)
+                        self.ui.tableWidget.item(3, cols).setText(u_temp_dict[key][3])
                     for item in u_temp_dict[key]:
                         if type(item) is dict:
                             for key_b in item:
@@ -152,6 +165,9 @@ class Ui_Project_Main(object):
                                 the_child.setText(0, key_b)
                                 the_child.setText(1, item[key_b][0])
                                 the_child.setText(2, item[key_b][1])
+                                if URL2 != "":
+                                    the_child.setText(3, item[key_b][2])
+                                    the_child.setText(4, item[key_b][3])
                                 the_child.setFlags(the_child.flags() | QtCore.Qt.ItemIsEditable)
                                 prnt.addChild(the_child)
                                 # table update
@@ -160,7 +176,7 @@ class Ui_Project_Main(object):
                                 col = self.ui.tableWidget.columnCount()
                                 self.ui.tableWidget.setColumnCount(col + 1)
                                 self.ui.tableWidget.setHorizontalHeaderItem(col, itm_1)
-                                self.ui.tableWidget.horizontalHeaderItem(col).setText(key + "_" + key_b)
+                                self.ui.tableWidget.horizontalHeaderItem(col).setText(key_b)
                                 # row 1 item
                                 itm_2 = QtWidgets.QTableWidgetItem()
                                 self.ui.tableWidget.setItem(0, (col), itm_2)
@@ -169,6 +185,15 @@ class Ui_Project_Main(object):
                                 itm_3 = QtWidgets.QTableWidgetItem()
                                 self.ui.tableWidget.setItem(1, (col), itm_3)
                                 self.ui.tableWidget.item(1, (col)).setText(item[key_b][1])
+                                if URL2 != "":
+                                    # row 3 item
+                                    itm_2 = QtWidgets.QTableWidgetItem()
+                                    self.ui.tableWidget.setItem(2, (col), itm_2)
+                                    self.ui.tableWidget.item(2, (col)).setText(item[key_b][2])
+                                    # row 4 item
+                                    itm_3 = QtWidgets.QTableWidgetItem()
+                                    self.ui.tableWidget.setItem(3, (col), itm_3)
+                                    self.ui.tableWidget.item(3, (col)).setText(item[key_b][3])
 
 
     # get the project ID from selected row

@@ -23,7 +23,9 @@ def check_inputs(my_url, input1, input2):
     # search the page to find the elements that contain the inputs
     try:
         text1 = driver.find_element(By.XPATH, f"// *[contains(text(),{user_input1})]")
+        print(text1)
         text2 = driver.find_element(By.XPATH, f"// *[contains(text(),{user_input2})]")
+        print(text2)
         return True
     except:
         return False

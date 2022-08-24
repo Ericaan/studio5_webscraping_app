@@ -61,6 +61,7 @@ class Ui_MainWindow(object):
         self.dialog.ui = download_data.Ui_Dialog()
         self.dialog.ui.setupUi(self.dialog)
         self.dialog.ui.my_url = self.url_bar.text()
+        self.dialog.ui.my_url_2 = self.url_bar_2.text()
         self.dialog.show()
 
     # open the input notice
@@ -235,8 +236,9 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.tab_2)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.groupBox_7 = QtWidgets.QGroupBox(self.tab_2)
-        self.groupBox_7.setGeometry(QtCore.QRect(10, 13, 747, 50))
         self.groupBox_7.setMaximumSize(QtCore.QSize(16777215, 50))
         self.groupBox_7.setTitle("")
         self.groupBox_7.setObjectName("groupBox_7")
@@ -255,10 +257,11 @@ class Ui_MainWindow(object):
         self.for_btn_2 = QtWidgets.QPushButton(self.groupBox_7)
         self.for_btn_2.setObjectName("for_btn_2")
         self.horizontalLayout_7.addWidget(self.for_btn_2)
+        self.verticalLayout_5.addWidget(self.groupBox_7)
         self.browser_2 = QtWebEngineWidgets.QWebEngineView(self.tab_2)
-        self.browser_2.setGeometry(QtCore.QRect(10, 70, 747, 418))
         self.browser_2.setMinimumSize(QtCore.QSize(0, 0))
         self.browser_2.setObjectName("browser_2")
+        self.verticalLayout_5.addWidget(self.browser_2)
         self.tabWidget.addTab(self.tab_2, "")
         self.verticalLayout_3.addWidget(self.tabWidget)
         self.tableWidget = QtWidgets.QTableWidget(self.groupBox)
@@ -308,11 +311,11 @@ class Ui_MainWindow(object):
 
         # make browser buttons work
         self.go_btn.clicked.connect(
-            lambda: project_methods.navigate(self.url_bar.toPlainText(), self.url_bar, self.browser))
+            lambda: project_methods.navigate(self.url_bar.text(), self.url_bar, self.browser))
         self.back_btn.clicked.connect(self.browser.back)
         self.for_btn.clicked.connect(self.browser.forward)
         self.go_btn_2.clicked.connect(
-            lambda: project_methods.navigate(self.url_bar_2.toPlainText(), self.url_bar_2, self.browser_2))
+            lambda: project_methods.navigate(self.url_bar_2.text(), self.url_bar_2, self.browser_2))
         self.back_btn_2.clicked.connect(self.browser_2.back)
         self.for_btn_2.clicked.connect(self.browser_2.forward)
         # template handling
@@ -321,12 +324,12 @@ class Ui_MainWindow(object):
             lambda: project_methods.del_temp_item(self.tree_template, self.rb_delete))
         self.btn_add2template.clicked.connect(lambda: self.check_inputs())
         # preview table handling
-        self.tableWidget.clicked.connect(lambda: project_methods.table_refresh(self.tableWidget, self.tree_template))
+        self.tableWidget.clicked.connect(lambda: project_methods.table_refresh(self.tableWidget, self.tree_template, self.url_bar_2))
         # back button functionality
         self.tb_home.clicked.connect(lambda: self.openAllProjectWindow())
         self.tb_home.clicked.connect(lambda: MainWindow.close())
         # save button functionality
-        self.btn_psave.clicked.connect(lambda: project_methods.make_dict(self.tree_template, temp_dict))
+        self.btn_psave.clicked.connect(lambda: project_methods.make_dict(self.tree_template, temp_dict, self.url_bar_2))
         self.btn_psave.clicked.connect(
             lambda: project_methods.save_click(self.lbl_pname, self.url_bar, self.url_bar_2, temp_dict))
         # get data button functionality

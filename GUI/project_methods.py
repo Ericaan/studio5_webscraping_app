@@ -6,7 +6,7 @@ import crud
 # this is for all the methods used in project_ui page
 # buttons and other interaction methods
 # refresh the table so the column titles match the template
-def table_refresh(tableWidget, tree_template):
+def table_refresh(tableWidget, tree_template, url_bar_2):
     # clear the table first
     while tableWidget.columnCount() > 0:
         tableWidget.removeColumn(0)
@@ -29,21 +29,22 @@ def table_refresh(tableWidget, tree_template):
             item_3 = QtWidgets.QTableWidgetItem()
             tableWidget.setItem(1, cols, item_3)
             tableWidget.item(1, cols).setText(item.text(2))
-            # row 3 item
-            item_2 = QtWidgets.QTableWidgetItem()
-            tableWidget.setItem(2, cols, item_2)
-            tableWidget.item(2, cols).setText(item.text(3))
-            # row 4 item
-            item_3 = QtWidgets.QTableWidgetItem()
-            tableWidget.setItem(3, cols, item_3)
-            tableWidget.item(3, cols).setText(item.text(4))
+            if url_bar_2.text() != "":
+                # row 3 item
+                item_2 = QtWidgets.QTableWidgetItem()
+                tableWidget.setItem(2, cols, item_2)
+                tableWidget.item(2, cols).setText(item.text(3))
+                # row 4 item
+                item_3 = QtWidgets.QTableWidgetItem()
+                tableWidget.setItem(3, cols, item_3)
+                tableWidget.item(3, cols).setText(item.text(4))
         else:
             # column
             item_1 = QtWidgets.QTableWidgetItem()
             cols = tableWidget.columnCount()
             tableWidget.setColumnCount(cols + 1)
             tableWidget.setHorizontalHeaderItem(cols, item_1)
-            tableWidget.horizontalHeaderItem(cols).setText(item.parent().text(0) + "_" + item.text(0))
+            tableWidget.horizontalHeaderItem(cols).setText(item.text(0))
             # row 1 item
             item_2 = QtWidgets.QTableWidgetItem()
             tableWidget.setItem(0, cols, item_2)
@@ -52,6 +53,15 @@ def table_refresh(tableWidget, tree_template):
             item_3 = QtWidgets.QTableWidgetItem()
             tableWidget.setItem(1, cols, item_3)
             tableWidget.item(1, cols).setText(item.text(2))
+            if url_bar_2.text() != "":
+                # row 3 item
+                item_2 = QtWidgets.QTableWidgetItem()
+                tableWidget.setItem(2, cols, item_2)
+                tableWidget.item(2, cols).setText(item.text(3))
+                # row 4 item
+                item_3 = QtWidgets.QTableWidgetItem()
+                tableWidget.setItem(3, cols, item_3)
+                tableWidget.item(3, cols).setText(item.text(4))
         iterator += 1
 
 
@@ -68,21 +78,28 @@ def save_click(lbl_pname, url_bar, url_bar2, temp_dict):
 
 
 # makes the template into a dictionary that can be saved more easily onto the database
-def make_dict(tree_template, temp_dict):
+def make_dict(tree_template, temp_dict, url_bar_2):
     if tree_template is not None:
         iterator = QtWidgets.QTreeWidgetItemIterator(tree_template)
         while iterator.value():
             item = iterator.value()
             if item.parent() is None:
                 key = item.text(0)
-                values = [item.text(1), item.text(2)]
+                if url_bar_2.text() != "":
+                    values = [item.text(1), item.text(2), item.text(3), item.text(4)]
+                else:
+                    values = [item.text(1), item.text(2)]
                 temp_dict[key] = values
             else:
                 key = item.parent().text(0)
-                values = {item.text(0): [item.text(1), item.text(2)]}
+                if url_bar_2.text() != "":
+                    values = {item.text(0): [item.text(1), item.text(2), item.text(3), item.text(4)]}
+                else:
+                    values = {item.text(0): [item.text(1), item.text(2)]}
                 temp_dict[key].append(values)
             iterator += 1
     print("make dict works")
+    print(temp_dict)
 
 
 # navigate method for go button
@@ -92,6 +109,7 @@ def navigate(url, bar, brows):
         url = "http://" + url
         bar.setText(url)
     brows.setUrl(QtCore.QUrl(url))
+    print("navigate works")
 
 
 # delete item from template and preview table

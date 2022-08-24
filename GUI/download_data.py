@@ -85,9 +85,12 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def web_scrape(self, diction):
+    def web_scrape(self, diction, pages):
         for key in diction:
-            values = web_scraper.scrape(self.my_url, diction[key][0], diction[key][1], 1)
+            values = web_scraper.scrape(self.my_url, diction[key][0], diction[key][1], pages)
+            if self.my_url_2 != "":
+                values_2 = web_scraper.scrape(self.my_url_2, diction[key][2], diction[key][3], pages)
+                values.extend(values_2)
             results[key] = values
             for item in diction[key]:
                 if type(item) is dict:
@@ -95,7 +98,7 @@ class Ui_Dialog(object):
 
     def get_data(self):
         if len(results) == 0:
-            self.web_scrape(project_ui.temp_dict)
+            self.web_scrape(project_ui.temp_dict, int(self.spinBox.text()))
             if self.rb_csv.isChecked():
                 web_scraper.get_data_csv_json("csv", results, self.lineEdit.text())
             elif self.rb_json.isChecked():
