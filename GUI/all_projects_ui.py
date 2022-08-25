@@ -24,6 +24,12 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 import matplotlib.pyplot as plt
 import random
 
+# showing necessary button in navigation toolbar
+class NavigationToolbar(NavigationToolbar):
+    NavigationToolbar.toolitems = (
+        ('Save', 'Save as Image', 'filesave', 'save_figure'),
+    )
+
 class Ui_Project_Main(object):
     def openProjectsTab(self):
         self.stackedWidget.setCurrentIndex(1)
@@ -497,9 +503,9 @@ class Ui_Project_Main(object):
         # self.back_btn = QtWidgets.QPushButton(self.widget_12)
         # self.back_btn.setObjectName("back_btn")
         # self.horizontalLayout_6.addWidget(self.back_btn)
-        self.download_btn = QtWidgets.QPushButton(self.widget_12)
-        self.download_btn.setObjectName("download_btn")
-        self.horizontalLayout_6.addWidget(self.download_btn)
+        # self.download_btn = QtWidgets.QPushButton(self.widget_12)
+        # self.download_btn.setObjectName("download_btn")
+        # self.horizontalLayout_6.addWidget(self.download_btn)
         self.verticalLayout_18.addWidget(self.widget_12, 0, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
         self.verticalLayout_17.addWidget(self.widget_9)
         self.widget_11 = QtWidgets.QWidget(self.widget_8)
@@ -674,11 +680,11 @@ class Ui_Project_Main(object):
         self.select_report_dv_button.clicked.connect(lambda: Project_Main.close())
 
         # canvas for data visualisation
-        self.figure = plt.figure(figsize=(11,9), dpi=100)
+        self.figure = plt.figure(figsize=(20, 20))
         self.canvas = FigureCanvas(self.figure)
-        # self.toolbar = NavigationToolbar(self.canvas, self.widget_11)
-        # self.verticalLayout_20.addWidget(self.toolbar)
         self.verticalLayout_21.addWidget(self.canvas)
+        self.toolbar = NavigationToolbar(self.canvas, self.widget_12)
+        self.horizontalLayout_6.addWidget(self.toolbar)
 
         self.dv_table = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_2)
         self.dv_table.setObjectName("dv_table")
@@ -712,7 +718,7 @@ class Ui_Project_Main(object):
         self.select_report_dv_button.setText(_translate("Project_Main", "Select Report"))
         self.dv_report_name_lbl.setText(_translate("Project_Main", "Data Visualisation Name"))
         # self.back_btn.setText(_translate("Project_Main", "Back"))
-        self.download_btn.setText(_translate("Project_Main", "Download"))
+        # self.download_btn.setText(_translate("Project_Main", "Download"))
         self.label_5.setText(_translate("Project_Main", "Instruction Manual"))
         self.label_3.setText(_translate("Project_Main", "My Account"))
         self.email_acc_lbl.setText(_translate("Project_Main", "Email"))
