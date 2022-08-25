@@ -13,9 +13,24 @@ import all_projects_ui
 import pandas as pd
 import numpy as np
 
+
 class Ui_ConstructReport(object):
     # set the graph's position
-    position = 421
+    position = 521
+
+    """
+        We have 4 types of graph:
+        1. Scatter plot
+            Best to show the correlations and cluster between 2 numeric variables
+        2. Line chart
+            Best to use if user has one date variable and one numeric variable.
+            Used for numeric variables
+        3. Bar chart
+            Best to illustrate one string and one numeric variable. Can be used for numeric variables
+        4. Histogram 
+            Can be used for numeric or string variable, to show their frequency
+    """
+
     def generate_report(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = all_projects_ui.Ui_Project_Main()
@@ -43,13 +58,21 @@ class Ui_ConstructReport(object):
         ax.plot(x, y)
         self.position += 1
 
-    def bar_chart(self, df, a, b):
+    def bar_chart_nums(self, df, a, b):
         ax = self.ui.figure.add_subplot(self.position)
         x = np.array(df[a])
         y = np.array(df[b])
         ax.bar(x, y)
         ax.set_xlabel(a)
         ax.set_ylabel(b)
+        self.position += 1
+
+    def bar_chart_obj_and_num(self, df, a, b):
+        # a = string, b = num
+        ax = self.ui.figure.add_subplot(self.position)
+        bar_value = df.groupby(a)[b].mean().sort_values(ascending=False)[:15]
+        ax = bar_value.plot.bar()
+        ax.ticklabel_format(axis='y', style='plain')
         self.position += 1
 
     def histogram(self, df, value):
@@ -62,9 +85,16 @@ class Ui_ConstructReport(object):
 
     def drawing_graph(self):
         file_name = self.lblHidden.text()
-        #read the csv file
-        df = pd.read_csv(file_name)
-        #clear previous figure
+        # read the csv file and drop all the Nan
+        data_frame = pd.read_csv(file_name)
+        df = data_frame.dropna(how='all')
+        # get the columns with float64 or int64
+        nums = df.select_dtypes(include=['int64', 'float64'])
+        columns_nums = nums.columns
+        # get the columns with O data type
+        objs = df.select_dtypes('O')
+        columns_objs = objs.columns
+        # clear previous figure
         self.ui.figure.clear()
 
         scatterx1 = self.scatter_x_1.text()
@@ -92,9 +122,31 @@ class Ui_ConstructReport(object):
         if linex2 != "" and liney2 != "":
             self.line_chart(df, linex2, liney2)
         if barx1 != "" and bary1 != "":
-            self.bar_chart(df, barx1, bary1)
+            # only bar chart accepts one string and one numeric
+            if barx1 in columns_nums and bary1 in columns_nums:
+                print("both are nums")
+                self.bar_chart_nums(df, barx1, bary1)
+            elif barx1 in columns_objs and bary1 in columns_nums:
+                print("Object and num")
+                self.bar_chart_obj_and_num(df, barx1, bary1)
+            elif barx1 in columns_nums and bary1 in columns_objs:
+                print("num and object")
+                self.bar_chart_obj_and_num(df, bary1, barx1)
+            elif barx1 in columns_objs and bary1 in columns_objs:
+                print("both are objs")
         if barx2 != "" and bary2 != "":
-            self.bar_chart(df, barx2, bary2)
+            # only bar chart accepts one string and one numeric
+            if barx2 in columns_nums and bary2 in columns_nums:
+                print("both are nums")
+                self.bar_chart_nums(df, barx2, bary2)
+            elif barx2 in columns_objs and bary2 in columns_nums:
+                print("Object and num")
+                self.bar_chart_obj_and_num(df, barx2, bary2)
+            elif barx2 in columns_nums and bary2 in columns_objs:
+                print("num and object")
+                self.bar_chart_obj_and_num(df, bary2, barx2)
+            elif barx2 in columns_objs and bary2 in columns_objs:
+                print("both are objs")
         if histogram1 != "":
             self.histogram(df, histogram1)
         if histogram2 != "":
@@ -128,7 +180,7 @@ class Ui_ConstructReport(object):
         self.report_name_label = QtWidgets.QLabel(self.widget)
         self.report_name_label.setObjectName("report_name_label")
         self.verticalLayout_2.addWidget(self.report_name_label)
-        self.verticalLayout.addWidget(self.widget, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.verticalLayout.addWidget(self.widget, 0, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
         self.widget_2 = QtWidgets.QWidget(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -332,7 +384,7 @@ class Ui_ConstructReport(object):
         self.label_4 = QtWidgets.QLabel(self.widget_14)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_5.addWidget(self.label_4)
-        self.verticalLayout_11.addWidget(self.widget_14, 0, QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.verticalLayout_11.addWidget(self.widget_14, 0, QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
         self.widget_15 = QtWidgets.QWidget(self.widget_5)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -677,10 +729,10 @@ class Ui_ConstructReport(object):
         self.barChartQ.currentIndexChanged.connect(lambda: bar_quantity())
         self.histogramQ.currentIndexChanged.connect(lambda: histogram_quantity())
 
-        self.generateReport.clicked.connect(lambda :self.generate_report())
-        self.generateReport.clicked.connect(lambda :ConstructReport.close())
-        self.cancel.clicked.connect(lambda :self.back_to_main_menu())
-        self.cancel.clicked.connect(lambda :ConstructReport.close())
+        self.generateReport.clicked.connect(lambda: self.generate_report())
+        self.generateReport.clicked.connect(lambda: ConstructReport.close())
+        self.cancel.clicked.connect(lambda: self.back_to_main_menu())
+        self.cancel.clicked.connect(lambda: ConstructReport.close())
 
         self.retranslateUi(ConstructReport)
         QtCore.QMetaObject.connectSlotsByName(ConstructReport)
@@ -689,12 +741,14 @@ class Ui_ConstructReport(object):
         _translate = QtCore.QCoreApplication.translate
         ConstructReport.setWindowTitle(_translate("ConstructReport", "MainWindow"))
         self.report_name_label.setText(_translate("ConstructReport", "Report Name"))
-        self.label_2.setText(_translate("ConstructReport", "What type(s) of data visualisation do you want to use for this report?"))
+        self.label_2.setText(
+            _translate("ConstructReport", "What type(s) of data visualisation do you want to use for this report?"))
         self.scatterCB.setText(_translate("ConstructReport", "Scatter Plot"))
         self.lineChartCB.setText(_translate("ConstructReport", "Line Chart"))
         self.barChartCB.setText(_translate("ConstructReport", "Bar Chart"))
         self.histogramCB.setText(_translate("ConstructReport", "Histogram"))
-        self.label_7.setText(_translate("ConstructReport", "From the type(s) you have selected, how many of each do you want to make?"))
+        self.label_7.setText(
+            _translate("ConstructReport", "From the type(s) you have selected, how many of each do you want to make?"))
         self.label_14.setText(_translate("ConstructReport", "Scatter Plot: "))
         self.scatterQ.setItemText(0, _translate("ConstructReport", "1"))
         self.scatterQ.setItemText(1, _translate("ConstructReport", "2"))
@@ -723,6 +777,7 @@ class Ui_ConstructReport(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     ConstructReport = QtWidgets.QMainWindow()
     ui = Ui_ConstructReport()

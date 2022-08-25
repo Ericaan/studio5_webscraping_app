@@ -43,7 +43,8 @@ class Ui_SelectReport(object):
         report_name = self.report_name_text.text()
         file_name = self.file_name_lbl.text()
         self.ui.lblHidden.setText(file_name)
-        df = pd.read_csv(file_name)
+        data_frame = pd.read_csv(file_name)
+        df = data_frame.dropna(how='all')
         rows = len(df)
         columns = len(df.columns)
         header_labels = df.columns
