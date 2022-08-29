@@ -2,10 +2,10 @@ import crud
 import web_scraper
 
 pname = "test"
-URL = "https://nz.indeed.com/jobs?q=software%20developer&l&from=searchOnHP&vjk=e9742e01e29192e2"
+URL = "https://www.trademe.co.nz/a/jobs/search?search_string=software%20developer"
 URL_2 = ""
-user_input1 = '.Net Developer'
-user_input2 = '.Net Developer'
+user_input1 = 'Front End / Back End / Full Stack Development Jobs'
+user_input2 = 'CONTRACT React Native Mobile Developer'
 pages = 1
 new_user_input = ""
 test = {'Age': [52, 24, 31, 47, 51, 61],

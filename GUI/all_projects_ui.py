@@ -136,8 +136,8 @@ class Ui_Project_Main(object):
                     self.ui.tree_template.topLevelItem(count-1).setText(1, u_temp_dict[key][0])
                     self.ui.tree_template.topLevelItem(count-1).setText(2, u_temp_dict[key][1])
                     if URL2 != "":
-                        self.ui.tree_template.topLevelItem(count - 1).setText(2, u_temp_dict[key][2])
-                        self.ui.tree_template.topLevelItem(count - 1).setText(3, u_temp_dict[key][3])
+                        self.ui.tree_template.topLevelItem(count - 1).setText(3, u_temp_dict[key][2])
+                        self.ui.tree_template.topLevelItem(count - 1).setText(4, u_temp_dict[key][3])
                     self.ui.tree_template.topLevelItem(count-1).setFlags(self.ui.tree_template.topLevelItem(count-1).flags() | QtCore.Qt.ItemIsEditable)
                     # table update
                     # column

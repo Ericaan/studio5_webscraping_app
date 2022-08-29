@@ -324,7 +324,8 @@ class Ui_MainWindow(object):
             lambda: project_methods.del_temp_item(self.tree_template, self.rb_delete))
         self.btn_add2template.clicked.connect(lambda: self.check_inputs())
         # preview table handling
-        self.tableWidget.clicked.connect(lambda: project_methods.table_refresh(self.tableWidget, self.tree_template, self.url_bar_2))
+        self.tableWidget.clicked.connect(
+            lambda: project_methods.table_refresh(self.tableWidget, self.tree_template, self.url_bar_2))
         # back button functionality
         self.tb_home.clicked.connect(lambda: self.openAllProjectWindow())
         self.tb_home.clicked.connect(lambda: MainWindow.close())
@@ -333,7 +334,8 @@ class Ui_MainWindow(object):
         self.btn_psave.clicked.connect(
             lambda: project_methods.save_click(self.lbl_pname, self.url_bar, self.url_bar_2, temp_dict))
         # get data button functionality
-        self.btn_get_data.clicked.connect(lambda: project_methods.make_dict(self.tree_template, temp_dict))
+        self.btn_get_data.clicked.connect(
+            lambda: project_methods.make_dict(self.tree_template, temp_dict, self.url_bar_2))
         self.btn_get_data.clicked.connect(lambda: self.open_getData_dialog())
         # delete button
         self.btn_del.clicked.connect(lambda: project_methods.del_project(self.lbl_pname))
