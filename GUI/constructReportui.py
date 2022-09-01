@@ -46,6 +46,7 @@ class Ui_ConstructReport(object):
         # else:
         #     print("Change the value")
 
+    # makes scatterplot
     def scatter_plot(self, df, a, b):
         ax = self.ui.figure.add_subplot(self.position)
         x = np.array(df[a])
@@ -55,6 +56,7 @@ class Ui_ConstructReport(object):
         ax.set_ylabel(b)
         self.position += 1
 
+    # makes line chart
     def line_chart(self, df, a, b):
         ax = self.ui.figure.add_subplot(self.position)
         x = np.array(df[a])
@@ -71,6 +73,7 @@ class Ui_ConstructReport(object):
         ax.set_ylabel(b)
         self.position += 1
 
+    # makes bar chart
     def bar_chart_obj_and_num(self, df, a, b):
         # a = string, b = num
         ax = self.ui.figure.add_subplot(self.position)
@@ -79,6 +82,7 @@ class Ui_ConstructReport(object):
         ax.ticklabel_format(axis='y', style='plain')
         self.position += 1
 
+    # makes histogram
     def histogram(self, df, value):
         ax = self.ui.figure.add_subplot(self.position)
         # plot data
@@ -87,6 +91,8 @@ class Ui_ConstructReport(object):
         ax.set_ylabel('Frequency')
         self.position += 1
 
+    # reads user input fields and compares to table
+    # returns the graphs
     def drawing_graph(self):
         # message = QtWidgets.QMessageBox()
         file_name = self.lblHidden.text()

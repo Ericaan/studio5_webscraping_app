@@ -16,6 +16,7 @@ results = {}
 
 
 class Ui_Dialog(object):
+    results.clear()
     my_url = ""
     my_url_2 = ""
     def setupUi(self, Dialog):
@@ -76,26 +77,33 @@ class Ui_Dialog(object):
         self.spinBox.setObjectName("spinBox")
 
         # close dialog button
+        self.btn_cancel.clicked.connect(lambda: results.clear())
         self.btn_cancel.clicked.connect(lambda: Dialog.close())
-
         # generate button
-        # self.btn_generate.clicked.connect(lambda: self.web_scrape(project_ui.temp_dict))
         self.btn_generate.clicked.connect(lambda: self.get_data())
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+    # recursive method to iterate through the template and scrape based on the inputs, that data is then put into
+    # results dictionary
     def web_scrape(self, diction, pages):
         for key in diction:
             values = web_scraper.scrape(self.my_url, diction[key][0], diction[key][1], pages)
+            results['url'] = []
+            for item in values:
+                results['url'].append(self.my_url)
             if self.my_url_2 != "":
                 values_2 = web_scraper.scrape(self.my_url_2, diction[key][2], diction[key][3], pages)
                 values.extend(values_2)
+                for item in values_2:
+                    results['url'].append(self.my_url_2)
             results[key] = values
             for item in diction[key]:
                 if type(item) is dict:
-                    self.web_scrape(item)
+                    self.web_scrape(item, pages)
 
+    # method that returns the file based on selected type
     def get_data(self):
         if len(results) == 0:
             self.web_scrape(project_ui.temp_dict, int(self.spinBox.text()))

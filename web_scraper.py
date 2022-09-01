@@ -219,6 +219,7 @@ def get_data_csv_json(file_type, diction, file_name):
     if file_type == "csv":
         df = pd.DataFrame(dict([(k, pd.Series(v)) for k, v in diction.items()]))
         # df = pd.DataFrame.from_dict(diction, orient='index')
+        print(type(df))
         df.to_csv(f"{file_name}.csv")
         print("CSV file is created")
     elif file_type == "json":
