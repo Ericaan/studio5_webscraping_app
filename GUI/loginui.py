@@ -22,7 +22,6 @@ class Ui_LOGIN(object):
         self.window.show()
 
     def go_to_main_window(self):
-        _translate = QtCore.QCoreApplication.translate
         self.window = QtWidgets.QMainWindow()
         self.ui = all_projects_ui.Ui_Project_Main()
         self.ui.setupUi(self.window)
@@ -35,6 +34,7 @@ class Ui_LOGIN(object):
 
     def login(self):
         message = QtWidgets.QMessageBox()
+        message.setWindowTitle("LOGIN")
         # checking empty fields
         if self.email_text.text() != "" and self.pass_text.text() != "":
             user_email_firestore = crud.checking_user_email(self.email_text.text())
@@ -50,7 +50,10 @@ class Ui_LOGIN(object):
                     message.setText("Successfully login")
                     message.exec_()
                     self.go_to_main_window()
-                    # LOGIN.hide()
+                    # working if login is the first window that was opened
+                    # if user open signup window then go to login and try to login,
+                    # the main menu won't show up (unknown reason)
+                    LOGIN.hide()
                 else:
                     message.setText("Please enter the correct password")
                     message.exec_()
@@ -147,8 +150,6 @@ class Ui_LOGIN(object):
         self.horizontalLayout_4.addWidget(self.pass_lbl)
         self.pass_text = QtWidgets.QLineEdit(self.widget_6)
         self.pass_text.setObjectName("pass_text")
-        # hide the password
-        self.pass_text.setEchoMode(QtWidgets.QLineEdit.Password)
         self.horizontalLayout_4.addWidget(self.pass_text)
         self.horizontalLayout_2.addWidget(self.widget_6)
         self.verticalLayout_4.addWidget(self.widget_2)
@@ -163,9 +164,6 @@ class Ui_LOGIN(object):
         self.login_button.setFont(font)
         self.login_button.setObjectName("login_button")
         self.verticalLayout_6.addWidget(self.login_button)
-        self.login_button.clicked.connect(lambda :self.login())
-        # self.login_button.clicked.connect(LOGIN.close())
-        # self.login_button.clicked.connect(lambda :LOGIN.close())
         self.verticalLayout_4.addWidget(self.widget_4, 0, QtCore.Qt.AlignHCenter)
         self.widget_3 = QtWidgets.QWidget(self.frame_3)
         self.widget_3.setObjectName("widget_3")
@@ -178,12 +176,18 @@ class Ui_LOGIN(object):
         self.signup_button.setFont(font)
         self.signup_button.setObjectName("signup_button")
         self.verticalLayout_5.addWidget(self.signup_button)
-        self.signup_button.clicked.connect(lambda :self.go_to_signup_window())
-        self.signup_button.clicked.connect(lambda: LOGIN.close())
         self.verticalLayout_4.addWidget(self.widget_3, 0, QtCore.Qt.AlignHCenter)
         self.verticalLayout_2.addWidget(self.frame_3)
         self.verticalLayout.addWidget(self.frame)
         LOGIN.setCentralWidget(self.centralwidget)
+
+        # hide the password
+        self.pass_text.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.login_button.clicked.connect(lambda: self.login())
+        # self.login_button.clicked.connect(LOGIN.close())
+        # self.login_button.clicked.connect(lambda :LOGIN.close())
+        self.signup_button.clicked.connect(lambda :self.go_to_signup_window())
+        self.signup_button.clicked.connect(lambda: LOGIN.close())
 
         self.retranslateUi(LOGIN)
         QtCore.QMetaObject.connectSlotsByName(LOGIN)

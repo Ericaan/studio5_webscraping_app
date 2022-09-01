@@ -16,6 +16,7 @@ import bcrypt
 
 class Ui_SIGNUP(object):
     def email_validation(self, email_input):
+        # email pattern
         pattern = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
         if re.match(pattern, email_input):
             return True
@@ -34,14 +35,16 @@ class Ui_SIGNUP(object):
 
     def signup(self):
         message = QtWidgets.QMessageBox()
+        message.setWindowTitle("SIGNUP")
         # checking empty fields
         if self.email_text.text() != "" and self.pass_text.text() != "":
+            # getting user's email and password from database with user's email
             user_email_firestore = crud.checking_user_email(self.email_text.text())
             user_pass_firestore = crud.checking_user_pass(self.email_text.text())
+            # encode the user input first before checking them
             user_input_password = self.pass_text.text().encode('utf-8')
             # checking whether email that user inputted exists in database
             if user_email_firestore == "Exists":
-                print("exists")
                 # check whether email in database has the same password
                 # direct user to go to login window
                 if bcrypt.checkpw(user_input_password, user_pass_firestore):
@@ -54,20 +57,18 @@ class Ui_SIGNUP(object):
                     self.empty_fields()
             # if it does not exist, check whether email is valid (pattern)
             else:
-                print("does not exist")
                 if self.email_validation(self.email_text.text()):
-                    print("Valid email")
                     # if email's valid = register user
                     user_password = self.pass_text.text()
                     user_password = user_password.encode('utf-8')
                     hashed_pass = bcrypt.hashpw(user_password, bcrypt.gensalt(10))
+                    # create new user with their email and hashed pass
                     crud.create_user(self.email_text.text(), hashed_pass)
                     message.setText("Registered")
                     message.exec_()
                     self.go_to_login_window()
                     SIGNUP.close()
                 else:
-                    print("Invalid email")
                     message.setText("Email is not valid")
                     message.exec_()
                     self.empty_fields()
@@ -157,8 +158,6 @@ class Ui_SIGNUP(object):
         self.pass_text = QtWidgets.QLineEdit(self.widget_6)
         self.pass_text.setObjectName("pass_text")
         self.horizontalLayout_4.addWidget(self.pass_text)
-        #hide the password
-        self.pass_text.setEchoMode(QtWidgets.QLineEdit.Password)
         self.horizontalLayout_2.addWidget(self.widget_6)
         self.verticalLayout_4.addWidget(self.widget_2)
         self.widget_4 = QtWidgets.QWidget(self.frame_3)
@@ -169,8 +168,6 @@ class Ui_SIGNUP(object):
         self.signup_button.setMinimumSize(QtCore.QSize(100, 0))
         self.signup_button.setObjectName("signup_button")
         self.verticalLayout_6.addWidget(self.signup_button)
-        self.signup_button.clicked.connect(lambda :self.signup())
-        # self.signup_button.clicked.connect(lambda :SIGNUP.close())
 
         self.verticalLayout_4.addWidget(self.widget_4, 0, QtCore.Qt.AlignHCenter)
         self.widget_3 = QtWidgets.QWidget(self.frame_3)
@@ -183,14 +180,18 @@ class Ui_SIGNUP(object):
         self.login_button.setFont(font)
         self.login_button.setObjectName("login_button")
         self.verticalLayout_5.addWidget(self.login_button)
-        self.login_button.clicked.connect(lambda :self.go_to_login_window())
-        self.login_button.clicked.connect(lambda :SIGNUP.close())
         self.verticalLayout_4.addWidget(self.widget_3, 0, QtCore.Qt.AlignHCenter)
         self.verticalLayout_2.addWidget(self.frame_3)
         self.verticalLayout.addWidget(self.frame)
         SIGNUP.setCentralWidget(self.centralwidget)
 
+        #hide the password
+        self.pass_text.setEchoMode(QtWidgets.QLineEdit.Password)
 
+        self.signup_button.clicked.connect(lambda :self.signup())
+        # self.signup_button.clicked.connect(lambda :SIGNUP.close())
+        self.login_button.clicked.connect(lambda :self.go_to_login_window())
+        self.login_button.clicked.connect(lambda :SIGNUP.close())
 
         self.retranslateUi(SIGNUP)
         QtCore.QMetaObject.connectSlotsByName(SIGNUP)

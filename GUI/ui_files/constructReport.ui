@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1357</width>
-    <height>837</height>
+    <height>894</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -118,104 +118,6 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QWidget" name="widget_8" native="true">
-               <layout class="QVBoxLayout" name="verticalLayout_6">
-                <property name="spacing">
-                 <number>0</number>
-                </property>
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item alignment="Qt::AlignTop">
-                 <widget class="QWidget" name="widget_13" native="true">
-                  <layout class="QVBoxLayout" name="verticalLayout_9">
-                   <item>
-                    <widget class="QLabel" name="label_2">
-                     <property name="text">
-                      <string>What type(s) of data visualisation do you want to use for this report?</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QWidget" name="widget_10" native="true">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_3">
-                   <property name="spacing">
-                    <number>0</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QWidget" name="widget_11" native="true">
-                     <layout class="QVBoxLayout" name="verticalLayout_7">
-                      <item>
-                       <widget class="QCheckBox" name="scatterCB">
-                        <property name="text">
-                         <string>Scatter Plot</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QCheckBox" name="lineChartCB">
-                        <property name="text">
-                         <string>Line Chart</string>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QWidget" name="widget_12" native="true">
-                     <layout class="QVBoxLayout" name="verticalLayout_8">
-                      <item>
-                       <widget class="QCheckBox" name="barChartCB">
-                        <property name="text">
-                         <string>Bar Chart</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QCheckBox" name="histogramCB">
-                        <property name="text">
-                         <string>Histogram</string>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
               <widget class="QWidget" name="widget_9" native="true">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
@@ -242,8 +144,79 @@
                    <item>
                     <widget class="QLabel" name="label_7">
                      <property name="text">
-                      <string>From the type(s) you have selected, how many of each do you want to make?</string>
+                      <string>Based on the input type, how many of each do you want to make?</string>
                      </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget_8" native="true">
+                     <layout class="QVBoxLayout" name="verticalLayout_6">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QWidget" name="widget_10" native="true">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <layout class="QHBoxLayout" name="horizontalLayout_3">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <widget class="QWidget" name="widget_11" native="true">
+                           <layout class="QVBoxLayout" name="verticalLayout_7">
+                            <item>
+                             <widget class="QLabel" name="label">
+                              <property name="text">
+                               <string>Number Value/Input</string>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QWidget" name="widget_12" native="true">
+                           <layout class="QVBoxLayout" name="verticalLayout_8">
+                            <item>
+                             <widget class="QLabel" name="label_10">
+                              <property name="text">
+                               <string>Word Value/Input</string>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                   </layout>
@@ -299,6 +272,11 @@
                           <widget class="QComboBox" name="scatterQ">
                            <item>
                             <property name="text">
+                             <string>0</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
                              <string>1</string>
                             </property>
                            </item>
@@ -324,6 +302,11 @@
                          </item>
                          <item>
                           <widget class="QComboBox" name="lineChartQ">
+                           <item>
+                            <property name="text">
+                             <string>0</string>
+                            </property>
+                           </item>
                            <item>
                             <property name="text">
                              <string>1</string>
@@ -353,31 +336,9 @@
                           <widget class="QComboBox" name="barChartQ">
                            <item>
                             <property name="text">
-                             <string>1</string>
+                             <string>0</string>
                             </property>
                            </item>
-                           <item>
-                            <property name="text">
-                             <string>2</string>
-                            </property>
-                           </item>
-                          </widget>
-                         </item>
-                        </layout>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QWidget" name="histogramQWidget" native="true">
-                        <layout class="QHBoxLayout" name="horizontalLayout_12">
-                         <item>
-                          <widget class="QLabel" name="label_12">
-                           <property name="text">
-                            <string>Histogram:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QComboBox" name="histogramQ">
                            <item>
                             <property name="text">
                              <string>1</string>
@@ -398,7 +359,72 @@
                    </item>
                    <item>
                     <widget class="QWidget" name="widget_34" native="true">
-                     <layout class="QVBoxLayout" name="verticalLayout_21"/>
+                     <layout class="QVBoxLayout" name="verticalLayout_21">
+                      <item>
+                       <widget class="QWidget" name="histogramQWidget" native="true">
+                        <layout class="QHBoxLayout" name="horizontalLayout_12">
+                         <item>
+                          <widget class="QLabel" name="label_12">
+                           <property name="text">
+                            <string>Histogram:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QComboBox" name="histogramQ">
+                           <item>
+                            <property name="text">
+                             <string>0</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>1</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>2</string>
+                            </property>
+                           </item>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="wordTQWidget" native="true">
+                        <layout class="QHBoxLayout" name="horizontalLayout_8">
+                         <item>
+                          <widget class="QLabel" name="label_15">
+                           <property name="text">
+                            <string>Word Table</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QComboBox" name="wordtableQ">
+                           <item>
+                            <property name="text">
+                             <string>0</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>1</string>
+                            </property>
+                           </item>
+                           <item>
+                            <property name="text">
+                             <string>2</string>
+                            </property>
+                           </item>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                   </layout>
@@ -485,7 +511,7 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
+             <item alignment="Qt::AlignLeft">
               <widget class="QWidget" name="keyValueWidget1" native="true">
                <layout class="QVBoxLayout" name="verticalLayout_12">
                 <item alignment="Qt::AlignLeft">
@@ -599,6 +625,29 @@
                    </item>
                    <item>
                     <widget class="QLineEdit" name="histo_value1">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QWidget" name="word_tableWidget1" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_16">
+                   <item>
+                    <widget class="QLabel" name="label_20">
+                     <property name="text">
+                      <string>Word Table 1:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="table_value1">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -727,6 +776,29 @@
                    </item>
                    <item>
                     <widget class="QLineEdit" name="histo_value2">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignLeft">
+                 <widget class="QWidget" name="word_tableWidget2" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_21">
+                   <item>
+                    <widget class="QLabel" name="label_21">
+                     <property name="text">
+                      <string>Word Table 2:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="table_value2">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                        <horstretch>0</horstretch>

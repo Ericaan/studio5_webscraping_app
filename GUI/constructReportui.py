@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import all_projects_ui
+import selectReportui
 import pandas as pd
 import numpy as np
 
@@ -17,7 +18,6 @@ import numpy as np
 class Ui_ConstructReport(object):
     # set the graph's position
     position = 521
-    warning_message = False
 
     """
         We have 4 types of graph:
@@ -33,7 +33,6 @@ class Ui_ConstructReport(object):
     """
 
     def generate_report(self):
-        # if self.warning_message is False:
         self.window = QtWidgets.QMainWindow()
         self.ui = all_projects_ui.Ui_Project_Main()
         self.ui.setupUi(self.window)
@@ -43,8 +42,6 @@ class Ui_ConstructReport(object):
         self.ui.dv_report_name_lbl.setText(report_name)
         self.ui.userId_label.setText(self.lbl_id.text())
         self.drawing_graph()
-        # else:
-        #     print("Change the value")
 
     # makes scatterplot
     def scatter_plot(self, df, a, b):
@@ -79,6 +76,7 @@ class Ui_ConstructReport(object):
         ax = self.ui.figure.add_subplot(self.position)
         bar_value = df.groupby(a)[b].mean().sort_values(ascending=False)[:15]
         ax = bar_value.plot.bar()
+        # x label = 90
         ax.ticklabel_format(axis='y', style='plain')
         self.position += 1
 
@@ -89,6 +87,18 @@ class Ui_ConstructReport(object):
         ax.hist(df[value])
         ax.set_xlabel(value)
         ax.set_ylabel('Frequency')
+        ax.set_xticklabels(df[value], rotation=45, ha='right')
+        self.position += 1
+
+    def word_table(self, df, value):
+        ax = self.ui.figure.add_subplot(self.position)
+        ax.axis('off')
+        ax.axis('tight')
+        df['table1'] = df[value].str.lower().str.replace('[^\w\s]', '')
+        table1 = df.table1.str.split(expand=True).stack().value_counts().reset_index()
+        table1.columns = ["Word", 'Frequency']
+        df = pd.DataFrame(table1, columns=table1.columns)
+        ax.table(cellText=df.values, colLabels=df.columns, loc='center')
         self.position += 1
 
     # reads user input fields and compares to table
@@ -102,12 +112,10 @@ class Ui_ConstructReport(object):
         # get the columns with float64 or int64
         nums = df.select_dtypes(include=['int64', 'float64'])
         columns_nums = nums.columns
-        print("aaaaaa")
         # get the columns with O data type
         objs = df.select_dtypes('O')
-        print(nums)
-        print(objs)
         columns_objs = objs.columns
+
         # clear previous figure
         self.ui.figure.clear()
 
@@ -125,6 +133,8 @@ class Ui_ConstructReport(object):
         bary2 = self.bar_y_2.text()
         histogram1 = self.histo_value1.text()
         histogram2 = self.histo_value2.text()
+        table1 = self.table_value1.text()
+        table2 = self.table_value2.text()
 
         # multiple if statements to check the values of each graph
         # and assign them based on the graph they picked
@@ -132,7 +142,6 @@ class Ui_ConstructReport(object):
             if scatterx1 in columns_nums and scattery1 in columns_nums:
                 self.scatter_plot(df, scatterx1, scattery1)
             else:
-
                 print("Please make sure to enter columns names with numeric values")
                 # message.setWindowTitle("Warning!")
                 # message.setText("Please make sure to enter columns names with numeric values")
@@ -141,7 +150,6 @@ class Ui_ConstructReport(object):
             if scatterx2 in columns_nums and scattery2 in columns_nums:
                 self.scatter_plot(df, scatterx2, scattery2)
             else:
-
                 print("Please make sure to enter columns names with numeric values")
                 # message.setWindowTitle("Warning!")
                 # message.setText("Please make sure to enter columns names with numeric values")
@@ -191,11 +199,13 @@ class Ui_ConstructReport(object):
                 # message.setText("Both values are string. Cannot be used for Bar Chart")
                 # message.exec_()
         if histogram1 != "":
-            print("bbbbb")
             self.histogram(df, histogram1)
         if histogram2 != "":
             self.histogram(df, histogram2)
-
+        if table1 != "":
+            self.word_table(data_frame, table1)
+        if table2 != "":
+            self.word_table(data_frame, table2)
         self.ui.figure.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.4, hspace=0.4)
         self.ui.canvas.draw()
 
@@ -209,7 +219,7 @@ class Ui_ConstructReport(object):
 
     def setupUi(self, ConstructReport):
         ConstructReport.setObjectName("ConstructReport")
-        ConstructReport.resize(1357, 837)
+        ConstructReport.resize(1357, 894)
         self.centralwidget = QtWidgets.QWidget(ConstructReport)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -267,55 +277,6 @@ class Ui_ConstructReport(object):
         self.verticalLayout_5.setContentsMargins(0, -1, 0, 0)
         self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.widget_8 = QtWidgets.QWidget(self.widget_7)
-        self.widget_8.setObjectName("widget_8")
-        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.widget_8)
-        self.verticalLayout_6.setContentsMargins(0, -1, 0, 0)
-        self.verticalLayout_6.setSpacing(0)
-        self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.widget_13 = QtWidgets.QWidget(self.widget_8)
-        self.widget_13.setObjectName("widget_13")
-        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.widget_13)
-        self.verticalLayout_9.setObjectName("verticalLayout_9")
-        self.label_2 = QtWidgets.QLabel(self.widget_13)
-        self.label_2.setObjectName("label_2")
-        self.verticalLayout_9.addWidget(self.label_2)
-        self.verticalLayout_6.addWidget(self.widget_13, 0, QtCore.Qt.AlignTop)
-        self.widget_10 = QtWidgets.QWidget(self.widget_8)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.MinimumExpanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.widget_10.sizePolicy().hasHeightForWidth())
-        self.widget_10.setSizePolicy(sizePolicy)
-        self.widget_10.setObjectName("widget_10")
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_10)
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_3.setSpacing(0)
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.widget_11 = QtWidgets.QWidget(self.widget_10)
-        self.widget_11.setObjectName("widget_11")
-        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.widget_11)
-        self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.scatterCB = QtWidgets.QCheckBox(self.widget_11)
-        self.scatterCB.setObjectName("scatterCB")
-        self.verticalLayout_7.addWidget(self.scatterCB)
-        self.lineChartCB = QtWidgets.QCheckBox(self.widget_11)
-        self.lineChartCB.setObjectName("lineChartCB")
-        self.verticalLayout_7.addWidget(self.lineChartCB)
-        self.horizontalLayout_3.addWidget(self.widget_11)
-        self.widget_12 = QtWidgets.QWidget(self.widget_10)
-        self.widget_12.setObjectName("widget_12")
-        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.widget_12)
-        self.verticalLayout_8.setObjectName("verticalLayout_8")
-        self.barChartCB = QtWidgets.QCheckBox(self.widget_12)
-        self.barChartCB.setObjectName("barChartCB")
-        self.verticalLayout_8.addWidget(self.barChartCB)
-        self.histogramCB = QtWidgets.QCheckBox(self.widget_12)
-        self.histogramCB.setObjectName("histogramCB")
-        self.verticalLayout_8.addWidget(self.histogramCB)
-        self.horizontalLayout_3.addWidget(self.widget_12)
-        self.verticalLayout_6.addWidget(self.widget_10)
-        self.verticalLayout_5.addWidget(self.widget_8)
         self.widget_9 = QtWidgets.QWidget(self.widget_7)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
@@ -334,6 +295,41 @@ class Ui_ConstructReport(object):
         self.label_7 = QtWidgets.QLabel(self.widget_20)
         self.label_7.setObjectName("label_7")
         self.verticalLayout_14.addWidget(self.label_7)
+        self.widget_8 = QtWidgets.QWidget(self.widget_20)
+        self.widget_8.setObjectName("widget_8")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.widget_8)
+        self.verticalLayout_6.setContentsMargins(0, -1, 0, 0)
+        self.verticalLayout_6.setSpacing(0)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.widget_10 = QtWidgets.QWidget(self.widget_8)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.widget_10.sizePolicy().hasHeightForWidth())
+        self.widget_10.setSizePolicy(sizePolicy)
+        self.widget_10.setObjectName("widget_10")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_10)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setSpacing(0)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.widget_11 = QtWidgets.QWidget(self.widget_10)
+        self.widget_11.setObjectName("widget_11")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.widget_11)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.label = QtWidgets.QLabel(self.widget_11)
+        self.label.setObjectName("label")
+        self.verticalLayout_7.addWidget(self.label)
+        self.horizontalLayout_3.addWidget(self.widget_11)
+        self.widget_12 = QtWidgets.QWidget(self.widget_10)
+        self.widget_12.setObjectName("widget_12")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.widget_12)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.label_10 = QtWidgets.QLabel(self.widget_12)
+        self.label_10.setObjectName("label_10")
+        self.verticalLayout_8.addWidget(self.label_10)
+        self.horizontalLayout_3.addWidget(self.widget_12)
+        self.verticalLayout_6.addWidget(self.widget_10)
+        self.verticalLayout_14.addWidget(self.widget_8)
         self.verticalLayout_10.addWidget(self.widget_20)
         self.widget_32 = QtWidgets.QWidget(self.widget_9)
         self.widget_32.setObjectName("widget_32")
@@ -358,6 +354,7 @@ class Ui_ConstructReport(object):
         self.scatterQ.setObjectName("scatterQ")
         self.scatterQ.addItem("")
         self.scatterQ.addItem("")
+        self.scatterQ.addItem("")
         self.horizontalLayout_15.addWidget(self.scatterQ)
         self.verticalLayout_20.addWidget(self.scatterQWidget)
         self.lineQWidget = QtWidgets.QWidget(self.widget_33)
@@ -369,6 +366,7 @@ class Ui_ConstructReport(object):
         self.horizontalLayout_11.addWidget(self.label_11)
         self.lineChartQ = QtWidgets.QComboBox(self.lineQWidget)
         self.lineChartQ.setObjectName("lineChartQ")
+        self.lineChartQ.addItem("")
         self.lineChartQ.addItem("")
         self.lineChartQ.addItem("")
         self.horizontalLayout_11.addWidget(self.lineChartQ)
@@ -384,9 +382,15 @@ class Ui_ConstructReport(object):
         self.barChartQ.setObjectName("barChartQ")
         self.barChartQ.addItem("")
         self.barChartQ.addItem("")
+        self.barChartQ.addItem("")
         self.horizontalLayout_13.addWidget(self.barChartQ)
         self.verticalLayout_20.addWidget(self.barQWidget)
-        self.histogramQWidget = QtWidgets.QWidget(self.widget_33)
+        self.horizontalLayout_14.addWidget(self.widget_33)
+        self.widget_34 = QtWidgets.QWidget(self.widget_32)
+        self.widget_34.setObjectName("widget_34")
+        self.verticalLayout_21 = QtWidgets.QVBoxLayout(self.widget_34)
+        self.verticalLayout_21.setObjectName("verticalLayout_21")
+        self.histogramQWidget = QtWidgets.QWidget(self.widget_34)
         self.histogramQWidget.setObjectName("histogramQWidget")
         self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.histogramQWidget)
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
@@ -397,13 +401,23 @@ class Ui_ConstructReport(object):
         self.histogramQ.setObjectName("histogramQ")
         self.histogramQ.addItem("")
         self.histogramQ.addItem("")
+        self.histogramQ.addItem("")
         self.horizontalLayout_12.addWidget(self.histogramQ)
-        self.verticalLayout_20.addWidget(self.histogramQWidget)
-        self.horizontalLayout_14.addWidget(self.widget_33)
-        self.widget_34 = QtWidgets.QWidget(self.widget_32)
-        self.widget_34.setObjectName("widget_34")
-        self.verticalLayout_21 = QtWidgets.QVBoxLayout(self.widget_34)
-        self.verticalLayout_21.setObjectName("verticalLayout_21")
+        self.verticalLayout_21.addWidget(self.histogramQWidget)
+        self.wordTQWidget = QtWidgets.QWidget(self.widget_34)
+        self.wordTQWidget.setObjectName("wordTQWidget")
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.wordTQWidget)
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        self.label_15 = QtWidgets.QLabel(self.wordTQWidget)
+        self.label_15.setObjectName("label_15")
+        self.horizontalLayout_8.addWidget(self.label_15)
+        self.wordtableQ = QtWidgets.QComboBox(self.wordTQWidget)
+        self.wordtableQ.setObjectName("wordtableQ")
+        self.wordtableQ.addItem("")
+        self.wordtableQ.addItem("")
+        self.wordtableQ.addItem("")
+        self.horizontalLayout_8.addWidget(self.wordtableQ)
+        self.verticalLayout_21.addWidget(self.wordTQWidget)
         self.horizontalLayout_14.addWidget(self.widget_34)
         self.verticalLayout_10.addWidget(self.widget_32)
         self.verticalLayout_5.addWidget(self.widget_9)
@@ -535,7 +549,23 @@ class Ui_ConstructReport(object):
         self.histo_value1.setObjectName("histo_value1")
         self.horizontalLayout_10.addWidget(self.histo_value1)
         self.verticalLayout_12.addWidget(self.histogramWidget1, 0, QtCore.Qt.AlignLeft)
-        self.horizontalLayout_4.addWidget(self.keyValueWidget1)
+        self.word_tableWidget1 = QtWidgets.QWidget(self.keyValueWidget1)
+        self.word_tableWidget1.setObjectName("word_tableWidget1")
+        self.horizontalLayout_16 = QtWidgets.QHBoxLayout(self.word_tableWidget1)
+        self.horizontalLayout_16.setObjectName("horizontalLayout_16")
+        self.label_20 = QtWidgets.QLabel(self.word_tableWidget1)
+        self.label_20.setObjectName("label_20")
+        self.horizontalLayout_16.addWidget(self.label_20)
+        self.table_value1 = QtWidgets.QLineEdit(self.word_tableWidget1)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.table_value1.sizePolicy().hasHeightForWidth())
+        self.table_value1.setSizePolicy(sizePolicy)
+        self.table_value1.setObjectName("table_value1")
+        self.horizontalLayout_16.addWidget(self.table_value1)
+        self.verticalLayout_12.addWidget(self.word_tableWidget1, 0, QtCore.Qt.AlignLeft)
+        self.horizontalLayout_4.addWidget(self.keyValueWidget1, 0, QtCore.Qt.AlignLeft)
         self.keyValueWidget2 = QtWidgets.QWidget(self.widget_15)
         self.keyValueWidget2.setObjectName("keyValueWidget2")
         self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.keyValueWidget2)
@@ -628,6 +658,22 @@ class Ui_ConstructReport(object):
         self.histo_value2.setObjectName("histo_value2")
         self.horizontalLayout_20.addWidget(self.histo_value2)
         self.verticalLayout_13.addWidget(self.histogramWidget2, 0, QtCore.Qt.AlignLeft)
+        self.word_tableWidget2 = QtWidgets.QWidget(self.keyValueWidget2)
+        self.word_tableWidget2.setObjectName("word_tableWidget2")
+        self.horizontalLayout_21 = QtWidgets.QHBoxLayout(self.word_tableWidget2)
+        self.horizontalLayout_21.setObjectName("horizontalLayout_21")
+        self.label_21 = QtWidgets.QLabel(self.word_tableWidget2)
+        self.label_21.setObjectName("label_21")
+        self.horizontalLayout_21.addWidget(self.label_21)
+        self.table_value2 = QtWidgets.QLineEdit(self.word_tableWidget2)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.table_value2.sizePolicy().hasHeightForWidth())
+        self.table_value2.setSizePolicy(sizePolicy)
+        self.table_value2.setObjectName("table_value2")
+        self.horizontalLayout_21.addWidget(self.table_value2)
+        self.verticalLayout_13.addWidget(self.word_tableWidget2, 0, QtCore.Qt.AlignLeft)
         self.horizontalLayout_4.addWidget(self.keyValueWidget2)
         self.verticalLayout_11.addWidget(self.widget_15)
         self.verticalLayout_3.addWidget(self.widget_5)
@@ -658,16 +704,12 @@ class Ui_ConstructReport(object):
         self.verticalLayout_2.addWidget(self.lblHidden)
         self.lblHidden.setHidden(True)
 
+        # label for user id
         self.lbl_id = QtWidgets.QLabel(self.widget)
         self.verticalLayout_2.addWidget(self.lbl_id)
         self.lbl_id.setHidden(True)
 
         # hid all the widgets for graphs
-        self.scatterQWidget.setHidden(True)
-        self.lineQWidget.setHidden(True)
-        self.barQWidget.setHidden(True)
-        self.histogramQWidget.setHidden(True)
-        self.label_7.setHidden(True)
         self.widget_14.setHidden(True)
         self.scatterWidget1.setHidden(True)
         self.scatterWidget2.setHidden(True)
@@ -677,104 +719,98 @@ class Ui_ConstructReport(object):
         self.barWidget2.setHidden(True)
         self.histogramWidget1.setHidden(True)
         self.histogramWidget2.setHidden(True)
+        self.word_tableWidget1.setHidden(True)
+        self.word_tableWidget2.setHidden(True)
 
-        # check checkboxes if they are clicked, if they are clicked, show the widgets
-        # if they are not checked or unchecked, hid widget and empty text fields
-        def scatter_checked():
-            if self.scatterCB.isChecked():
-                self.label_7.setHidden(False)
-                self.scatterQWidget.setHidden(False)
-            else:
-                self.scatterQWidget.setHidden(True)
+        # combo box, set widget based on the quantity user picked,
+        # empty user input if quantity = 0/1
+        def scatter_quantity():
+            if self.scatterQ.currentIndex() == 0:
                 self.scatterWidget1.setHidden(True)
                 self.scatterWidget2.setHidden(True)
                 self.scatter_x_1.setText("")
                 self.scatter_y_1.setText("")
                 self.scatter_x_2.setText("")
                 self.scatter_y_2.setText("")
+            elif self.scatterQ.currentIndex() == 1:
+                self.scatterWidget1.setHidden(False)
+                self.scatterWidget2.setHidden(True)
+                self.scatter_x_2.setText("")
+                self.scatter_y_2.setText("")
+            elif self.scatterQ.currentIndex() == 2:
+                self.scatterWidget1.setHidden(False)
+                self.scatterWidget2.setHidden(False)
 
-        def line_checked():
-            if self.lineChartCB.isChecked():
-                self.label_7.setHidden(False)
-                self.lineQWidget.setHidden(False)
-            else:
-                self.lineQWidget.setHidden(True)
+        def line_quantity():
+            if self.lineChartQ.currentIndex() == 0:
                 self.lineWidget1.setHidden(True)
                 self.lineWidget2.setHidden(True)
                 self.line_x_1.setText("")
                 self.line_y_1.setText("")
                 self.line_x_2.setText("")
                 self.line_y_2.setText("")
+            elif self.lineChartQ.currentIndex() == 1:
+                self.lineWidget1.setHidden(False)
+                self.lineWidget2.setHidden(True)
+                self.line_x_2.setText("")
+                self.line_y_2.setText("")
+            elif self.lineChartQ.currentIndex() == 2:
+                self.lineWidget1.setHidden(False)
+                self.lineWidget2.setHidden(False)
 
-        def bar_checked():
-            if self.barChartCB.isChecked():
-                self.label_7.setHidden(False)
-                self.barQWidget.setHidden(False)
-            else:
-                self.barQWidget.setHidden(True)
+        def bar_quantity():
+            if self.barChartQ.currentIndex() == 0:
                 self.barWidget1.setHidden(True)
                 self.barWidget2.setHidden(True)
                 self.bar_x_1.setText("")
                 self.bar_y_1.setText("")
                 self.bar_x_2.setText("")
                 self.bar_y_2.setText("")
-
-        def histogram_checked():
-            if self.histogramCB.isChecked():
-                self.label_7.setHidden(False)
-                self.histogramQWidget.setHidden(False)
-            else:
-                self.histogramQWidget.setHidden(True)
-                self.histogramWidget1.setHidden(True)
-                self.histogramWidget2.setHidden(True)
-                self.histo_value1.setText("")
-                self.histo_value2.setText("")
-
-        self.scatterCB.stateChanged.connect(lambda: scatter_checked())
-        self.lineChartCB.stateChanged.connect(lambda: line_checked())
-        self.barChartCB.stateChanged.connect(lambda: bar_checked())
-        self.histogramCB.stateChanged.connect(lambda: histogram_checked())
-
-        # combo box, set widget based on the quantity user picked
-        def scatter_quantity():
-            if self.scatterQ.currentIndex() == 0:
-                self.scatterWidget1.setHidden(False)
-                self.scatterWidget2.setHidden(True)
-            elif self.scatterQ.currentIndex() == 1:
-                self.scatterWidget1.setHidden(False)
-                self.scatterWidget2.setHidden(False)
-
-        def line_quantity():
-            if self.lineChartQ.currentIndex() == 0:
-                self.lineWidget1.setHidden(False)
-                self.lineWidget2.setHidden(True)
-            elif self.lineChartQ.currentIndex() == 1:
-                self.lineWidget1.setHidden(False)
-                self.lineWidget2.setHidden(False)
-
-        def bar_quantity():
-            if self.barChartQ.currentIndex() == 0:
+            elif self.barChartQ.currentIndex() == 1:
                 self.barWidget1.setHidden(False)
                 self.barWidget2.setHidden(True)
-            elif self.barChartQ.currentIndex() == 1:
+                self.bar_x_2.setText("")
+                self.bar_y_2.setText("")
+            elif self.barChartQ.currentIndex() == 2:
                 self.barWidget1.setHidden(False)
                 self.barWidget2.setHidden(False)
 
         def histogram_quantity():
             if self.histogramQ.currentIndex() == 0:
-                self.histogramWidget1.setHidden(False)
+                self.histogramWidget1.setHidden(True)
                 self.histogramWidget2.setHidden(True)
+                self.histo_value1.setText("")
+                self.histo_value2.setText("")
             elif self.histogramQ.currentIndex() == 1:
                 self.histogramWidget1.setHidden(False)
+                self.histogramWidget2.setHidden(True)
+                self.histo_value2.setText("")
+            elif self.histogramQ.currentIndex() == 2:
+                self.histogramWidget1.setHidden(False)
                 self.histogramWidget2.setHidden(False)
+
+        def wordTable_quantity():
+            if self.wordtableQ.currentIndex() == 0:
+                self.word_tableWidget1.setHidden(True)
+                self.word_tableWidget2.setHidden(True)
+                self.table_value1.setText("")
+                self.table_value2.setText("")
+            elif self.wordtableQ.currentIndex() == 1:
+                self.word_tableWidget1.setHidden(False)
+                self.word_tableWidget2.setHidden(True)
+                self.table_value2.setText("")
+            elif self.wordtableQ.currentIndex() == 2:
+                self.word_tableWidget1.setHidden(False)
+                self.word_tableWidget2.setHidden(False)
 
         self.scatterQ.currentIndexChanged.connect(lambda: scatter_quantity())
         self.lineChartQ.currentIndexChanged.connect(lambda: line_quantity())
         self.barChartQ.currentIndexChanged.connect(lambda: bar_quantity())
         self.histogramQ.currentIndexChanged.connect(lambda: histogram_quantity())
+        self.wordtableQ.currentIndexChanged.connect(lambda: wordTable_quantity())
 
         self.generateReport.clicked.connect(lambda: self.generate_report())
-        self.generateReport.clicked.connect(lambda: ConstructReport.close())
+        # self.generateReport.clicked.connect(lambda: ConstructReport.close())
         self.cancel.clicked.connect(lambda: self.back_to_main_menu())
         self.cancel.clicked.connect(lambda: ConstructReport.close())
 
@@ -785,36 +821,42 @@ class Ui_ConstructReport(object):
         _translate = QtCore.QCoreApplication.translate
         ConstructReport.setWindowTitle(_translate("ConstructReport", "MainWindow"))
         self.report_name_label.setText(_translate("ConstructReport", "Report Name"))
-        self.label_2.setText(
-            _translate("ConstructReport", "What type(s) of data visualisation do you want to use for this report?"))
-        self.scatterCB.setText(_translate("ConstructReport", "Scatter Plot"))
-        self.lineChartCB.setText(_translate("ConstructReport", "Line Chart"))
-        self.barChartCB.setText(_translate("ConstructReport", "Bar Chart"))
-        self.histogramCB.setText(_translate("ConstructReport", "Histogram"))
         self.label_7.setText(
-            _translate("ConstructReport", "From the type(s) you have selected, how many of each do you want to make?"))
+            _translate("ConstructReport", "Based on the input type, how many of each do you want to make?"))
+        self.label.setText(_translate("ConstructReport", "Number Value/Input"))
+        self.label_10.setText(_translate("ConstructReport", "Word Value/Input"))
         self.label_14.setText(_translate("ConstructReport", "Scatter Plot: "))
-        self.scatterQ.setItemText(0, _translate("ConstructReport", "1"))
-        self.scatterQ.setItemText(1, _translate("ConstructReport", "2"))
+        self.scatterQ.setItemText(0, _translate("ConstructReport", "0"))
+        self.scatterQ.setItemText(1, _translate("ConstructReport", "1"))
+        self.scatterQ.setItemText(2, _translate("ConstructReport", "2"))
         self.label_11.setText(_translate("ConstructReport", "Line Chart:"))
-        self.lineChartQ.setItemText(0, _translate("ConstructReport", "1"))
-        self.lineChartQ.setItemText(1, _translate("ConstructReport", "2"))
+        self.lineChartQ.setItemText(0, _translate("ConstructReport", "0"))
+        self.lineChartQ.setItemText(1, _translate("ConstructReport", "1"))
+        self.lineChartQ.setItemText(2, _translate("ConstructReport", "2"))
         self.label_13.setText(_translate("ConstructReport", "Bar Chart:"))
-        self.barChartQ.setItemText(0, _translate("ConstructReport", "1"))
-        self.barChartQ.setItemText(1, _translate("ConstructReport", "2"))
+        self.barChartQ.setItemText(0, _translate("ConstructReport", "0"))
+        self.barChartQ.setItemText(1, _translate("ConstructReport", "1"))
+        self.barChartQ.setItemText(2, _translate("ConstructReport", "2"))
         self.label_12.setText(_translate("ConstructReport", "Histogram:"))
-        self.histogramQ.setItemText(0, _translate("ConstructReport", "1"))
-        self.histogramQ.setItemText(1, _translate("ConstructReport", "2"))
+        self.histogramQ.setItemText(0, _translate("ConstructReport", "0"))
+        self.histogramQ.setItemText(1, _translate("ConstructReport", "1"))
+        self.histogramQ.setItemText(2, _translate("ConstructReport", "2"))
+        self.label_15.setText(_translate("ConstructReport", "Word Table"))
+        self.wordtableQ.setItemText(0, _translate("ConstructReport", "0"))
+        self.wordtableQ.setItemText(1, _translate("ConstructReport", "1"))
+        self.wordtableQ.setItemText(2, _translate("ConstructReport", "2"))
         self.label_3.setText(_translate("ConstructReport", "You have chosen the graph(s) you want to use."))
         self.label_4.setText(_translate("ConstructReport", "Please input the key value(s) for each graph"))
         self.label_5.setText(_translate("ConstructReport", "Scatter Plot 1: "))
         self.label_6.setText(_translate("ConstructReport", "Line Chart 1:"))
         self.label_8.setText(_translate("ConstructReport", "Bar Chart 1:"))
         self.label_9.setText(_translate("ConstructReport", "Histogram 1:"))
+        self.label_20.setText(_translate("ConstructReport", "Word Table 1:"))
         self.label_16.setText(_translate("ConstructReport", "Scatter Plot 2: "))
         self.label_17.setText(_translate("ConstructReport", "Line Chart 2:"))
         self.label_18.setText(_translate("ConstructReport", "Bar Chart 2:"))
         self.label_19.setText(_translate("ConstructReport", "Histogram 2:"))
+        self.label_21.setText(_translate("ConstructReport", "Word Table 2:"))
         self.generateReport.setText(_translate("ConstructReport", "Generate"))
         self.cancel.setText(_translate("ConstructReport", "Cancel"))
 

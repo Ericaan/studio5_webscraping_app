@@ -11,10 +11,11 @@
 import bcrypt
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
-
+from PIL import ImageQt
 import new_project_ui
 import project_ui
 import crud
+from PyQt5.QtGui import QPixmap
 # import selectReportui
 import selectReportui
 import loginui
@@ -88,10 +89,12 @@ class Ui_Project_Main(object):
         self.window.show()
 
     def openProjectTask(self):
+        message = QMessageBox()
         projectId = self.label_hidden.text()
         u_temp_dict = crud.read_user_input(projectId)
         if projectId == "":
-            print("User has not select any projects")
+            message.setText("User has not selected any projects")
+            message.exec_()
         else:
             self.window = QtWidgets.QMainWindow()
             self.ui = project_ui.Ui_MainWindow()
@@ -99,7 +102,6 @@ class Ui_Project_Main(object):
             self.window.show()
             # showing existing project name, url, and inputs
             project_name = crud.read_project_name(self.label_hidden.text())
-            print(project_name)
             URL = crud.read_project_url(self.label_hidden.text())
             URL2 = crud.read_project_url2(self.label_hidden.text())
             # project title
@@ -200,6 +202,8 @@ class Ui_Project_Main(object):
                                     itm_3 = QtWidgets.QTableWidgetItem()
                                     self.ui.tableWidget.setItem(3, (col), itm_3)
                                     self.ui.tableWidget.item(3, (col)).setText(item[key_b][3])
+            else:
+                print("dict is empty")
 
 
     # get the project ID from selected row
@@ -236,15 +240,23 @@ class Ui_Project_Main(object):
             # user hasn't change the pass
             user_changed_password = self.pass_acc_text.text().encode('utf-8')
             user_pass_firestore = crud.return_user_pass(self.userId_label.text())
-            if bcrypt.checkpw(user_changed_password, user_pass_firestore):
-                msg = QMessageBox()
-                msg.setText("You have not changed the password")
-                msg.exec_()
+            if self.pass_acc_text.text() != "":
+                if bcrypt.checkpw(user_changed_password, user_pass_firestore):
+                    msg = QMessageBox()
+                    msg.setText("You have not changed the password")
+                    msg.exec_()
+                else:
+                    changed_password = self.pass_acc_text.text()
+                    changed_password = changed_password.encode('utf-8')
+                    hashed_pass = bcrypt.hashpw(changed_password, bcrypt.gensalt(10))
+                    crud.update_user(self.userId_label.text(), hashed_pass)
+                    msg = QMessageBox()
+                    msg.setText("You have changed the password")
+                    msg.exec_()
             else:
-                changed_password = self.pass_acc_text.text()
-                changed_password = changed_password.encode('utf-8')
-                hashed_pass = bcrypt.hashpw(changed_password, bcrypt.gensalt(10))
-                crud.update_user(self.userId_label.text(), hashed_pass)
+                msg = QMessageBox()
+                msg.setText("Please make sure you've entered the new password")
+                msg.exec_()
 
     def deleteAccount(self):
         message = QMessageBox()
@@ -265,6 +277,15 @@ class Ui_Project_Main(object):
         self.ui.setupUi(self.window)
         self.window.show()
         self.ui.id_lbl.setText(self.userId_label.text())
+
+    def download_report(self):
+        filePath, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Save Image","",
+                                                            "PNG(*.png);;JPEG(*.jpg *.jpeg)")
+        if filePath == "":
+            return
+        image = ImageQt.fromqpixmap(self.widget_8.grab())
+        image.save(filePath)
+        print("saved")
 
     def setupUi(self, Project_Main):
         Project_Main.setObjectName("Project_Main")
@@ -503,9 +524,9 @@ class Ui_Project_Main(object):
         # self.back_btn = QtWidgets.QPushButton(self.widget_12)
         # self.back_btn.setObjectName("back_btn")
         # self.horizontalLayout_6.addWidget(self.back_btn)
-        # self.download_btn = QtWidgets.QPushButton(self.widget_12)
-        # self.download_btn.setObjectName("download_btn")
-        # self.horizontalLayout_6.addWidget(self.download_btn)
+        self.download_btn = QtWidgets.QPushButton(self.widget_12)
+        self.download_btn.setObjectName("download_btn")
+        self.horizontalLayout_6.addWidget(self.download_btn)
         self.verticalLayout_18.addWidget(self.widget_12, 0, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
         self.verticalLayout_17.addWidget(self.widget_9)
         self.widget_11 = QtWidgets.QWidget(self.widget_8)
@@ -686,14 +707,16 @@ class Ui_Project_Main(object):
         self.toolbar = NavigationToolbar(self.canvas, self.widget_12)
         self.horizontalLayout_6.addWidget(self.toolbar)
 
-        self.dv_table = QtWidgets.QTableWidget(self.scrollAreaWidgetContents_2)
+        self.dv_table = QtWidgets.QTableWidget(self.widget_11)
         self.dv_table.setObjectName("dv_table")
-        self.verticalLayout_21.addWidget(self.dv_table)
+        self.verticalLayout_17.addWidget(self.dv_table)
         self.dv_table.setHidden(True)
 
         self.change_pass_btn.clicked.connect(lambda: self.changePass())
 
         self.delete_acc_button.clicked.connect(lambda: self.deleteAccount())
+
+        self.download_btn.clicked.connect(lambda: self.download_report())
 
         self.retranslateUi(Project_Main)
         self.stackedWidget.setCurrentIndex(0)
@@ -718,7 +741,7 @@ class Ui_Project_Main(object):
         self.select_report_dv_button.setText(_translate("Project_Main", "Select Report"))
         self.dv_report_name_lbl.setText(_translate("Project_Main", "Data Visualisation Name"))
         # self.back_btn.setText(_translate("Project_Main", "Back"))
-        # self.download_btn.setText(_translate("Project_Main", "Download"))
+        self.download_btn.setText(_translate("Project_Main", "Download"))
         self.label_5.setText(_translate("Project_Main", "Instruction Manual"))
         self.label_3.setText(_translate("Project_Main", "My Account"))
         self.email_acc_lbl.setText(_translate("Project_Main", "Email"))
