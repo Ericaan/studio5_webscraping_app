@@ -21,6 +21,7 @@ import input_notice
 
 # holds the data from template and its inputs
 temp_dict = {}
+uid = ""
 
 
 class Ui_MainWindow(object):
@@ -33,7 +34,6 @@ class Ui_MainWindow(object):
         self.ui.setupUi(self.window)
         self.window.show()
         self.ui.stackedWidget.setCurrentIndex(1)
-        uid = crud.return_userid_by_pname(self.lbl_pname.text())
         self.ui.userId_label.setText(uid)
         crud.read_specific_fields(uid)
         # read csv file

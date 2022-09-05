@@ -89,6 +89,7 @@ class Ui_Project_Main(object):
         self.window.show()
 
     def openProjectTask(self):
+        project_ui.uid = self.userId_label.text()
         message = QMessageBox()
         projectId = self.label_hidden.text()
         u_temp_dict = crud.read_user_input(projectId)
