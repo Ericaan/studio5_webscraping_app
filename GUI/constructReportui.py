@@ -20,7 +20,7 @@ class Ui_ConstructReport(object):
     position = 521
 
     """
-        We have 4 types of graph:
+        We have 5 types of graph:
         1. Scatter plot
             Best to show the correlations and cluster between 2 numeric variables
         2. Line chart
@@ -30,18 +30,28 @@ class Ui_ConstructReport(object):
             Best to illustrate one string and one numeric variable. Can be used for numeric variables
         4. Histogram 
             Can be used for numeric or string variable, to show their frequency
+        5. Word Table 
+            Split and count the same words 
     """
 
     def generate_report(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = all_projects_ui.Ui_Project_Main()
-        self.ui.setupUi(self.window)
-        self.window.show()
-        self.ui.stackedWidget.setCurrentIndex(3)
-        report_name = self.report_name_label.text()
-        self.ui.dv_report_name_lbl.setText(report_name)
-        self.ui.userId_label.setText(self.lbl_id.text())
-        self.drawing_graph()
+        message = QtWidgets.QMessageBox()
+        # checking if all graphs have 0 quantity
+        if self.histogramQ.currentIndex() == 0 and self.scatterQ.currentIndex() == 0 and self.barChartQ.currentIndex() == 0 and self.lineChartQ.currentIndex() == 0 and self.wordtableQ.currentIndex() == 0:
+            message.setWindowTitle("Warning!")
+            message.setText("Please make sure to choose at least one type of graph")
+            message.exec_()
+        else:
+            self.window = QtWidgets.QMainWindow()
+            self.ui = all_projects_ui.Ui_Project_Main()
+            self.ui.setupUi(self.window)
+            self.window.show()
+            self.ui.stackedWidget.setCurrentIndex(3)
+            report_name = self.report_name_label.text()
+            self.ui.dv_report_name_lbl.setText(report_name)
+            self.ui.userId_label.setText(self.lbl_id.text())
+            self.drawing_graph()
+            self.position = 521
 
     # makes scatterplot
     def scatter_plot(self, df, a, b):

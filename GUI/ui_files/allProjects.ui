@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1106</width>
-    <height>600</height>
+    <width>1280</width>
+    <height>708</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -227,247 +227,37 @@
                </property>
               </widget>
              </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QStackedWidget" name="stackedWidget">
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="currentIndex">
-             <number>0</number>
-            </property>
-            <widget class="QWidget" name="MainPage">
-             <layout class="QVBoxLayout" name="verticalLayout_4">
-              <item>
-               <widget class="QLabel" name="label">
-                <property name="font">
-                 <font>
-                  <pointsize>10</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Welcome to YouScrape</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QWidget" name="Projects">
-             <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <layout class="QVBoxLayout" name="project_layout">
-                <property name="leftMargin">
-                 <number>20</number>
-                </property>
-                <property name="topMargin">
-                 <number>20</number>
-                </property>
-                <property name="rightMargin">
-                 <number>20</number>
-                </property>
-                <item>
-                 <widget class="QPushButton" name="newproject_button">
-                  <property name="minimumSize">
-                   <size>
-                    <width>120</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>0</width>
-                    <height>300</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>12</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>New Project</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="open_project_button">
-                  <property name="minimumSize">
-                   <size>
-                    <width>120</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>0</width>
-                    <height>300</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>12</pointsize>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Open</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QTableWidget" name="projects_table">
-                  <property name="gridStyle">
-                   <enum>Qt::SolidLine</enum>
-                  </property>
-                  <attribute name="horizontalHeaderCascadingSectionResizes">
-                   <bool>false</bool>
-                  </attribute>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QWidget" name="DataVisualisation">
-             <layout class="QVBoxLayout" name="verticalLayout_5">
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QWidget" name="widget_4" native="true">
-                <layout class="QVBoxLayout" name="verticalLayout_8">
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                 <item alignment="Qt::AlignTop">
-                  <widget class="QWidget" name="widget_5" native="true">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>70</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>18</pointsize>
-                    </font>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_13">
-                    <item alignment="Qt::AlignHCenter">
-                     <widget class="QLabel" name="label_2">
-                      <property name="text">
-                       <string>Data Visualisation</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item alignment="Qt::AlignLeft|Qt::AlignTop">
-                  <widget class="QWidget" name="widget_6" native="true">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>14</pointsize>
-                    </font>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_14">
-                    <item>
-                     <widget class="QPushButton" name="select_report_dv_button">
-                      <property name="text">
-                       <string>Select Report</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
+             <item>
+              <widget class="QStackedWidget" name="stackedWidget">
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="currentIndex">
+                <number>4</number>
+               </property>
+               <widget class="QWidget" name="MainPage">
+                <layout class="QVBoxLayout" name="verticalLayout_4">
                  <item>
-                  <widget class="QWidget" name="widget_7" native="true">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
+                  <widget class="QLabel" name="label">
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
                    </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_15"/>
+                   <property name="text">
+                    <string>Welcome to YouScrape</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
                   </widget>
                  </item>
                 </layout>
                </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QWidget" name="ReportDVTab">
-             <layout class="QVBoxLayout" name="verticalLayout_16">
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QWidget" name="widget_8" native="true">
-                <layout class="QVBoxLayout" name="verticalLayout_17">
+               <widget class="QWidget" name="Projects">
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
                  <property name="spacing">
                   <number>0</number>
                  </property>
@@ -484,13 +274,98 @@
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QWidget" name="widget_9" native="true">
-                   <property name="font">
-                    <font>
-                     <pointsize>16</pointsize>
-                    </font>
+                  <layout class="QVBoxLayout" name="project_layout">
+                   <property name="leftMargin">
+                    <number>20</number>
                    </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_18">
+                   <property name="topMargin">
+                    <number>20</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>20</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="newproject_button">
+                     <property name="minimumSize">
+                      <size>
+                       <width>120</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>0</width>
+                       <height>300</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>12</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>New Project</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="open_project_button">
+                     <property name="minimumSize">
+                      <size>
+                       <width>120</width>
+                       <height>50</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>0</width>
+                       <height>300</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>12</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Open</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QTableWidget" name="projects_table">
+                     <property name="gridStyle">
+                      <enum>Qt::SolidLine</enum>
+                     </property>
+                     <attribute name="horizontalHeaderCascadingSectionResizes">
+                      <bool>false</bool>
+                     </attribute>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="DataVisualisation">
+                <layout class="QVBoxLayout" name="verticalLayout_5">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QWidget" name="widget_4" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_8">
                     <property name="spacing">
                      <number>0</number>
                     </property>
@@ -507,26 +382,31 @@
                      <number>0</number>
                     </property>
                     <item alignment="Qt::AlignTop">
-                     <widget class="QWidget" name="widget_10" native="true">
-                      <layout class="QVBoxLayout" name="verticalLayout_19">
+                     <widget class="QWidget" name="widget_5" native="true">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>70</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <pointsize>18</pointsize>
+                       </font>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_13">
                        <item alignment="Qt::AlignHCenter">
-                        <widget class="QLabel" name="dv_report_name_lbl">
-                         <property name="minimumSize">
-                          <size>
-                           <width>0</width>
-                           <height>70</height>
-                          </size>
-                         </property>
+                        <widget class="QLabel" name="label_2">
                          <property name="text">
-                          <string>Data Visualisation Name</string>
+                          <string>Data Visualisation</string>
                          </property>
                         </widget>
                        </item>
                       </layout>
                      </widget>
                     </item>
-                    <item alignment="Qt::AlignHCenter|Qt::AlignTop">
-                     <widget class="QWidget" name="widget_12" native="true">
+                    <item alignment="Qt::AlignLeft|Qt::AlignTop">
+                     <widget class="QWidget" name="widget_6" native="true">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                         <horstretch>0</horstretch>
@@ -535,81 +415,29 @@
                       </property>
                       <property name="font">
                        <font>
-                        <pointsize>12</pointsize>
+                        <pointsize>14</pointsize>
                        </font>
                       </property>
-                      <layout class="QHBoxLayout" name="horizontalLayout_6">
+                      <layout class="QVBoxLayout" name="verticalLayout_14">
                        <item>
-                        <widget class="QPushButton" name="download_btn">
+                        <widget class="QPushButton" name="select_report_dv_button">
                          <property name="text">
-                          <string>Download</string>
+                          <string>Select Report</string>
                          </property>
                         </widget>
                        </item>
                       </layout>
                      </widget>
                     </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QWidget" name="widget_11" native="true">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_20">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
                     <item>
-                     <widget class="QScrollArea" name="scrollArea">
+                     <widget class="QWidget" name="widget_7" native="true">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
                       </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>100</height>
-                       </size>
-                      </property>
-                      <property name="widgetResizable">
-                       <bool>true</bool>
-                      </property>
-                      <widget class="QWidget" name="scrollAreaWidgetContents_2">
-                       <property name="geometry">
-                        <rect>
-                         <x>0</x>
-                         <y>0</y>
-                         <width>885</width>
-                         <height>22</height>
-                        </rect>
-                       </property>
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <layout class="QVBoxLayout" name="verticalLayout_21"/>
-                      </widget>
+                      <layout class="QVBoxLayout" name="verticalLayout_15"/>
                      </widget>
                     </item>
                    </layout>
@@ -617,14 +445,8 @@
                  </item>
                 </layout>
                </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QWidget" name="Manual">
-             <layout class="QVBoxLayout" name="verticalLayout_6">
-              <item>
-               <widget class="QWidget" name="widget_13" native="true">
-                <layout class="QVBoxLayout" name="verticalLayout_22">
+               <widget class="QWidget" name="ReportDVTab">
+                <layout class="QVBoxLayout" name="verticalLayout_16">
                  <property name="spacing">
                   <number>0</number>
                  </property>
@@ -641,8 +463,8 @@
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QWidget" name="widget_15" native="true">
-                   <layout class="QHBoxLayout" name="horizontalLayout_8">
+                  <widget class="QWidget" name="widget_8" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_17">
                     <property name="spacing">
                      <number>0</number>
                     </property>
@@ -659,25 +481,758 @@
                      <number>0</number>
                     </property>
                     <item>
-                     <widget class="QWidget" name="widget_16" native="true">
+                     <widget class="QWidget" name="widget_9" native="true">
+                      <property name="font">
+                       <font>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_18">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item alignment="Qt::AlignTop">
+                        <widget class="QWidget" name="widget_10" native="true">
+                         <layout class="QVBoxLayout" name="verticalLayout_19">
+                          <item alignment="Qt::AlignHCenter">
+                           <widget class="QLabel" name="dv_report_name_lbl">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>70</height>
+                             </size>
+                            </property>
+                            <property name="text">
+                             <string>Data Visualisation Name</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+                        <widget class="QWidget" name="widget_12" native="true">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_6">
+                          <item>
+                           <widget class="QPushButton" name="download_btn">
+                            <property name="text">
+                             <string>Download</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QWidget" name="widget_11" native="true">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
                       </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_25">
+                      <layout class="QVBoxLayout" name="verticalLayout_20">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
                        <item>
-                        <widget class="QLabel" name="label_5">
+                        <widget class="QScrollArea" name="scrollArea">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>100</height>
+                          </size>
+                         </property>
+                         <property name="widgetResizable">
+                          <bool>true</bool>
+                         </property>
+                         <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                          <property name="geometry">
+                           <rect>
+                            <x>0</x>
+                            <y>0</y>
+                            <width>1059</width>
+                            <height>22</height>
+                           </rect>
+                          </property>
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_21"/>
+                         </widget>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="Manual">
+                <layout class="QVBoxLayout" name="verticalLayout_6">
+                 <item>
+                  <widget class="QWidget" name="widget_13" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_22">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QWidget" name="widget_15" native="true">
+                      <layout class="QHBoxLayout" name="horizontalLayout_8">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_16" native="true">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_25">
+                          <item>
+                           <widget class="QLabel" name="label_5">
+                            <property name="font">
+                             <font>
+                              <pointsize>10</pointsize>
+                              <weight>75</weight>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>Instruction Manual</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item alignment="Qt::AlignRight">
+                        <widget class="QWidget" name="widget_17" native="true">
                          <property name="font">
                           <font>
                            <pointsize>10</pointsize>
+                          </font>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_23">
+                          <item>
+                           <widget class="QPushButton" name="download_manual">
+                            <property name="text">
+                             <string>Download PDF</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QWidget" name="widget_14" native="true">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_24">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QScrollArea" name="scrollArea_2">
+                         <property name="font">
+                          <font>
+                           <pointsize>10</pointsize>
+                          </font>
+                         </property>
+                         <property name="widgetResizable">
+                          <bool>true</bool>
+                         </property>
+                         <widget class="QWidget" name="scrollAreaWidgetContents">
+                          <property name="geometry">
+                           <rect>
+                            <x>0</x>
+                            <y>0</y>
+                            <width>1447</width>
+                            <height>5156</height>
+                           </rect>
+                          </property>
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_26">
+                           <item>
+                            <widget class="QWidget" name="widget_18" native="true">
+                             <layout class="QVBoxLayout" name="verticalLayout_27">
+                              <item>
+                               <widget class="QWidget" name="widget_22" native="true">
+                                <layout class="QVBoxLayout" name="verticalLayout_28">
+                                 <item>
+                                  <widget class="QLabel" name="label_4">
+                                   <property name="text">
+                                    <string>Introduction</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QWidget" name="widget_19" native="true">
+                             <layout class="QVBoxLayout" name="verticalLayout_29">
+                              <item>
+                               <widget class="QWidget" name="widget_23" native="true">
+                                <layout class="QVBoxLayout" name="verticalLayout_30">
+                                 <item>
+                                  <widget class="QLabel" name="label_6">
+                                   <property name="text">
+                                    <string>Projects</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QWidget" name="widget_27" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_31">
+                                    <item>
+                                     <widget class="QLabel" name="label_7">
+                                      <property name="text">
+                                       <string>Create a project</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QWidget" name="widget_26" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_32">
+                                    <item>
+                                     <widget class="QLabel" name="label_8">
+                                      <property name="text">
+                                       <string>Edit a project</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QWidget" name="widget_25" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_33">
+                                    <item>
+                                     <widget class="QLabel" name="label_10">
+                                      <property name="text">
+                                       <string>Open project</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QWidget" name="widget_24" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_34">
+                                    <item>
+                                     <widget class="QLabel" name="label_9">
+                                      <property name="text">
+                                       <string>Website change</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QWidget" name="widget_20" native="true">
+                             <layout class="QVBoxLayout" name="verticalLayout_35">
+                              <item>
+                               <widget class="QWidget" name="widget_28" native="true">
+                                <layout class="QVBoxLayout" name="verticalLayout_36">
+                                 <item>
+                                  <widget class="QLabel" name="label_11">
+                                   <property name="font">
+                                    <font>
+                                     <pointsize>11</pointsize>
+                                     <weight>75</weight>
+                                     <bold>true</bold>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>Reports</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_18">
+                                   <property name="text">
+                                    <string>After user generated or got data from their preferred website(s) in CSV or JSON format. User can create a visualised report by using the file</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QWidget" name="widget_31" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_37">
+                                    <item>
+                                     <widget class="QLabel" name="label_12">
+                                      <property name="font">
+                                       <font>
+                                        <pointsize>11</pointsize>
+                                        <weight>75</weight>
+                                        <bold>true</bold>
+                                       </font>
+                                      </property>
+                                      <property name="text">
+                                       <string>Create report</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_19">
+                                      <property name="text">
+                                       <string>User will input the report name and select downloaded data. Make sure to input and choose the preferred file.</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_20">
+                                      <property name="text">
+                                       <string/>
+                                      </property>
+                                      <property name="pixmap">
+                                       <pixmap>../images/selectReport.png</pixmap>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QWidget" name="widget_30" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_38">
+                                    <item>
+                                     <widget class="QLabel" name="label_13">
+                                      <property name="font">
+                                       <font>
+                                        <pointsize>11</pointsize>
+                                        <weight>75</weight>
+                                        <bold>true</bold>
+                                       </font>
+                                      </property>
+                                      <property name="text">
+                                       <string>Select visualisations</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_21">
+                                      <property name="text">
+                                       <string/>
+                                      </property>
+                                      <property name="pixmap">
+                                       <pixmap>../images/construct1.png</pixmap>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_22">
+                                      <property name="text">
+                                       <string>After selecting which data user wants to visualise. User will be directed to construct page where they will choose the graph types and their quantity with up to two maximum.
+ The graph is divided by two types, number and word input or value. </string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_23">
+                                      <property name="text">
+                                       <string/>
+                                      </property>
+                                      <property name="pixmap">
+                                       <pixmap>../images/construct2.png</pixmap>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_24">
+                                      <property name="text">
+                                       <string>User will have to input the values based on the column’s name (name can be seen on the top left table).</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QWidget" name="widget_35" native="true">
+                                      <layout class="QVBoxLayout" name="verticalLayout_44">
+                                       <item>
+                                        <widget class="QWidget" name="widget_36" native="true">
+                                         <layout class="QVBoxLayout" name="verticalLayout_45">
+                                          <item>
+                                           <widget class="QLabel" name="label_25">
+                                            <property name="font">
+                                             <font>
+                                              <pointsize>11</pointsize>
+                                              <weight>75</weight>
+                                              <bold>true</bold>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Graph Types</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QLabel" name="label_26">
+                                            <property name="text">
+                                             <string>1. Number Value/Input 
+    1. Scatter plot, user will have to input two numeric values. Scatter plot is best to show the correlations between them.
+    2. Line chart, user has to input two numeric values
+    3. Bar chart, user can input two numeric values or one numeric and one word/string value. 
+    Line chart and bar chart can be used to show two different values or categories.
+2. Word Value/Input
+    Both Histogram and Word table only need one input/value
+    1. Histogram, can be used if user want to see the frequency of each word
+    2. Word table, will split and count how many of the same words
+</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                      </layout>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QWidget" name="widget_29" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_39">
+                                    <item>
+                                     <widget class="QLabel" name="label_14">
+                                      <property name="font">
+                                       <font>
+                                        <pointsize>11</pointsize>
+                                        <weight>75</weight>
+                                        <bold>true</bold>
+                                       </font>
+                                      </property>
+                                      <property name="text">
+                                       <string>Save or edit</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_27">
+                                      <property name="text">
+                                       <string>After choosing and inputting values based on the input type, user can generate the report and will be directed to the report page where user can see their chosen graph(s). </string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_28">
+                                      <property name="text">
+                                       <string/>
+                                      </property>
+                                      <property name="pixmap">
+                                       <pixmap>../images/report.png</pixmap>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_29">
+                                      <property name="text">
+                                       <string>The generated report will not be saved in user’s database. If user wants to keep the report, they can download it as Image (PNG or JPG). 
+They can also go back to the previous page if they want to delete or add a certain graph.</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QWidget" name="widget_21" native="true">
+                             <layout class="QVBoxLayout" name="verticalLayout_40">
+                              <item>
+                               <widget class="QWidget" name="widget_32" native="true">
+                                <layout class="QVBoxLayout" name="verticalLayout_41">
+                                 <item>
+                                  <widget class="QLabel" name="label_15">
+                                   <property name="font">
+                                    <font>
+                                     <pointsize>11</pointsize>
+                                     <weight>75</weight>
+                                     <bold>true</bold>
+                                    </font>
+                                   </property>
+                                   <property name="text">
+                                    <string>Account</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_30">
+                                   <property name="text">
+                                    <string>Each user has their email address as their username and password to log in. If user does not have an account, they can sign up and log in with the new account.</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_31">
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="pixmap">
+                                    <pixmap>../images/myaccount.png</pixmap>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QWidget" name="widget_34" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_42">
+                                    <item>
+                                     <widget class="QLabel" name="label_16">
+                                      <property name="font">
+                                       <font>
+                                        <pointsize>11</pointsize>
+                                        <weight>75</weight>
+                                        <bold>true</bold>
+                                       </font>
+                                      </property>
+                                      <property name="text">
+                                       <string>Change password</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_32">
+                                      <property name="text">
+                                       <string>Passwords can be changed by user while the email address cannot be changed.</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QWidget" name="widget_33" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_43">
+                                    <item>
+                                     <widget class="QLabel" name="label_17">
+                                      <property name="font">
+                                       <font>
+                                        <pointsize>11</pointsize>
+                                        <weight>75</weight>
+                                        <bold>true</bold>
+                                       </font>
+                                      </property>
+                                      <property name="text">
+                                       <string>Delete account</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_33">
+                                      <property name="text">
+                                       <string>If user wants to delete their account, they have to be aware that all of their projects that have been created will be deleted.</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="Account">
+                <layout class="QVBoxLayout" name="verticalLayout_7">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QFrame" name="frame">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_9">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item alignment="Qt::AlignTop">
+                     <widget class="QFrame" name="frame_5">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>100</height>
+                       </size>
+                      </property>
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_10">
+                       <item>
+                        <widget class="QLabel" name="label_3">
+                         <property name="font">
+                          <font>
+                           <pointsize>16</pointsize>
                            <weight>75</weight>
                            <bold>true</bold>
                           </font>
                          </property>
                          <property name="text">
-                          <string>Instruction Manual</string>
+                          <string>My Account</string>
                          </property>
                          <property name="alignment">
                           <set>Qt::AlignCenter</set>
@@ -687,435 +1242,86 @@
                       </layout>
                      </widget>
                     </item>
-                    <item alignment="Qt::AlignRight">
-                     <widget class="QWidget" name="widget_17" native="true">
-                      <property name="font">
-                       <font>
-                        <pointsize>10</pointsize>
-                       </font>
-                      </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_23">
-                       <item>
-                        <widget class="QPushButton" name="download_manual">
-                         <property name="text">
-                          <string>Download PDF</string>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QWidget" name="widget_14" native="true">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_24">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
                     <item>
-                     <widget class="QScrollArea" name="scrollArea_2">
-                      <property name="font">
-                       <font>
-                        <pointsize>10</pointsize>
-                       </font>
+                     <widget class="QFrame" name="frame_3">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
                       </property>
-                      <property name="widgetResizable">
-                       <bool>true</bool>
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
                       </property>
-                      <widget class="QWidget" name="scrollAreaWidgetContents">
-                       <property name="geometry">
-                        <rect>
-                         <x>0</x>
-                         <y>0</y>
-                         <width>842</width>
-                         <height>753</height>
-                        </rect>
-                       </property>
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <layout class="QVBoxLayout" name="verticalLayout_26">
-                        <item>
-                         <widget class="QWidget" name="widget_18" native="true">
-                          <layout class="QVBoxLayout" name="verticalLayout_27">
-                           <item>
-                            <widget class="QWidget" name="widget_22" native="true">
-                             <layout class="QVBoxLayout" name="verticalLayout_28">
-                              <item>
-                               <widget class="QLabel" name="label_4">
-                                <property name="text">
-                                 <string>Introduction</string>
-                                </property>
-                               </widget>
-                              </item>
-                             </layout>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QWidget" name="widget_19" native="true">
-                          <layout class="QVBoxLayout" name="verticalLayout_29">
-                           <item>
-                            <widget class="QWidget" name="widget_23" native="true">
-                             <layout class="QVBoxLayout" name="verticalLayout_30">
-                              <item>
-                               <widget class="QLabel" name="label_6">
-                                <property name="text">
-                                 <string>Projects</string>
-                                </property>
-                               </widget>
-                              </item>
-                              <item>
-                               <widget class="QWidget" name="widget_27" native="true">
-                                <layout class="QVBoxLayout" name="verticalLayout_31">
-                                 <item>
-                                  <widget class="QLabel" name="label_7">
-                                   <property name="text">
-                                    <string>Create a project</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                </layout>
-                               </widget>
-                              </item>
-                              <item>
-                               <widget class="QWidget" name="widget_26" native="true">
-                                <layout class="QVBoxLayout" name="verticalLayout_32">
-                                 <item>
-                                  <widget class="QLabel" name="label_8">
-                                   <property name="text">
-                                    <string>Edit a project</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                </layout>
-                               </widget>
-                              </item>
-                              <item>
-                               <widget class="QWidget" name="widget_25" native="true">
-                                <layout class="QVBoxLayout" name="verticalLayout_33">
-                                 <item>
-                                  <widget class="QLabel" name="label_10">
-                                   <property name="text">
-                                    <string>Open project</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                </layout>
-                               </widget>
-                              </item>
-                              <item>
-                               <widget class="QWidget" name="widget_24" native="true">
-                                <layout class="QVBoxLayout" name="verticalLayout_34">
-                                 <item>
-                                  <widget class="QLabel" name="label_9">
-                                   <property name="text">
-                                    <string>Website change</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                </layout>
-                               </widget>
-                              </item>
-                             </layout>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QWidget" name="widget_20" native="true">
-                          <layout class="QVBoxLayout" name="verticalLayout_35">
-                           <item>
-                            <widget class="QWidget" name="widget_28" native="true">
-                             <layout class="QVBoxLayout" name="verticalLayout_36">
-                              <item>
-                               <widget class="QLabel" name="label_11">
-                                <property name="text">
-                                 <string>Reports</string>
-                                </property>
-                               </widget>
-                              </item>
-                              <item>
-                               <widget class="QWidget" name="widget_31" native="true">
-                                <layout class="QVBoxLayout" name="verticalLayout_37">
-                                 <item>
-                                  <widget class="QLabel" name="label_12">
-                                   <property name="text">
-                                    <string>Create report</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                </layout>
-                               </widget>
-                              </item>
-                              <item>
-                               <widget class="QWidget" name="widget_30" native="true">
-                                <layout class="QVBoxLayout" name="verticalLayout_38">
-                                 <item>
-                                  <widget class="QLabel" name="label_13">
-                                   <property name="text">
-                                    <string>Select visualisations</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                </layout>
-                               </widget>
-                              </item>
-                              <item>
-                               <widget class="QWidget" name="widget_29" native="true">
-                                <layout class="QVBoxLayout" name="verticalLayout_39">
-                                 <item>
-                                  <widget class="QLabel" name="label_14">
-                                   <property name="text">
-                                    <string>Save or edit</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                </layout>
-                               </widget>
-                              </item>
-                             </layout>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QWidget" name="widget_21" native="true">
-                          <layout class="QVBoxLayout" name="verticalLayout_40">
-                           <item>
-                            <widget class="QWidget" name="widget_32" native="true">
-                             <layout class="QVBoxLayout" name="verticalLayout_41">
-                              <item>
-                               <widget class="QLabel" name="label_15">
-                                <property name="text">
-                                 <string>Account</string>
-                                </property>
-                               </widget>
-                              </item>
-                              <item>
-                               <widget class="QWidget" name="widget_34" native="true">
-                                <layout class="QVBoxLayout" name="verticalLayout_42">
-                                 <item>
-                                  <widget class="QLabel" name="label_16">
-                                   <property name="text">
-                                    <string>Change password</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                </layout>
-                               </widget>
-                              </item>
-                              <item>
-                               <widget class="QWidget" name="widget_33" native="true">
-                                <layout class="QVBoxLayout" name="verticalLayout_43">
-                                 <item>
-                                  <widget class="QLabel" name="label_17">
-                                   <property name="text">
-                                    <string>Delete account</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                </layout>
-                               </widget>
-                              </item>
-                             </layout>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
-                        </item>
-                       </layout>
-                      </widget>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QWidget" name="Account">
-             <layout class="QVBoxLayout" name="verticalLayout_7">
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QFrame" name="frame">
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
-                </property>
-                <layout class="QVBoxLayout" name="verticalLayout_9">
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                 <item alignment="Qt::AlignTop">
-                  <widget class="QFrame" name="frame_5">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>100</height>
-                    </size>
-                   </property>
-                   <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_10">
-                    <item>
-                     <widget class="QLabel" name="label_3">
-                      <property name="font">
-                       <font>
-                        <pointsize>16</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                       </font>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
                       </property>
-                      <property name="text">
-                       <string>My Account</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QFrame" name="frame_3">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_11">
-                    <item alignment="Qt::AlignBottom">
-                     <widget class="QWidget" name="widget" native="true">
-                      <property name="font">
-                       <font>
-                        <pointsize>12</pointsize>
-                       </font>
-                      </property>
-                      <layout class="QHBoxLayout" name="horizontalLayout_3">
-                       <item>
-                        <widget class="QLabel" name="email_acc_lbl">
-                         <property name="text">
-                          <string>Email</string>
+                      <layout class="QVBoxLayout" name="verticalLayout_11">
+                       <item alignment="Qt::AlignBottom">
+                        <widget class="QWidget" name="widget" native="true">
+                         <property name="font">
+                          <font>
+                           <pointsize>12</pointsize>
+                          </font>
                          </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_3">
+                          <item>
+                           <widget class="QLabel" name="email_acc_lbl">
+                            <property name="text">
+                             <string>Email:</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="email_acc_text"/>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
-                       <item>
-                        <widget class="QLineEdit" name="email_acc_text"/>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item alignment="Qt::AlignTop">
-                     <widget class="QWidget" name="widget_2" native="true">
-                      <property name="font">
-                       <font>
-                        <pointsize>12</pointsize>
-                       </font>
-                      </property>
-                      <layout class="QHBoxLayout" name="horizontalLayout_4">
-                       <item>
-                        <widget class="QLabel" name="pass_acc_lbl">
-                         <property name="text">
-                          <string>Password</string>
+                       <item alignment="Qt::AlignTop">
+                        <widget class="QWidget" name="widget_2" native="true">
+                         <property name="font">
+                          <font>
+                           <pointsize>12</pointsize>
+                          </font>
                          </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_4">
+                          <item>
+                           <widget class="QLabel" name="pass_acc_lbl">
+                            <property name="text">
+                             <string>Password:</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="pass_acc_text"/>
+                          </item>
+                          <item>
+                           <widget class="QPushButton" name="change_pass_btn">
+                            <property name="text">
+                             <string>Change Password</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
-                       <item>
-                        <widget class="QLineEdit" name="pass_acc_text"/>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="change_pass_btn">
-                         <property name="text">
-                          <string>Change Password</string>
+                       <item alignment="Qt::AlignTop">
+                        <widget class="QWidget" name="widget_3" native="true">
+                         <property name="font">
+                          <font>
+                           <pointsize>12</pointsize>
+                          </font>
                          </property>
-                        </widget>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item alignment="Qt::AlignTop">
-                     <widget class="QWidget" name="widget_3" native="true">
-                      <property name="font">
-                       <font>
-                        <pointsize>12</pointsize>
-                       </font>
-                      </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_12">
-                       <item alignment="Qt::AlignRight">
-                        <widget class="QPushButton" name="delete_acc_button">
-                         <property name="text">
-                          <string>Delete Account</string>
-                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_12">
+                          <item alignment="Qt::AlignRight">
+                           <widget class="QPushButton" name="delete_acc_button">
+                            <property name="text">
+                             <string>Delete Account</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
                       </layout>
@@ -1126,9 +1332,9 @@
                  </item>
                 </layout>
                </widget>
-              </item>
-             </layout>
-            </widget>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>

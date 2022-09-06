@@ -278,6 +278,10 @@ class Ui_Project_Main(object):
         self.window.show()
         self.ui.id_lbl.setText(self.userId_label.text())
 
+    def download_manual(self):
+        # download manual.pdf
+        print("")
+
     def setupUi(self, Project_Main):
         Project_Main.setObjectName("Project_Main")
         Project_Main.resize(1106, 600)
@@ -892,6 +896,8 @@ class Ui_Project_Main(object):
         self.change_pass_btn.clicked.connect(lambda: self.changePass())
 
         self.delete_acc_button.clicked.connect(lambda: self.deleteAccount())
+
+        self.download_manual.clicked.connect(lambda: self.download_manual)
 
         self.retranslateUi(Project_Main)
         self.stackedWidget.setCurrentIndex(0)

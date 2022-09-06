@@ -106,10 +106,8 @@ class Ui_SelectReport(object):
             self.ui.report_name_label.setText(report_name)
             self.ui.lbl_id.setText(self.id_lbl.text())
             # having a problem when closing SelectReport
-            # because the data has not been transferred to next window
-            # and we already close the window
-            # one way to fix it, we make SelectReport invisible to user
-            SelectReport.setVisible(False)
+            # same problem with Login page
+            # SelectReport.setVisible(False)
 
         else:
             message.setText("Please input the report name and choose file!")
