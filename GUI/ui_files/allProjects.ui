@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1280</width>
-    <height>708</height>
+    <height>684</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -744,8 +744,8 @@
                            <rect>
                             <x>0</x>
                             <y>0</y>
-                            <width>1447</width>
-                            <height>5156</height>
+                            <width>1547</width>
+                            <height>6508</height>
                            </rect>
                           </property>
                           <property name="sizePolicy">
@@ -868,7 +868,17 @@
                                  <item>
                                   <widget class="QLabel" name="label_18">
                                    <property name="text">
-                                    <string>After user generated or got data from their preferred website(s) in CSV or JSON format. User can create a visualised report by using the file</string>
+                                    <string>Another function that YouScrape provides is you can create a visualised report using generated data or any CSV or JSON file. You can click on “Data Visualisation” on the left side to select new report. </string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_34">
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="pixmap">
+                                    <pixmap>../images/mainwindow.png</pixmap>
                                    </property>
                                   </widget>
                                  </item>
@@ -890,9 +900,19 @@
                                      </widget>
                                     </item>
                                     <item>
+                                     <widget class="QLabel" name="label_35">
+                                      <property name="text">
+                                       <string/>
+                                      </property>
+                                      <property name="pixmap">
+                                       <pixmap>../images/dv-mainpage.png</pixmap>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
                                      <widget class="QLabel" name="label_19">
                                       <property name="text">
-                                       <string>User will input the report name and select downloaded data. Make sure to input and choose the preferred file.</string>
+                                       <string>After clicking the “Select Report” button, you have to input the report name and select one CSV or JSON file. </string>
                                       </property>
                                      </widget>
                                     </item>
@@ -927,6 +947,13 @@
                                      </widget>
                                     </item>
                                     <item>
+                                     <widget class="QLabel" name="label_36">
+                                      <property name="text">
+                                       <string>You can see what is inside the CSV/JSON file in the table (top left). </string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
                                      <widget class="QLabel" name="label_21">
                                       <property name="text">
                                        <string/>
@@ -939,8 +966,7 @@
                                     <item>
                                      <widget class="QLabel" name="label_22">
                                       <property name="text">
-                                       <string>After selecting which data user wants to visualise. User will be directed to construct page where they will choose the graph types and their quantity with up to two maximum.
- The graph is divided by two types, number and word input or value. </string>
+                                       <string>In this window, you can choose any graph that is suitable for your data with their quantity (maximum two). The graph is divided by two types, number and word input or value. </string>
                                       </property>
                                      </widget>
                                     </item>
@@ -957,7 +983,7 @@
                                     <item>
                                      <widget class="QLabel" name="label_24">
                                       <property name="text">
-                                       <string>User will have to input the values based on the column’s name (name can be seen on the top left table).</string>
+                                       <string>You have to input the values based on the column’s name (name can be seen on the top left table). Make sure to at least select one of the graphs to generate the report.</string>
                                       </property>
                                      </widget>
                                     </item>
@@ -982,19 +1008,92 @@
                                            </widget>
                                           </item>
                                           <item>
-                                           <widget class="QLabel" name="label_26">
-                                            <property name="text">
-                                             <string>1. Number Value/Input 
-    1. Scatter plot, user will have to input two numeric values. Scatter plot is best to show the correlations between them.
-    2. Line chart, user has to input two numeric values
-    3. Bar chart, user can input two numeric values or one numeric and one word/string value. 
-    Line chart and bar chart can be used to show two different values or categories.
-2. Word Value/Input
-    Both Histogram and Word table only need one input/value
-    1. Histogram, can be used if user want to see the frequency of each word
-    2. Word table, will split and count how many of the same words
-</string>
-                                            </property>
+                                           <widget class="QWidget" name="widget_38" native="true">
+                                            <layout class="QVBoxLayout" name="verticalLayout_47">
+                                             <item>
+                                              <widget class="QLabel" name="label_26">
+                                               <property name="text">
+                                                <string>Number Value/Input</string>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item>
+                                              <widget class="QWidget" name="widget_41" native="true">
+                                               <layout class="QVBoxLayout" name="verticalLayout_50">
+                                                <item>
+                                                 <widget class="QLabel" name="label_38">
+                                                  <property name="text">
+                                                   <string>1. Scatter Plot, , user will have to input two numeric values. You can use Scatter plot to show the correlations between the values. 
+For example, you have data about crime and education. You would like to see whether higher levels of education affect the crime rate. 
+In that case, scatter plot is the best type of graph to present your data.</string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                                <item>
+                                                 <widget class="QLabel" name="label_40">
+                                                  <property name="text">
+                                                   <string>2. Line Chart, user has to input two numeric values</string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                                <item>
+                                                 <widget class="QLabel" name="label_41">
+                                                  <property name="text">
+                                                   <string>3. Bar Chart, user can input two numeric values or one numeric and one word/string value. </string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                                <item>
+                                                 <widget class="QLabel" name="label_42">
+                                                  <property name="text">
+                                                   <string>Line chart and bar chart can be used to show two different values or categories.</string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                               </layout>
+                                              </widget>
+                                             </item>
+                                            </layout>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QWidget" name="widget_39" native="true">
+                                            <layout class="QVBoxLayout" name="verticalLayout_48">
+                                             <item>
+                                              <widget class="QLabel" name="label_37">
+                                               <property name="text">
+                                                <string>Word Value/Input</string>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item>
+                                              <widget class="QWidget" name="widget_43" native="true">
+                                               <layout class="QVBoxLayout" name="verticalLayout_52">
+                                                <item>
+                                                 <widget class="QLabel" name="label_39">
+                                                  <property name="text">
+                                                   <string>Both Histogram and Word table only need one input/value</string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                                <item>
+                                                 <widget class="QLabel" name="label_43">
+                                                  <property name="text">
+                                                   <string>1. Histogram, can be used if you want to see the frequency of each word</string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                                <item>
+                                                 <widget class="QLabel" name="label_44">
+                                                  <property name="text">
+                                                   <string>2. Word table, will split and count how many of the same words</string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                               </layout>
+                                              </widget>
+                                             </item>
+                                            </layout>
                                            </widget>
                                           </item>
                                          </layout>
@@ -1026,7 +1125,7 @@
                                     <item>
                                      <widget class="QLabel" name="label_27">
                                       <property name="text">
-                                       <string>After choosing and inputting values based on the input type, user can generate the report and will be directed to the report page where user can see their chosen graph(s). </string>
+                                       <string>After choosing and inputting values based on the input type, you can generate the report and will be directed to the report page where you can see their chosen graph(s). </string>
                                       </property>
                                      </widget>
                                     </item>
@@ -1043,8 +1142,8 @@
                                     <item>
                                      <widget class="QLabel" name="label_29">
                                       <property name="text">
-                                       <string>The generated report will not be saved in user’s database. If user wants to keep the report, they can download it as Image (PNG or JPG). 
-They can also go back to the previous page if they want to delete or add a certain graph.</string>
+                                       <string>The generated report will not be saved in your database. If you want to keep the report, you can download it as Image (PNG or JPG).
+ You can also go back to the previous page if you want to delete or add a certain graph.</string>
                                       </property>
                                      </widget>
                                     </item>
@@ -1141,7 +1240,7 @@ They can also go back to the previous page if they want to delete or add a certa
                                     <item>
                                      <widget class="QLabel" name="label_33">
                                       <property name="text">
-                                       <string>If user wants to delete their account, they have to be aware that all of their projects that have been created will be deleted.</string>
+                                       <string>If you would like to delete your account, you have to be aware that all of your projects that have been created will be deleted.</string>
                                       </property>
                                      </widget>
                                     </item>

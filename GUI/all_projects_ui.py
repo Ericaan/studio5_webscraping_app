@@ -516,7 +516,7 @@ class Ui_Project_Main(object):
         self.widget_12.setObjectName("widget_12")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.widget_12)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        self.download_btn = QtWidgets.QPushButton(self.widget_12)
+        self.download_btn = QtWidgets.QLabel(self.widget_12)
         self.download_btn.setObjectName("download_btn")
         self.horizontalLayout_6.addWidget(self.download_btn)
         self.verticalLayout_18.addWidget(self.widget_12, 0, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
