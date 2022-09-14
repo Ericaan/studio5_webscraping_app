@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import all_projects_ui
+from GUI.Projects import all_projects_ui
 import selectReportui
 import pandas as pd
 import numpy as np

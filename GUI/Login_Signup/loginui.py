@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'signup.ui'
+# Form implementation generated from reading ui file 'login.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -9,79 +9,67 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import crud
-import re
-import loginui
+from Database import crud
+from GUI.Projects import all_projects_ui
+import signupui
 import bcrypt
 
-class Ui_SIGNUP(object):
-    def email_validation(self, email_input):
-        # email pattern
-        pattern = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
-        if re.match(pattern, email_input):
-            return True
-        else:
-            return False
-
-    def go_to_login_window(self):
+class Ui_LOGIN(object):
+    def go_to_signup_window(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = loginui.Ui_LOGIN()
+        self.ui = signupui.Ui_SIGNUP()
         self.ui.setupUi(self.window)
         self.window.show()
+
+    def go_to_main_window(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = all_projects_ui.Ui_Project_Main()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        self.ui.userId_label.setText(self.userId.text())
 
     def empty_fields(self):
         self.email_text.setText("")
         self.pass_text.setText("")
 
-    def signup(self):
+    def login(self):
         message = QtWidgets.QMessageBox()
-        message.setWindowTitle("SIGNUP")
+        message.setWindowTitle("LOGIN")
         # checking empty fields
         if self.email_text.text() != "" and self.pass_text.text() != "":
-            # getting user's email and password from database with user's email
             user_email_firestore = crud.checking_user_email(self.email_text.text())
             user_pass_firestore = crud.checking_user_pass(self.email_text.text())
-            # encode the user input first before checking them
             user_input_password = self.pass_text.text().encode('utf-8')
             # checking whether email that user inputted exists in database
             if user_email_firestore == "Exists":
-                # check whether email in database has the same password
-                # direct user to go to login window
+                # check whether email is in database has the same password
+                # direct user to main_menu
                 if bcrypt.checkpw(user_input_password, user_pass_firestore):
-                    message.setText("User has already existed. Please go to LOGIN window")
+                    self.userId.setText(crud.pass_userrId(self.email_text.text()))
+                    # userId.append(crud.pass_userrId(self.email_text.text()))
+                    message.setText("Successfully login")
                     message.exec_()
-                    self.empty_fields()
+                    self.go_to_main_window()
+                    # working if login is the first window that was opened
+                    # if user open signup window then go to login and try to login,
+                    # the main menu won't show up (unknown reason)
+                    LOGIN.hide()
                 else:
-                    message.setText("User with this email has already registered!")
+                    message.setText("Please enter the correct password")
                     message.exec_()
-                    self.empty_fields()
-            # if it does not exist, check whether email is valid (pattern)
             else:
-                if self.email_validation(self.email_text.text()):
-                    # if email's valid = register user
-                    user_password = self.pass_text.text()
-                    user_password = user_password.encode('utf-8')
-                    hashed_pass = bcrypt.hashpw(user_password, bcrypt.gensalt(10))
-                    # create new user with their email and hashed pass
-                    crud.create_user(self.email_text.text(), hashed_pass)
-                    message.setText("Registered")
-                    message.exec_()
-                    self.go_to_login_window()
-                    SIGNUP.close()
-                else:
-                    message.setText("Email is not valid")
-                    message.exec_()
-                    self.empty_fields()
+                message.setText("User is not registered. Please signup first")
+                message.exec_()
+                self.empty_fields()
 
         else:
             message.setText("Please enter both fields!")
             message.exec_()
 
-
-    def setupUi(self, SIGNUP):
-        SIGNUP.setObjectName("SIGNUP")
-        SIGNUP.resize(660, 470)
-        self.centralwidget = QtWidgets.QWidget(SIGNUP)
+    def setupUi(self, LOGIN):
+        LOGIN.setObjectName("LOGIN")
+        LOGIN.resize(660, 470)
+        self.centralwidget = QtWidgets.QWidget(LOGIN)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -114,18 +102,12 @@ class Ui_SIGNUP(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
         self.frame_3.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.frame_3.setFont(font)
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.frame_3)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.widget = QtWidgets.QWidget(self.frame_3)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.widget.setFont(font)
         self.widget.setObjectName("widget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -134,9 +116,20 @@ class Ui_SIGNUP(object):
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_5)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.email_lbl = QtWidgets.QLabel(self.widget_5)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.email_lbl.setFont(font)
         self.email_lbl.setObjectName("email_lbl")
         self.horizontalLayout_3.addWidget(self.email_lbl)
+
+        self.userId = QtWidgets.QLabel(self.widget_5)
+        self.horizontalLayout_3.addWidget(self.userId)
+        self.userId.setHidden(True)
+
         self.email_text = QtWidgets.QLineEdit(self.widget_5)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.email_text.setFont(font)
         self.email_text.setObjectName("email_text")
         self.horizontalLayout_3.addWidget(self.email_text)
         self.horizontalLayout.addWidget(self.widget_5)
@@ -164,53 +157,56 @@ class Ui_SIGNUP(object):
         self.widget_4.setObjectName("widget_4")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.widget_4)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.signup_button = QtWidgets.QPushButton(self.widget_4)
-        self.signup_button.setMinimumSize(QtCore.QSize(100, 0))
-        self.signup_button.setObjectName("signup_button")
-        self.verticalLayout_6.addWidget(self.signup_button)
-
+        self.login_button = QtWidgets.QPushButton(self.widget_4)
+        self.login_button.setMinimumSize(QtCore.QSize(100, 0))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.login_button.setFont(font)
+        self.login_button.setObjectName("login_button")
+        self.verticalLayout_6.addWidget(self.login_button)
         self.verticalLayout_4.addWidget(self.widget_4, 0, QtCore.Qt.AlignHCenter)
         self.widget_3 = QtWidgets.QWidget(self.frame_3)
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget_3)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.login_button = QtWidgets.QPushButton(self.widget_3)
+        self.signup_button = QtWidgets.QPushButton(self.widget_3)
         font = QtGui.QFont()
+        font.setPointSize(12)
         font.setUnderline(True)
-        self.login_button.setFont(font)
-        self.login_button.setObjectName("login_button")
-        self.verticalLayout_5.addWidget(self.login_button)
+        self.signup_button.setFont(font)
+        self.signup_button.setObjectName("signup_button")
+        self.verticalLayout_5.addWidget(self.signup_button)
         self.verticalLayout_4.addWidget(self.widget_3, 0, QtCore.Qt.AlignHCenter)
         self.verticalLayout_2.addWidget(self.frame_3)
         self.verticalLayout.addWidget(self.frame)
-        SIGNUP.setCentralWidget(self.centralwidget)
+        LOGIN.setCentralWidget(self.centralwidget)
 
-        #hide the password
+        # hide the password
         self.pass_text.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.login_button.clicked.connect(lambda: self.login())
+        # self.login_button.clicked.connect(LOGIN.close())
+        # self.login_button.clicked.connect(lambda :LOGIN.close())
+        self.signup_button.clicked.connect(lambda :self.go_to_signup_window())
+        self.signup_button.clicked.connect(lambda: LOGIN.close())
 
-        self.signup_button.clicked.connect(lambda :self.signup())
-        # self.signup_button.clicked.connect(lambda :SIGNUP.close())
-        self.login_button.clicked.connect(lambda :self.go_to_login_window())
-        self.login_button.clicked.connect(lambda :SIGNUP.close())
+        self.retranslateUi(LOGIN)
+        QtCore.QMetaObject.connectSlotsByName(LOGIN)
 
-        self.retranslateUi(SIGNUP)
-        QtCore.QMetaObject.connectSlotsByName(SIGNUP)
-
-    def retranslateUi(self, SIGNUP):
+    def retranslateUi(self, LOGIN):
         _translate = QtCore.QCoreApplication.translate
-        SIGNUP.setWindowTitle(_translate("SIGNUP", "MainWindow"))
-        self.label.setText(_translate("SIGNUP", "SIGNUP"))
-        self.email_lbl.setText(_translate("SIGNUP", "Email"))
-        self.pass_lbl.setText(_translate("SIGNUP", "Password"))
-        self.signup_button.setText(_translate("SIGNUP", "SIGNUP"))
-        self.login_button.setText(_translate("SIGNUP", "Already have an account?"))
+        LOGIN.setWindowTitle(_translate("LOGIN", "MainWindow"))
+        self.label.setText(_translate("LOGIN", "LOGIN"))
+        self.email_lbl.setText(_translate("LOGIN", "Email"))
+        self.pass_lbl.setText(_translate("LOGIN", "Password"))
+        self.login_button.setText(_translate("LOGIN", "LOGIN"))
+        self.signup_button.setText(_translate("LOGIN", "Don\'t have an account?"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    SIGNUP = QtWidgets.QMainWindow()
-    ui = Ui_SIGNUP()
-    ui.setupUi(SIGNUP)
-    SIGNUP.show()
+    LOGIN = QtWidgets.QMainWindow()
+    ui = Ui_LOGIN()
+    ui.setupUi(LOGIN)
+    LOGIN.show()
     sys.exit(app.exec_())

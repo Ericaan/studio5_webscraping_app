@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import new_project_ui
 import project_ui
-import crud
+from Database import crud
 from PyQt5.QtGui import QPixmap
 # import selectReportui
 import selectReportui

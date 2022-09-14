@@ -83,7 +83,7 @@ def read_specific_fields(userId):
         # assign keys
         keys = ["Project ID", "Project Name", "URL", "URL2", "Data Download", "Last Date"]
         if docs == []:
-            with open('project_details.csv', 'w') as f:
+            with open('../project_details.csv', 'w') as f:
                 write = csv.writer(f)
                 write.writerow(keys)
         else:
@@ -112,7 +112,7 @@ def read_specific_fields(userId):
             # 5 values
             new_list =list(list_split(data, 6))
 
-            with open('project_details.csv', 'w') as f:
+            with open('../project_details.csv', 'w') as f:
                 write = csv.writer(f)
                 write.writerow(keys)
                 write.writerows(new_list)

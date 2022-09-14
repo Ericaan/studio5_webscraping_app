@@ -12,11 +12,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtWebEngineWidgets
 
 import web_scraper
-from GUI import all_projects_ui
-import crud
+from GUI.Projects import all_projects_ui, project_methods
+from Database import crud
 import pandas as pd
 import download_data
-from GUI import project_methods
 import input_notice
 
 # holds the data from template and its inputs

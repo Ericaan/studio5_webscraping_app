@@ -1,6 +1,6 @@
 
 from PyQt5 import QtCore, QtWidgets
-import crud
+from Database import crud
 
 
 # this is for all the methods used in project_ui page

@@ -10,9 +10,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QUrl
-import all_projects_ui
+from GUI.Projects import all_projects_ui
 import project_ui
-import crud
+from Database import crud
 
 
 class Ui_CreateNewProjectWindow(object):
