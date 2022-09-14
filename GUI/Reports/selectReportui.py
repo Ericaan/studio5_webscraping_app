@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 from GUI.Projects import all_projects_ui
-import constructReportui
+from GUI.Reports import constructReportui
 import pandas as pd
 from re import search
 import csv

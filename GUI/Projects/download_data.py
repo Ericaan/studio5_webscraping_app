@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import project_ui
+from GUI.Projects import project_ui
 import web_scraper
 
 results = {}

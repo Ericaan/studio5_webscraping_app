@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Database import crud
 import re
-import loginui
+from GUI.Login_Signup import loginui
 import bcrypt
 
 class Ui_SIGNUP(object):

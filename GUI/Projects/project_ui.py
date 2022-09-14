@@ -15,8 +15,8 @@ import web_scraper
 from GUI.Projects import all_projects_ui, project_methods
 from Database import crud
 import pandas as pd
-import download_data
-import input_notice
+from GUI.Projects import download_data
+from GUI.Projects import input_notice
 
 # holds the data from template and its inputs
 temp_dict = {}
@@ -36,7 +36,7 @@ class Ui_MainWindow(object):
         self.ui.userId_label.setText(uid)
         crud.read_specific_fields(uid)
         # read csv file
-        read_csv = pd.read_csv('project_details.csv')
+        read_csv = pd.read_csv('../project_details.csv')
         rows = len(read_csv)
         columns = len(read_csv.columns)
         header_labels = read_csv.columns

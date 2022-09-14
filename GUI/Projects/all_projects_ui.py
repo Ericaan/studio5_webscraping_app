@@ -11,13 +11,11 @@
 import bcrypt
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
-import new_project_ui
-import project_ui
+from GUI.Projects import new_project_ui
+from GUI.Projects import project_ui
 from Database import crud
-from PyQt5.QtGui import QPixmap
-# import selectReportui
-import selectReportui
-import loginui
+from GUI.Reports import selectReportui
+from GUI.Login_Signup import loginui
 import pandas as pd
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
@@ -37,7 +35,7 @@ class Ui_Project_Main(object):
         crud.read_specific_fields(self.userId_label.text())
 
         # read csv file
-        read_csv = pd.read_csv('project_details.csv')
+        read_csv = pd.read_csv('../project_details.csv')
         rows = len(read_csv)
         columns = len(read_csv.columns)
         header_labels = read_csv.columns

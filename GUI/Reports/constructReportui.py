@@ -10,7 +10,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from GUI.Projects import all_projects_ui
-import selectReportui
 import pandas as pd
 import numpy as np
 
