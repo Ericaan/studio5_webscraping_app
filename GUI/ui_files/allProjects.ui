@@ -233,7 +233,7 @@
                 <enum>QFrame::NoFrame</enum>
                </property>
                <property name="currentIndex">
-                <number>4</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="MainPage">
                 <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -537,7 +537,7 @@
                          </property>
                          <layout class="QHBoxLayout" name="horizontalLayout_6">
                           <item>
-                           <widget class="QPushButton" name="download_btn">
+                           <widget class="QLabel" name="label_119">
                             <property name="text">
                              <string>Download</string>
                             </property>
@@ -674,7 +674,7 @@
                              </font>
                             </property>
                             <property name="text">
-                             <string>Instruction Manual</string>
+                             <string>Instruction Manual - YouScrape</string>
                             </property>
                             <property name="alignment">
                              <set>Qt::AlignCenter</set>
@@ -744,8 +744,8 @@
                            <rect>
                             <x>0</x>
                             <y>0</y>
-                            <width>1547</width>
-                            <height>6508</height>
+                            <width>1851</width>
+                            <height>15059</height>
                            </rect>
                           </property>
                           <property name="sizePolicy">
@@ -758,14 +758,310 @@
                            <item>
                             <widget class="QWidget" name="widget_18" native="true">
                              <layout class="QVBoxLayout" name="verticalLayout_27">
+                              <property name="spacing">
+                               <number>0</number>
+                              </property>
+                              <property name="leftMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
                               <item>
                                <widget class="QWidget" name="widget_22" native="true">
                                 <layout class="QVBoxLayout" name="verticalLayout_28">
                                  <item>
                                   <widget class="QLabel" name="label_4">
+                                   <property name="font">
+                                    <font>
+                                     <weight>75</weight>
+                                     <bold>true</bold>
+                                    </font>
+                                   </property>
                                    <property name="text">
                                     <string>Introduction</string>
                                    </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QWidget" name="widget_37" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_46">
+                                    <property name="spacing">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="leftMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="topMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="rightMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="bottomMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <item>
+                                     <widget class="QWidget" name="widget_40" native="true">
+                                      <layout class="QVBoxLayout" name="verticalLayout_49">
+                                       <property name="spacing">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="leftMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="topMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="rightMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="bottomMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <item>
+                                        <widget class="QWidget" name="widget_46" native="true">
+                                         <layout class="QVBoxLayout" name="verticalLayout_51">
+                                          <item>
+                                           <widget class="QLabel" name="label_40">
+                                            <property name="font">
+                                             <font>
+                                              <weight>75</weight>
+                                              <bold>true</bold>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>What is the app?</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QWidget" name="widget_47" native="true">
+                                            <layout class="QVBoxLayout" name="verticalLayout_56">
+                                             <property name="spacing">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="leftMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="topMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="rightMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="bottomMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <item>
+                                              <widget class="QLabel" name="label_47">
+                                               <property name="text">
+                                                <string>YouScrape is a web scraping application that allows you to extract data from your preferred websites. Beside scraping the information of the websites, 
+YouScrape also provides another function where you can visualise and customise the gathered data using different types of graph.</string>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                            </layout>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QWidget" name="widget_45" native="true">
+                                         <layout class="QVBoxLayout" name="verticalLayout_53">
+                                          <item>
+                                           <widget class="QLabel" name="label_42">
+                                            <property name="font">
+                                             <font>
+                                              <weight>75</weight>
+                                              <bold>true</bold>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Who is it for?</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QWidget" name="widget_48" native="true">
+                                            <layout class="QVBoxLayout" name="verticalLayout_57">
+                                             <property name="spacing">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="leftMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="topMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="rightMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="bottomMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <item>
+                                              <widget class="QLabel" name="label_48">
+                                               <property name="text">
+                                                <string>This application is for anyone and everyone, it is designed to be able to be used by anyone wanting to do some web scraping without having any actual coding knowledge.
+ Simply someone who wants to get and/or analyse larger amounts of data from the internet than is reasonably expectable of a user. </string>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                            </layout>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QWidget" name="widget_44" native="true">
+                                         <layout class="QVBoxLayout" name="verticalLayout_54">
+                                          <item>
+                                           <widget class="QLabel" name="label_45">
+                                            <property name="font">
+                                             <font>
+                                              <weight>75</weight>
+                                              <bold>true</bold>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Why we made the app?</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QWidget" name="widget_49" native="true">
+                                            <layout class="QVBoxLayout" name="verticalLayout_58">
+                                             <property name="spacing">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="leftMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="topMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="rightMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="bottomMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <item>
+                                              <widget class="QLabel" name="label_49">
+                                               <property name="text">
+                                                <string>Before making YouScrape, we had some ideas on what application we would like to make and web scraping is one of them. We tried some available web scraping applications such as ParseHub and OctoParse to see how they work.
+ After trying and testing the applications, we were inspired to make a similar application with different functions. Two URLs and data visualisation are some functions that ParseHub and OctoParse do not have. </string>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                            </layout>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QWidget" name="widget_42" native="true">
+                                         <layout class="QVBoxLayout" name="verticalLayout_55">
+                                          <item>
+                                           <widget class="QLabel" name="label_46">
+                                            <property name="font">
+                                             <font>
+                                              <weight>75</weight>
+                                              <bold>true</bold>
+                                             </font>
+                                            </property>
+                                            <property name="text">
+                                             <string>Ethical Web Scraping</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QWidget" name="widget_50" native="true">
+                                            <layout class="QVBoxLayout" name="verticalLayout_59">
+                                             <property name="spacing">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="leftMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="topMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="rightMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <property name="bottomMargin">
+                                              <number>0</number>
+                                             </property>
+                                             <item>
+                                              <widget class="QLabel" name="label_50">
+                                               <property name="text">
+                                                <string>There are many questions about web scraping, if taking someone else data from their website and using it for yourself is a moral thing to do. As with most things in life, the answer is not that simple.
+ But we have found a few guiding principles that we believe can help with ensuring no ethical boundaries are crossed when web scraping. </string>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item>
+                                              <widget class="QLabel" name="label_51">
+                                               <property name="text">
+                                                <string>These are the principles:</string>
+                                               </property>
+                                              </widget>
+                                             </item>
+                                             <item>
+                                              <widget class="QWidget" name="widget_51" native="true">
+                                               <layout class="QVBoxLayout" name="verticalLayout_60">
+                                                <item>
+                                                 <widget class="QLabel" name="label_52">
+                                                  <property name="text">
+                                                   <string>- Good intention, web scraping can be used to overburden and attack websites; it should be done with consideration and restraint</string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                                <item>
+                                                 <widget class="QLabel" name="label_53">
+                                                  <property name="text">
+                                                   <string>- Do not copy any information that wasn't already fully publicly available and not behind any password authentication barrier.</string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                                <item>
+                                                 <widget class="QLabel" name="label_54">
+                                                  <property name="text">
+                                                   <string>- Literal facts, make sure that the information being copied is factual and does not overstep anyone else's rights</string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                                <item>
+                                                 <widget class="QLabel" name="label_55">
+                                                  <property name="text">
+                                                   <string>- The data copied should be used for personal use or in a transformative way, it should not be used to steal business from competitors by undercutting or directly stealing customers.</string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                               </layout>
+                                              </widget>
+                                             </item>
+                                            </layout>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                      </layout>
+                                     </widget>
+                                    </item>
+                                   </layout>
                                   </widget>
                                  </item>
                                 </layout>
@@ -780,10 +1076,40 @@
                               <item>
                                <widget class="QWidget" name="widget_23" native="true">
                                 <layout class="QVBoxLayout" name="verticalLayout_30">
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="leftMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>0</number>
+                                 </property>
                                  <item>
                                   <widget class="QLabel" name="label_6">
+                                   <property name="font">
+                                    <font>
+                                     <weight>75</weight>
+                                     <bold>true</bold>
+                                    </font>
+                                   </property>
                                    <property name="text">
                                     <string>Projects</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_56">
+                                   <property name="text">
+                                    <string>Creating a project is the main function that YouScrape provides. Now what is making a Project? What is a Project? A project for the purposes of this application is where you load whatever webpage you are interested in getting information from
+ and you select the different elements or data that you want to scrape. That is if you wanna scrape financial data you might select the stock names and their values.
+ Or if your interested in comparing prices of laptops in order to get a new one, then you select the brand, specifications, prices or whatever you wish to consider for your purchase.</string>
                                    </property>
                                   </widget>
                                  </item>
@@ -792,9 +1118,98 @@
                                    <layout class="QVBoxLayout" name="verticalLayout_31">
                                     <item>
                                      <widget class="QLabel" name="label_7">
+                                      <property name="font">
+                                       <font>
+                                        <weight>75</weight>
+                                        <bold>true</bold>
+                                       </font>
+                                      </property>
                                       <property name="text">
                                        <string>Create a project</string>
                                       </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QWidget" name="widget_52" native="true">
+                                      <layout class="QVBoxLayout" name="verticalLayout_61">
+                                       <item>
+                                        <widget class="QLabel" name="label_57">
+                                         <property name="text">
+                                          <string>First of all you must know how to create a project. After logging into your account. You will be led to the main page. On the left side you will find the main menu. Click on the first tab labelled “Projects”:</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_58">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/mainwindow.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_59">
+                                         <property name="text">
+                                          <string>Once you are on the Projects tab then click on “New Project”:</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_60">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/projects.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_61">
+                                         <property name="text">
+                                          <string>A new window will appear where you name your project and input up to 2 URLs. Try to make your Project name relevant, 
+that way if you chrome back to it on a later date it will be easy to know what each project is. Once everything is ready click “create”:</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_62">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/create-new-project.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_63">
+                                         <property name="text">
+                                          <string>*Note, while the url can be changed later on in the project, it is recommended that you enter in a precise url. 
+For example see above, instead of just inputting tradem.co.nz the user used the url where the data they wants is on, in this case they are searching for cars.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_64">
+                                         <property name="text">
+                                          <string>Your project is now created:</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_65">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/newproject.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                      </layout>
                                      </widget>
                                     </item>
                                    </layout>
@@ -805,9 +1220,423 @@
                                    <layout class="QVBoxLayout" name="verticalLayout_32">
                                     <item>
                                      <widget class="QLabel" name="label_8">
+                                      <property name="font">
+                                       <font>
+                                        <weight>75</weight>
+                                        <bold>true</bold>
+                                       </font>
+                                      </property>
                                       <property name="text">
                                        <string>Edit a project</string>
                                       </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QWidget" name="widget_53" native="true">
+                                      <layout class="QVBoxLayout" name="verticalLayout_62">
+                                       <item>
+                                        <widget class="QLabel" name="label_66">
+                                         <property name="text">
+                                          <string>Now that you have created a Project it is important to know what you can do and how to do it.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_67">
+                                         <property name="font">
+                                          <font>
+                                           <underline>true</underline>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Add inputs</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_68">
+                                         <property name="text">
+                                          <string>When a project is created or when it is loaded the website(s) will automatically load on the browser section of the screen. Here you can look at your page and think about what you want to scrape. </string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_69">
+                                         <property name="text">
+                                          <string>Once you have identified what you want either copy paste the test from the webpage into the input fields or write them in yourself.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_70">
+                                         <property name="text">
+                                          <string>In this example we are looking at cars so we just have to take the names of two of the listing and use those:</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_71">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/add-inputs.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_72">
+                                         <property name="text">
+                                          <string>Selecting your inputs is arguably the most important part, based on these the program will find all others like them and put it into your final document. 
+Therefore there are a few things to take note of, or just general recommendations:</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_73">
+                                         <property name="font">
+                                          <font>
+                                           <underline>true</underline>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Input recommendations:</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QWidget" name="widget_54" native="true">
+                                         <layout class="QVBoxLayout" name="verticalLayout_63">
+                                          <item>
+                                           <widget class="QLabel" name="label_74">
+                                            <property name="text">
+                                             <string>- Be Precise: make sure that you have the correct spelling to match what you see on the page. That includes capital letters and special symbols.</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QLabel" name="label_75">
+                                            <property name="text">
+                                             <string>- The more unique the better: the program will search the page for anywhere it can find the text for the inputs, so to ensure its finding the correct elements, try and select things that do not appear anywhere else on the page.</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QLabel" name="label_76">
+                                            <property name="text">
+                                             <string>- Avoid featured items: some pages will push certain listings to the top with special code, this code can sometimes be different from the main results and can mess up with the data scraping.</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QLabel" name="label_77">
+                                            <property name="text">
+                                             <string>- If at first you don't succeed: in case the program can't seem to find your input just try a different one, maybe its spelt or formatted in a way that can make it difficult to identify so another input might solve your issue.</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QLabel" name="label_78">
+                                            <property name="text">
+                                             <string>- Dynamic results: web pages today, especially ones that are selling products and services, are constantly adding and taking away options, So even if you input a valid option one day, 
+if you save it and come back another time it might no longer be present. Just delete the old inputs and add new ones based on the changes.</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_79">
+                                         <property name="text">
+                                          <string>After choosing your inputs click “Add to template”, the program will check the inputs to see if they are present on the webpage (this might take a minute). 
+If they cant be found a new window will pop up and tell you the inputs are not present, just check spelling or select new ones.
+Once it finds them you will see a new item in the template and a new column in the preview table.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_80">
+                                         <property name="text">
+                                          <string>Invalid input</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_81">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/invalid-input.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_82">
+                                         <property name="text">
+                                          <string>Valid inputs</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_83">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/valid-input.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_84">
+                                         <property name="font">
+                                          <font>
+                                           <underline>true</underline>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>The template</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_85">
+                                         <property name="text">
+                                          <string>The template is the structure of your data. Here you will select how the different things you want to scrape relate to each other. </string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_86">
+                                         <property name="text">
+                                          <string>The main commands of the template can be found just underneath it:</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_87">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/commands.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QWidget" name="widget_55" native="true">
+                                         <layout class="QVBoxLayout" name="verticalLayout_64">
+                                          <item>
+                                           <widget class="QLabel" name="label_88">
+                                            <property name="text">
+                                             <string>- The &quot;Select&quot; command is the default command, when it is checked and you add inputs, a new item will be added to the template. 
+It will appear with the name “newItem”, make sure you double click on it and CHANGE THE NAME. Try and make sure that every item on the template is unique.</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QLabel" name="label_89">
+                                            <property name="text">
+                                             <string>- The next one is &quot;Relative Select&quot;, this command allows you to add new items to the template relative to an already existing template item. 
+In order to use it make sure you (1) select an already existing item on the template so its highlighted and make sure (2)&quot;relative select&quot; is checked. 
+Then just click (3) &quot;add to the template&quot; like with regular &quot;select&quot;. Once it is added you will see an (4)arrow next to the selected item click on it and you will see “newSubItem”, (5)edit the name to what you want.
+</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QLabel" name="label_90">
+                                            <property name="text">
+                                             <string>- &quot;Delete&quot; is a straight forward command, check its circle and then click on the item of the template you want deleted. BE CAREFUL, make sure you click on the right item.</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <widget class="QLabel" name="label_91">
+                                            <property name="text">
+                                             <string>- Finally, &quot;Second Tab&quot; is only applicable in projects with two URLs. Its objective is to make sure that for every selection in the first Website, there is a corresponding selection in the second one. 
+It works the same way as the &quot;relative select&quot;: make sure it's checked and the template item it corresponds to is highlighted, then &quot;add to template&quot;. 
+This wont make any visible changes on the template itself but if you look at the &quot;preview table&quot; the inputs will be visible there.</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_92">
+                                         <property name="text">
+                                          <string>As you work on your template you can reorganise the items into whichever order you want even moving relatively selected sub items  from one item to another.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_93">
+                                         <property name="font">
+                                          <font>
+                                           <underline>true</underline>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>The preview table</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_94">
+                                         <property name="text">
+                                          <string>The &quot;Preview Table&quot; is there for your assistance and clarification. Its directly tied to the inputs and the template. Whenever you add something to the template it will appear on the table. </string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_95">
+                                         <property name="text">
+                                          <string>However, if you make edits like changing the name of an item or the order that they appear just double click on the table and it will update itself. </string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_96">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/preview-table.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_97">
+                                         <property name="text">
+                                          <string>It will show the name of the template item and the inputs you chose for it. The reason its called the preview table is because it simulates what your data will look like in a Microsoft Excel file 
+if you choose to download the data as a csv; not in a 100% accurate capacity, just with the inputs and the item name.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_98">
+                                         <property name="font">
+                                          <font>
+                                           <underline>true</underline>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Browser view</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_99">
+                                         <property name="text">
+                                          <string>The &quot;Browser&quot; is where you can see the webpage(s) selected and interact with it.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_100">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/browser.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_101">
+                                         <property name="text">
+                                          <string>It has the basic functions of any web browser: displaying the page, a navigation bar and &quot;Go&quot; button for going to a new page, 
+and backwards and forwards buttons to go between pages you have navigated. If you input two URLs then you can find the second one on &quot;Tab 2&quot;.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_102">
+                                         <property name="text">
+                                          <string>If the page you input when creating the project is not working or not the one you desired then you can enter a new one and, as long as you click on the save button,
+the next time you open the project the new URL will still be there. Keep this in mind however if you don't want your URL to change.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_103">
+                                         <property name="font">
+                                          <font>
+                                           <underline>true</underline>
+                                          </font>
+                                         </property>
+                                         <property name="text">
+                                          <string>Home/Save/Delete/Get data</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_104">
+                                         <property name="text">
+                                          <string>The buttons on the top of the project screen are all basic functions.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_105">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/buttons-on-top.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_106">
+                                         <property name="text">
+                                          <string>On the far left, next to the project name, the button with 3 dots will take you back to the projects screen, so make sure you save before clicking it. </string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_107">
+                                         <property name="text">
+                                          <string>Save and Delete refer to the project itself. Saving will save the progress made with the template and whatever URLs are in the browser view. Deleting will get rid of the entire project so make sure you are certain before deleting.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_108">
+                                         <property name="text">
+                                          <string>Finally, &quot;Get Data&quot; is where you go to download the data you want at the end of the project. It will open up a new window:</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_109">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/get-data.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_110">
+                                         <property name="text">
+                                          <string>Here you select whether you want JSON or CSV type file and you give the file a name. There is also an option for number of result pages, 
+this refers to the number of result pages from the website you want it to scrape. It has a maximum of 99 pages it can iterate through. </string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_111">
+                                         <property name="text">
+                                          <string>Once you are satisfied with all the fields click on generate and depending on how much information you are looking to scrape it will take a few minutes to complete and return the file to you.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                      </layout>
                                      </widget>
                                     </item>
                                    </layout>
@@ -818,22 +1647,45 @@
                                    <layout class="QVBoxLayout" name="verticalLayout_33">
                                     <item>
                                      <widget class="QLabel" name="label_10">
+                                      <property name="font">
+                                       <font>
+                                        <weight>75</weight>
+                                        <bold>true</bold>
+                                       </font>
+                                      </property>
                                       <property name="text">
                                        <string>Open project</string>
                                       </property>
                                      </widget>
                                     </item>
-                                   </layout>
-                                  </widget>
-                                 </item>
-                                 <item>
-                                  <widget class="QWidget" name="widget_24" native="true">
-                                   <layout class="QVBoxLayout" name="verticalLayout_34">
                                     <item>
-                                     <widget class="QLabel" name="label_9">
-                                      <property name="text">
-                                       <string>Website change</string>
-                                      </property>
+                                     <widget class="QWidget" name="widget_56" native="true">
+                                      <layout class="QVBoxLayout" name="verticalLayout_65">
+                                       <item>
+                                        <widget class="QLabel" name="label_112">
+                                         <property name="text">
+                                          <string>If you saved a project and want to return to it then you can access it from the projects tab on the main window. Just select the project you want on the table and click on Open:</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_113">
+                                         <property name="text">
+                                          <string/>
+                                         </property>
+                                         <property name="pixmap">
+                                          <pixmap>../images/open-project.png</pixmap>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QLabel" name="label_114">
+                                         <property name="text">
+                                          <string>Also, if you wish to delete a project you must first open it and then delete it from the project page by clicking on the delete button you will find there.</string>
+                                         </property>
+                                        </widget>
+                                       </item>
+                                      </layout>
                                      </widget>
                                     </item>
                                    </layout>
@@ -848,6 +1700,21 @@
                            <item>
                             <widget class="QWidget" name="widget_20" native="true">
                              <layout class="QVBoxLayout" name="verticalLayout_35">
+                              <property name="spacing">
+                               <number>0</number>
+                              </property>
+                              <property name="leftMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
                               <item>
                                <widget class="QWidget" name="widget_28" native="true">
                                 <layout class="QVBoxLayout" name="verticalLayout_36">
@@ -868,7 +1735,15 @@
                                  <item>
                                   <widget class="QLabel" name="label_18">
                                    <property name="text">
-                                    <string>Another function that YouScrape provides is you can create a visualised report using generated data or any CSV or JSON file. You can click on “Data Visualisation” on the left side to select new report. </string>
+                                    <string>Another function that YouScrape provides is you can create a visualised report using generated data or any CSV or JSON file you want to visualise. 
+This makes it easier to spot the differences between the data you choose by using a suitable graph. </string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_9">
+                                   <property name="text">
+                                    <string>When you are in the Main Menu, you can see that we have a “Data Visualisation” tab on the left side. You can select the tab to select a new report. </string>
                                    </property>
                                   </widget>
                                  </item>
@@ -912,7 +1787,7 @@
                                     <item>
                                      <widget class="QLabel" name="label_19">
                                       <property name="text">
-                                       <string>After clicking the “Select Report” button, you have to input the report name and select one CSV or JSON file. </string>
+                                       <string>After clicking the “Select Report” button, you have to input the report name and select one CSV or JSON file.</string>
                                       </property>
                                      </widget>
                                     </item>
@@ -959,7 +1834,7 @@
                                        <string/>
                                       </property>
                                       <property name="pixmap">
-                                       <pixmap>../images/construct1.png</pixmap>
+                                       <pixmap>../images/cons1.png</pixmap>
                                       </property>
                                      </widget>
                                     </item>
@@ -976,7 +1851,7 @@
                                        <string/>
                                       </property>
                                       <property name="pixmap">
-                                       <pixmap>../images/construct2.png</pixmap>
+                                       <pixmap>../images/cons2.png</pixmap>
                                       </property>
                                      </widget>
                                     </item>
@@ -990,6 +1865,21 @@
                                     <item>
                                      <widget class="QWidget" name="widget_35" native="true">
                                       <layout class="QVBoxLayout" name="verticalLayout_44">
+                                       <property name="spacing">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="leftMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="topMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="rightMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="bottomMargin">
+                                        <number>0</number>
+                                       </property>
                                        <item>
                                         <widget class="QWidget" name="widget_36" native="true">
                                          <layout class="QVBoxLayout" name="verticalLayout_45">
@@ -1020,6 +1910,21 @@
                                              <item>
                                               <widget class="QWidget" name="widget_41" native="true">
                                                <layout class="QVBoxLayout" name="verticalLayout_50">
+                                                <property name="spacing">
+                                                 <number>0</number>
+                                                </property>
+                                                <property name="leftMargin">
+                                                 <number>0</number>
+                                                </property>
+                                                <property name="topMargin">
+                                                 <number>0</number>
+                                                </property>
+                                                <property name="rightMargin">
+                                                 <number>0</number>
+                                                </property>
+                                                <property name="bottomMargin">
+                                                 <number>0</number>
+                                                </property>
                                                 <item>
                                                  <widget class="QLabel" name="label_38">
                                                   <property name="text">
@@ -1030,23 +1935,29 @@ In that case, scatter plot is the best type of graph to present your data.</stri
                                                  </widget>
                                                 </item>
                                                 <item>
-                                                 <widget class="QLabel" name="label_40">
+                                                 <widget class="QLabel" name="label_115">
                                                   <property name="text">
-                                                   <string>2. Line Chart, user has to input two numeric values</string>
+                                                   <string/>
+                                                  </property>
+                                                  <property name="pixmap">
+                                                   <pixmap>../images/scatterplot.png</pixmap>
                                                   </property>
                                                  </widget>
                                                 </item>
                                                 <item>
                                                  <widget class="QLabel" name="label_41">
                                                   <property name="text">
-                                                   <string>3. Bar Chart, user can input two numeric values or one numeric and one word/string value. </string>
+                                                   <string>2. Bar Chart, user can input two numeric values or one numeric and one word/string value. Bar chart can be used to show two different values or categories</string>
                                                   </property>
                                                  </widget>
                                                 </item>
                                                 <item>
-                                                 <widget class="QLabel" name="label_42">
+                                                 <widget class="QLabel" name="label_116">
                                                   <property name="text">
-                                                   <string>Line chart and bar chart can be used to show two different values or categories.</string>
+                                                   <string/>
+                                                  </property>
+                                                  <property name="pixmap">
+                                                   <pixmap>../images/bar-chart.png</pixmap>
                                                   </property>
                                                  </widget>
                                                 </item>
@@ -1069,6 +1980,21 @@ In that case, scatter plot is the best type of graph to present your data.</stri
                                              <item>
                                               <widget class="QWidget" name="widget_43" native="true">
                                                <layout class="QVBoxLayout" name="verticalLayout_52">
+                                                <property name="spacing">
+                                                 <number>0</number>
+                                                </property>
+                                                <property name="leftMargin">
+                                                 <number>0</number>
+                                                </property>
+                                                <property name="topMargin">
+                                                 <number>0</number>
+                                                </property>
+                                                <property name="rightMargin">
+                                                 <number>0</number>
+                                                </property>
+                                                <property name="bottomMargin">
+                                                 <number>0</number>
+                                                </property>
                                                 <item>
                                                  <widget class="QLabel" name="label_39">
                                                   <property name="text">
@@ -1084,9 +2010,29 @@ In that case, scatter plot is the best type of graph to present your data.</stri
                                                  </widget>
                                                 </item>
                                                 <item>
+                                                 <widget class="QLabel" name="label_117">
+                                                  <property name="text">
+                                                   <string/>
+                                                  </property>
+                                                  <property name="pixmap">
+                                                   <pixmap>../images/histogram.png</pixmap>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                                <item>
                                                  <widget class="QLabel" name="label_44">
                                                   <property name="text">
                                                    <string>2. Word table, will split and count how many of the same words</string>
+                                                  </property>
+                                                 </widget>
+                                                </item>
+                                                <item>
+                                                 <widget class="QLabel" name="label_118">
+                                                  <property name="text">
+                                                   <string/>
+                                                  </property>
+                                                  <property name="pixmap">
+                                                   <pixmap>../images/word-table.png</pixmap>
                                                   </property>
                                                  </widget>
                                                 </item>
