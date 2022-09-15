@@ -24,15 +24,16 @@ class Ui_CreateNewProjectWindow(object):
         if projectname != "" and url != "":
             # open project task window
             self.window = QtWidgets.QMainWindow()
-            print("hello")
             self.ui = project_ui.Ui_MainWindow()
-            print("hello")
             self.ui.setupUi(self.window)
-            print("hello")
             self.window.show()
 
             crud.create_project(self.label_hidden.text(), projectname, url, url2)
             self.ui.lbl_pname.setText(projectname)
+            if url2 != "":
+                self.ui.tableWidget.setRowCount(4)
+            else:
+                self.ui.tableWidget.setRowCount(2)
             # set the browser with the URL user has inputted
             self.ui.browser.setUrl(QUrl(url))
             self.ui.url_bar.setText(url)
