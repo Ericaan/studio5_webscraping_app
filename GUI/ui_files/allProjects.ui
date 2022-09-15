@@ -743,9 +743,9 @@
                           <property name="geometry">
                            <rect>
                             <x>0</x>
-                            <y>0</y>
-                            <width>1851</width>
-                            <height>15059</height>
+                            <y>-112</y>
+                            <width>2083</width>
+                            <height>15101</height>
                            </rect>
                           </property>
                           <property name="sizePolicy">
@@ -958,8 +958,10 @@ YouScrape also provides another function where you can visualise and customise t
                                              <item>
                                               <widget class="QLabel" name="label_49">
                                                <property name="text">
-                                                <string>Before making YouScrape, we had some ideas on what application we would like to make and web scraping is one of them. We tried some available web scraping applications such as ParseHub and OctoParse to see how they work.
- After trying and testing the applications, we were inspired to make a similar application with different functions. Two URLs and data visualisation are some functions that ParseHub and OctoParse do not have. </string>
+                                                <string>Before making YouScrape, we had some ideas on what application we would like to make and web scraping is one of them. 
+Web scraping is something that both of us have never tried or learned before. We wanted to try and learn new things as we made this application and combine it with skills we had already had throughout years of studying. 
+After searching more and more about web scraping, we tried some available web scraping applications such as ParseHub and OctoParse to see how they work. After trying and testing the applications, we were inspired to make a similar application with different functions.
+Two URLs and data visualisation are some functions that ParseHub and OctoParse do not have. </string>
                                                </property>
                                               </widget>
                                              </item>
