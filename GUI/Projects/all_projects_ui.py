@@ -10,7 +10,7 @@
 
 import bcrypt
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QFileDialog
 from GUI.Projects import new_project_ui
 from GUI.Projects import project_ui
 from Database import crud
@@ -20,7 +20,8 @@ import pandas as pd
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
-
+import os, stat
+import shutil
 
 # showing necessary button in navigation toolbar
 class NavigationToolbar(NavigationToolbar):
@@ -277,9 +278,12 @@ class Ui_Project_Main(object):
         self.window.show()
         self.ui.id_lbl.setText(self.userId_label.text())
 
-    def download_manual(self):
+    def download_pdf_manual(self):
         # download manual.pdf
-        print("")
+        file_dest = str(QFileDialog.getExistingDirectory(None, "Select Directory"))
+        src = "Instruction Manual - Web Scraping App.pdf"
+        path = shutil.copy(src, file_dest)
+        print(os.access(path, stat.S_IRWXO))
 
     def setupUi(self, Project_Main):
         Project_Main.setObjectName("Project_Main")
@@ -1469,8 +1473,7 @@ class Ui_Project_Main(object):
         self.change_pass_btn.clicked.connect(lambda: self.changePass())
 
         self.delete_acc_button.clicked.connect(lambda: self.deleteAccount())
-
-        self.download_manual.clicked.connect(lambda: self.download_manual)
+        self.download_manual.clicked.connect(lambda: self.download_pdf_manual())
 
         self.retranslateUi(Project_Main)
         self.stackedWidget.setCurrentIndex(0)
