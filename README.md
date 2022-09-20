@@ -1,13 +1,32 @@
-# Studio 5 - Web Scraping App
+## YouScrape - The User-Friendly Web Scraper 
 
-In this section, we will give instruction to user on how they will use the application.
+Before going to deep with YouScrape, lets learn what web scraping is. Web scraping is an activity where user can select or choose any website that they would like to extract. This can be done manually by user or automated.
 
-- User can run the python code with suitable IDE (PyCharm, Visual Studio Code, etc.).
+### What is YouScrape?
+⇤ User-friendly web scraping and data analysis application
 
-- Make sure you have downloaded the lastest Python before running the code.
+⇤ Allows you to extract data from your preferred websites
 
-- To know whether you have python installed in your machine, you can open CMD/Command Prompt and type python. It will show the version of python you downloaded
+⇤ Visualise and customise the gathered data
 
-- Before running the code, you have to install PyQt5 and PyQtWebEngine 
+### Who is it for?
+Anyone who wants to web scrape but has no coding experience and everyone else 
 
-- After installing them, you now can run the code.
+### Why we made it?
+⇤ We want to use our learnt skills thoughout years of studying
+
+⇤ Explore a new subject which both of us never tried before
+
+⇤ Build something from ground up 
+
+### Ethical web scraping
+⇤ Good intention: web scraping can be used to overburden and attack websites; it should be done with consideration and restraint 
+
+⇤ Public data: do not copy any information that wasn't fully publicly available and not behind any password authentication barrier
+
+⇤ Facts: make sure that the infomration being copied is factual and does not overstep anyone else's rights
+
+⇤ Fair market: the data copied should be used for personal use or in a transformative way, it should not be used to steal business from competitors by undercutting or directly stealing customers
+
+#### Instruction manual
+We have instruction manual available called "Instruction Manual - Web Scrapping App". The instruction manual can also be read in the application.
