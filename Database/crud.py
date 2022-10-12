@@ -11,6 +11,7 @@ db = firestore.client()
 fb = firebase.FirebaseApplication('https://pythonfirebase-c03ae-default-rtdb.firebaseio.com/', None)
 
 
+
 # create a new project
 def create_project(userId, pname, my_url, my_url2):
     today = datetime.datetime.now()
