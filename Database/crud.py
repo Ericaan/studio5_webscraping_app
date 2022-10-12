@@ -5,7 +5,7 @@ from firebase_admin import firestore
 from firebase import firebase
 import datetime
 
-cred_object = credentials.Certificate("./Database/pythonfirebase-c03ae-firebase-adminsdk-6gimp-6133025366.json")
+cred_object = credentials.Certificate("./Database/.gitignore/pythonfirebase-c03ae-firebase-adminsdk-6gimp-6133025366.json")
 default_app = firebase_admin.initialize_app(cred_object)
 db = firestore.client()
 fb = firebase.FirebaseApplication('https://pythonfirebase-c03ae-default-rtdb.firebaseio.com/', None)

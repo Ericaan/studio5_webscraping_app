@@ -9,10 +9,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QFont
+
 from Database import crud
 from GUI.Projects import all_projects_ui
 from GUI.Login_Signup import signupui
 import bcrypt
+
 
 class Ui_LOGIN(object):
     def go_to_signup_window(self):
@@ -67,8 +70,10 @@ class Ui_LOGIN(object):
             message.exec_()
 
     def setupUi(self, LOGIN):
+
         LOGIN.setObjectName("LOGIN")
         LOGIN.resize(660, 470)
+
         self.centralwidget = QtWidgets.QWidget(LOGIN)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -198,6 +203,7 @@ class Ui_LOGIN(object):
         self.label.setText(_translate("LOGIN", "LOGIN"))
         self.email_lbl.setText(_translate("LOGIN", "Email"))
         self.pass_lbl.setText(_translate("LOGIN", "Password"))
+
         self.login_button.setText(_translate("LOGIN", "LOGIN"))
         self.signup_button.setText(_translate("LOGIN", "Don\'t have an account?"))
 
@@ -205,6 +211,7 @@ class Ui_LOGIN(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyleSheet(open('styles.css').read())
     LOGIN = QtWidgets.QMainWindow()
     ui = Ui_LOGIN()
     ui.setupUi(LOGIN)

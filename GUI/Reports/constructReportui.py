@@ -33,7 +33,7 @@ class Ui_ConstructReport(object):
     def generate_report(self):
         message = QtWidgets.QMessageBox()
         # checking if all graphs have 0 quantity
-        if self.histogramQ.currentIndex() == 0 and self.scatterQ.currentIndex() == 0 and self.barChartQ.currentIndex() == 0 and self.lineChartQ.currentIndex() == 0 and self.wordtableQ.currentIndex() == 0:
+        if self.histogramQ.currentIndex() == 0 and self.scatterQ.currentIndex() == 0 and self.barChartQ.currentIndex() == 0 and self.wordtableQ.currentIndex() == 0:
             message.setWindowTitle("Warning!")
             message.setText("Please make sure to choose at least one type of graph")
             message.exec_()
@@ -103,7 +103,8 @@ class Ui_ConstructReport(object):
     # makes table (split and count words)
     def word_table(self, df, value):
         ax = self.ui.figure.add_subplot(self.position)
-        ax.set_axis_off()
+        ax.axis('off')
+        ax.axis('tight')
         df['table1'] = df[value].str.lower().str.replace('[^\w\s]', '')
         table1 = df.table1.str.split(expand=True).stack().value_counts().reset_index()
         title = value.capitalize()
